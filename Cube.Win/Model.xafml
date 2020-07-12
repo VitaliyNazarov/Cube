@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Logo="ExpressAppLogo">
+  <NavigationItems NavigationStyle="Accordion" ShowImages="True" DefaultChildItemsDisplayStyle="List">
+    <Items>
+      <Item Id="Default">
+        <Items>
+          <Item Id="@a86bd763-750c-4eb4-9894-2dfed3f4383a" ImageName="BO_Order" Caption="Заказы" ViewId="Order_ListView" IsNewNode="True" />
+          <Item Id="PermissionPolicyRole_ListView" Caption="Роли" />
+          <Item Id="PermissionPolicyUser_ListView" Caption="Пользователи" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <Options UIType="SingleWindowSDI" FormStyle="Ribbon" ShowTabImage="False">
+    <LayoutManagerOptions EnableLayoutGroupImages="False" />
+  </Options>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="19.2.3.0" IsNewNode="True" />
+    <SchemaModule Name="SystemWindowsFormsModule" Version="19.2.3.0" IsNewNode="True" />
+  </SchemaModules>
+</Application>
