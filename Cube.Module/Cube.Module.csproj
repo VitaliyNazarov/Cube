@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Output\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -166,6 +166,7 @@
     <Compile Include="BusinessObjects\Image.cs" />
     <Compile Include="BusinessObjects\Interfaces\IArchivable.cs" />
     <Compile Include="BusinessObjects\Interfaces\IBaseEntity.cs" />
+    <Compile Include="BusinessObjects\Interfaces\IFileHolder.cs" />
     <Compile Include="BusinessObjects\Interfaces\IImageHolder.cs" />
     <Compile Include="BusinessObjects\Interfaces\ISoftDeletable.cs" />
     <Compile Include="BusinessObjects\Price.cs" />

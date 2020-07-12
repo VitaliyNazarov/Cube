@@ -6,6 +6,8 @@ using DevExpress.ExpressApp.Updating;
 using DevExpress.ExpressApp.Security;
 using DevExpress.Persistent.BaseImpl.EF;
 using DevExpress.Persistent.BaseImpl.EF.PermissionPolicy;
+using User = Cube.Model.Security.User;
+using Role = Cube.Model.Security.Role;
 
 namespace Cube.Module.DatabaseUpdate
 {
@@ -20,43 +22,34 @@ namespace Cube.Module.DatabaseUpdate
         public override void UpdateDatabaseAfterUpdateSchema()
         {
             base.UpdateDatabaseAfterUpdateSchema();
-            //string name = "MyName";
-            //DomainObject1 theObject = ObjectSpace.FindObject<DomainObject1>(CriteriaOperator.Parse("Name=?", name));
-            //if(theObject == null) {
-            //    theObject = ObjectSpace.CreateObject<DomainObject1>();
-            //    theObject.Name = name;
-            //}
-            if (ObjectSpace is DevExpress.ExpressApp.EF.EFObjectSpace)
+            var sampleUser = ObjectSpace.FindObject<Cube.Model.Security.User>(new BinaryOperator("UserName", "User"));
+            if (sampleUser == null)
             {
-                PermissionPolicyUser sampleUser = ObjectSpace.FindObject<PermissionPolicyUser>(new BinaryOperator("UserName", "User"));
-                if (sampleUser == null)
-                {
-                    sampleUser = ObjectSpace.CreateObject<PermissionPolicyUser>();
-                    sampleUser.UserName = "User";
-                    sampleUser.SetPassword("");
-                }
-                PermissionPolicyRole defaultRole = CreateDefaultRole();
-                sampleUser.Roles.Add(defaultRole);
-
-                PermissionPolicyUser userAdmin = ObjectSpace.FindObject<PermissionPolicyUser>(new BinaryOperator("UserName", "Admin"));
-                if (userAdmin == null)
-                {
-                    userAdmin = ObjectSpace.CreateObject<PermissionPolicyUser>();
-                    userAdmin.UserName = "Admin";
-                    // Set a password if the standard authentication type is used
-                    userAdmin.SetPassword("123");
-                }
-                // If a role with the Administrators name doesn't exist in the database, create this role
-                PermissionPolicyRole adminRole = ObjectSpace.FindObject<PermissionPolicyRole>(new BinaryOperator("Name", "Administrators"));
-                if (adminRole == null)
-                {
-                    adminRole = ObjectSpace.CreateObject<PermissionPolicyRole>();
-                    adminRole.Name = "Administrators";
-                }
-                adminRole.IsAdministrative = true;
-                userAdmin.Roles.Add(adminRole);
-                ObjectSpace.CommitChanges(); //This line persists created object(s).
+                sampleUser = ObjectSpace.CreateObject<User>();
+                sampleUser.UserName = "User";
+                sampleUser.SetPassword("");
             }
+            var defaultRole = CreateDefaultRole();
+            sampleUser.Roles.Add(defaultRole);
+
+            var userAdmin = ObjectSpace.FindObject<User>(new BinaryOperator("UserName", "Admin"));
+            if (userAdmin == null)
+            {
+                userAdmin = ObjectSpace.CreateObject<User>();
+                userAdmin.UserName = "Admin";
+                // Set a password if the standard authentication type is used
+                userAdmin.SetPassword("");
+            }
+            // If a role with the Administrators name doesn't exist in the database, create this role
+            var adminRole = ObjectSpace.FindObject<Role>(new BinaryOperator("Name", "Администраторы"));
+            if (adminRole == null)
+            {
+                adminRole = ObjectSpace.CreateObject<Role>();
+                adminRole.Name = "Администраторы";
+            }
+            adminRole.IsAdministrative = true;
+            userAdmin.Roles.Add(adminRole);
+            ObjectSpace.CommitChanges(); //This line persists created object(s).
         }
 
         public override void UpdateDatabaseBeforeUpdateSchema()
@@ -69,17 +62,17 @@ namespace Cube.Module.DatabaseUpdate
 
         private PermissionPolicyRole CreateDefaultRole()
         {
-            PermissionPolicyRole defaultRole = ObjectSpace.FindObject<PermissionPolicyRole>(new BinaryOperator("Name", "Default"));
+            var defaultRole = ObjectSpace.FindObject<Role>(new BinaryOperator("Name", "Операторы"));
             if (defaultRole == null)
             {
-                defaultRole = ObjectSpace.CreateObject<PermissionPolicyRole>();
-                defaultRole.Name = "Default";
+                defaultRole = ObjectSpace.CreateObject<Role>();
+                defaultRole.Name = "Операторы";
 
-                defaultRole.AddObjectPermission<PermissionPolicyUser>(SecurityOperations.Read, "[Oid] = CurrentUserId()", SecurityPermissionState.Allow);
+                defaultRole.AddObjectPermission<User>(SecurityOperations.Read, "[Oid] = CurrentUserId()", SecurityPermissionState.Allow);
                 defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Default/Items/MyDetails", SecurityPermissionState.Allow);
-                defaultRole.AddMemberPermission<PermissionPolicyUser>(SecurityOperations.Write, "ChangePasswordOnFirstLogon", "[Oid] = CurrentUserId()", SecurityPermissionState.Allow);
-                defaultRole.AddMemberPermission<PermissionPolicyUser>(SecurityOperations.Write, "StoredPassword", "[Oid] = CurrentUserId()", SecurityPermissionState.Allow);
-                defaultRole.AddTypePermissionsRecursively<PermissionPolicyRole>(SecurityOperations.Read, SecurityPermissionState.Deny);
+                defaultRole.AddMemberPermission<User>(SecurityOperations.Write, "ChangePasswordOnFirstLogon", "[Oid] = CurrentUserId()", SecurityPermissionState.Allow);
+                defaultRole.AddMemberPermission<User>(SecurityOperations.Write, "StoredPassword", "[Oid] = CurrentUserId()", SecurityPermissionState.Allow);
+                defaultRole.AddTypePermissionsRecursively<Role>(SecurityOperations.Read, SecurityPermissionState.Deny);
                 defaultRole.AddTypePermissionsRecursively<ModelDifference>(SecurityOperations.ReadWriteAccess, SecurityPermissionState.Allow);
                 defaultRole.AddTypePermissionsRecursively<ModelDifferenceAspect>(SecurityOperations.ReadWriteAccess, SecurityPermissionState.Allow);
             }

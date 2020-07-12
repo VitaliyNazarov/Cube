@@ -1,27 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Cube.Model.Contexts;
 using Cube.Model.Enums;
 using Cube.Model.Interfaces;
-using Cube.Model.Security;
+using DevExpress.Persistent.BaseImpl.EF;
 using SQLite.CodeFirst;
+using User = Cube.Model.Security.User;
 
 namespace Cube.Model
 {
     /// <summary>
     /// Заказ.
     /// </summary>
-    public class Order : IBaseEntity, IArchivable, IImageHolder
+    public class Order : IBaseEntity, IArchivable, IImageHolder//, IFileHolder
     {
         /// <summary>
         /// ctor
         /// </summary>
         public Order()
         {
-            Rows = new HashSet<OrderRow>();
-            Images = new HashSet<Image>();
+            Rows = new List<OrderRow>();
+            Images = new List<Image>();
         }
 
         #region Base properties
@@ -29,7 +31,7 @@ namespace Cube.Model
         /// <summary>
         /// Идентификатор.
         /// </summary>
-        [Autoincrement]
+        [Autoincrement, Browsable(false)]
         public long Id { get; set; }
 
         /// <summary>
@@ -43,7 +45,7 @@ namespace Cube.Model
         /// Внешний уникальный идентификатор.
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [SqlDefaultValue(DefaultValue = CubeEFHelper.ExternalIdGenerator)]
+        [SqlDefaultValue(DefaultValue = CubeEFHelper.ExternalIdGenerator), Browsable(false)]
         public Guid ExternalId { get; set; }
 
         #endregion
@@ -59,7 +61,7 @@ namespace Cube.Model
         /// Заказчик.
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Необходимо указать заказчика.")]
-        [StringLength(256, ErrorMessage = "Имя заказчика не должен превышать 256 символов.")]
+        //[StringLength(256, ErrorMessage = "Имя заказчика не должен превышать 256 символов.")]
         public string CustomerName { get; set; }
 
         /// <summary>
@@ -110,7 +112,7 @@ namespace Cube.Model
         /// <summary>
         /// Состав заказа.
         /// </summary>
-        public virtual ICollection<OrderRow> Rows { get; set; }
+        public virtual IList<OrderRow> Rows { get; set; }
 
         #region Implementation of IArchivable
 
@@ -126,7 +128,16 @@ namespace Cube.Model
         /// <summary>
         /// Коллекция картинок заказа.
         /// </summary>
-        public virtual ICollection<Image> Images { get; }
+        public virtual IList<Image> Images { get; }
+
+        #endregion
+
+        #region Implementation of IFileHolder
+
+        /// <summary>
+        /// Коллекция файлов заказа.
+        /// </summary>
+        //public virtual IList<FileData> Files { get; }
 
         #endregion
     }

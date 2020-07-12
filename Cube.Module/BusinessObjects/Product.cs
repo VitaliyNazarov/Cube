@@ -14,15 +14,14 @@ namespace Cube.Model
     /// <summary>
     /// Продукт.
     /// </summary>
-    public class Product : IBaseEntity, ISoftDeletable, IImageHolder, IArchivable
+    public class Product : IBaseEntity, ISoftDeletable, IImageHolder, IArchivable, ICategorizedItem
     {
         /// <summary>
         /// ctor
         /// </summary>
         public Product()
         {
-            Groups = new HashSet<ProductGroup>();
-            Images = new HashSet<Image>();
+            Images = new List<Image>();
         }
 
         #region Base properties
@@ -30,7 +29,7 @@ namespace Cube.Model
         /// <summary>
         /// Идентификатор.
         /// </summary>
-        [Autoincrement]
+        [Autoincrement, Browsable(false)]
         public long Id { get; set; }
 
         /// <summary>
@@ -44,7 +43,7 @@ namespace Cube.Model
         /// Внешний уникальный идентификатор.
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [SqlDefaultValue(DefaultValue = CubeEFHelper.ExternalIdGenerator)]
+        [SqlDefaultValue(DefaultValue = CubeEFHelper.ExternalIdGenerator), Browsable(false)]
         public Guid ExternalId { get; set; }
 
         /// <summary>
@@ -100,16 +99,16 @@ namespace Cube.Model
         #region References
 
         /// <summary>
-        /// Группы в которые включен продукт.
+        /// Группа в которую включен продукт.
         /// </summary>
-        public virtual ICollection<ProductGroup> Groups { get; set; }
+        public virtual ProductGroup Category { get; set; }
 
         #endregion
 
         #region Implementation of IImageHolder
 
         /// <inheritdoc />
-        public virtual ICollection<Image> Images { get; set; }
+        public virtual IList<Image> Images { get; set; }
 
         #endregion
 
@@ -120,6 +119,13 @@ namespace Cube.Model
         /// </summary>
         public bool IsArchive { get; set; }
 
+        ITreeNode ICategorizedItem.Category
+        {
+            get => Category; 
+            set => Category = (ProductGroup)value;
+        }
+
         #endregion
+
     }
 }

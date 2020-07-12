@@ -29,7 +29,7 @@
             this.module4 = new Cube.Module.Win.CubeWindowsFormsModule();
             this.securityModule1 = new DevExpress.ExpressApp.Security.SecurityModule();
             this.securityStrategyComplex1 = new DevExpress.ExpressApp.Security.SecurityStrategyComplex();
-            this.securityStrategyComplex1.SupportNavigationPermissionsForTypes = false;
+            this.authenticationStandard1 = new DevExpress.ExpressApp.Security.AuthenticationStandard();
             this.objectsModule = new DevExpress.ExpressApp.Objects.BusinessClassLibraryCustomizationModule();
             this.conditionalAppearanceModule = new DevExpress.ExpressApp.ConditionalAppearance.ConditionalAppearanceModule();
             this.fileAttachmentsWindowsFormsModule = new DevExpress.ExpressApp.FileAttachments.Win.FileAttachmentsWindowsFormsModule();
@@ -44,58 +44,77 @@
             this.validationModule = new DevExpress.ExpressApp.Validation.ValidationModule();
             this.validationWindowsFormsModule = new DevExpress.ExpressApp.Validation.Win.ValidationWindowsFormsModule();
             this.viewVariantsModule = new DevExpress.ExpressApp.ViewVariantsModule.ViewVariantsModule();
-            this.authenticationStandard1 = new DevExpress.ExpressApp.Security.AuthenticationStandard();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // securityStrategyComplex1
             // 
+            this.securityStrategyComplex1.AllowAnonymousAccess = false;
             this.securityStrategyComplex1.Authentication = this.authenticationStandard1;
+            this.securityStrategyComplex1.PermissionsReloadMode = DevExpress.ExpressApp.Security.PermissionsReloadMode.NoCache;
             this.securityStrategyComplex1.RoleType = typeof(DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyRole);
+            this.securityStrategyComplex1.SupportNavigationPermissionsForTypes = false;
             this.securityStrategyComplex1.UserType = typeof(DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyUser);
-            // 
-            // securityModule1
-            // 
-            this.securityModule1.UserType = typeof(DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyUser);
             // 
             // authenticationStandard1
             // 
             this.authenticationStandard1.LogonParametersType = typeof(DevExpress.ExpressApp.Security.AuthenticationStandardLogonParameters);
-            //
+            // 
+            // notificationsModule
+            // 
+            this.notificationsModule.CanAccessPostponedItems = false;
+            this.notificationsModule.NotificationsRefreshInterval = System.TimeSpan.Parse("00:05:00");
+            this.notificationsModule.NotificationsStartDelay = System.TimeSpan.Parse("00:00:05");
+            this.notificationsModule.ShowDismissAllAction = false;
+            this.notificationsModule.ShowNotificationsWindow = true;
+            this.notificationsModule.ShowRefreshAction = false;
+            // 
+            // officeModule
+            // 
+            this.officeModule.RichTextMailMergeDataType = null;
+            // 
+            // officeWindowsFormsModule
+            // 
+            this.officeWindowsFormsModule.RichTextMailMergeDataType = null;
+            // 
             // reportsModuleV2
-            //
+            // 
             this.reportsModuleV2.EnableInplaceReports = true;
             this.reportsModuleV2.ReportDataType = typeof(DevExpress.Persistent.BaseImpl.EF.ReportDataV2);
-            this.reportsModuleV2.ShowAdditionalNavigation = false;
             this.reportsModuleV2.ReportStoreMode = DevExpress.ExpressApp.ReportsV2.ReportStoreModes.XML;
+            // 
+            // validationModule
+            // 
+            this.validationModule.AllowValidationDetailsAccess = true;
+            this.validationModule.IgnoreWarningAndInformationRules = false;
             // 
             // CubeWindowsFormsApplication
             // 
             this.ApplicationName = "Cube";
             this.CheckCompatibilityType = DevExpress.ExpressApp.CheckCompatibilityType.DatabaseSchema;
+            this.MaxLogonAttemptCount = 10;
             this.Modules.Add(this.module1);
             this.Modules.Add(this.module2);
+            this.Modules.Add(this.objectsModule);
+            this.Modules.Add(this.conditionalAppearanceModule);
+            this.Modules.Add(this.notificationsModule);
+            this.Modules.Add(this.officeModule);
+            this.Modules.Add(this.reportsModuleV2);
+            this.Modules.Add(this.treeListEditorsModuleBase);
+            this.Modules.Add(this.validationModule);
+            this.Modules.Add(this.viewVariantsModule);
             this.Modules.Add(this.module3);
+            this.Modules.Add(this.fileAttachmentsWindowsFormsModule);
+            this.Modules.Add(this.notificationsWindowsFormsModule);
+            this.Modules.Add(this.officeWindowsFormsModule);
+            this.Modules.Add(this.reportsWindowsFormsModuleV2);
+            this.Modules.Add(this.treeListEditorsWindowsFormsModule);
+            this.Modules.Add(this.validationWindowsFormsModule);
             this.Modules.Add(this.module4);
             this.Modules.Add(this.securityModule1);
             this.Security = this.securityStrategyComplex1;
-            this.Modules.Add(this.objectsModule);
-            this.Modules.Add(this.conditionalAppearanceModule);
-            this.Modules.Add(this.fileAttachmentsWindowsFormsModule);
-            this.Modules.Add(this.notificationsModule);
-            this.Modules.Add(this.notificationsWindowsFormsModule);
-            this.Modules.Add(this.officeModule);
-            this.Modules.Add(this.officeWindowsFormsModule);
-            this.Modules.Add(this.reportsModuleV2);
-            this.Modules.Add(this.reportsWindowsFormsModuleV2);
-            this.Modules.Add(this.treeListEditorsModuleBase);
-            this.Modules.Add(this.treeListEditorsWindowsFormsModule);
-            this.Modules.Add(this.validationModule);
-            this.Modules.Add(this.validationWindowsFormsModule);
-            this.Modules.Add(this.viewVariantsModule);
             this.UseOldTemplates = false;
             this.DatabaseVersionMismatch += new System.EventHandler<DevExpress.ExpressApp.DatabaseVersionMismatchEventArgs>(this.CubeWindowsFormsApplication_DatabaseVersionMismatch);
             this.CustomizeLanguagesList += new System.EventHandler<DevExpress.ExpressApp.CustomizeLanguagesListEventArgs>(this.CubeWindowsFormsApplication_CustomizeLanguagesList);
-
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }

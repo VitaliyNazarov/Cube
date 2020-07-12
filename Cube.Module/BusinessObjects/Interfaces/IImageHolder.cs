@@ -10,6 +10,6 @@ namespace Cube.Model.Interfaces
         /// <summary>
         /// Изображения.
         /// </summary>
-        ICollection<Image> Images { get; }
+        IList<Image> Images { get; }
     }
 }

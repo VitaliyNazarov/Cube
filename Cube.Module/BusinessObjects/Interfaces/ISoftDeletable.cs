@@ -10,11 +10,11 @@ namespace Cube.Model.Interfaces
         /// <summary>
         /// Дата удаления группы.
         /// </summary>
-        DateTime? DeletedDate { get; }
+        DateTime? DeletedDate { get; set; }
 
         /// <summary>
         /// Удаленная группа.
         /// </summary>
-        bool Deleted { get; }
+        bool Deleted { get; set; }
     }
 }

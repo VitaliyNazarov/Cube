@@ -1,8 +1,9 @@
-﻿<?xml version="1.0" ?>
-<Application Title="Cube">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Title="Cube" Logo="ProductOrderDetail-21">
   <Options>
     <LayoutManagerOptions RequiredFieldMark="*" />
   </Options>
-  <Views>
-  </Views>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="19.2.3.0" IsNewNode="True" />
+  </SchemaModules>
 </Application>

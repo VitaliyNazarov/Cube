@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Cube.Model.Contexts;
@@ -18,7 +19,7 @@ namespace Cube.Model
         /// </summary>
         public PriceList()
         {
-            Prices = new HashSet<Price>();
+            Prices = new List<Price>();
         }
 
         #region Base properties
@@ -26,7 +27,7 @@ namespace Cube.Model
         /// <summary>
         /// Идентификатор.
         /// </summary>
-        [Autoincrement]
+        [Autoincrement, Browsable(false)]
         public long Id { get; set; }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace Cube.Model
         /// Внешний уникальный идентификатор.
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [SqlDefaultValue(DefaultValue = CubeEFHelper.ExternalIdGenerator)]
+        [SqlDefaultValue(DefaultValue = CubeEFHelper.ExternalIdGenerator), Browsable(false)]
         public Guid ExternalId { get; set; }
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace Cube.Model
         /// <summary>
         /// Цены продуктов по прайсу.
         /// </summary>
-        public virtual ICollection<Price> Prices { get; set; }
+        public virtual IList<Price> Prices { get; set; }
 
         #endregion
 

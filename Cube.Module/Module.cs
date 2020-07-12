@@ -2,6 +2,8 @@
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.DC;
 using System.Collections.Generic;
+using Cube.Model.Enums;
+using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp.Updating;
 using DevExpress.Persistent.BaseImpl;
 
@@ -26,6 +28,9 @@ namespace Cube.Module
         {
             InitializeComponent();
             BaseObject.OidInitializationMode = OidInitializationMode.AfterConstruction;
+            EnumProcessingHelper.RegisterEnum(typeof(OrderState));
+            EnumProcessingHelper.RegisterEnum(typeof(OrderType));
+            EnumProcessingHelper.RegisterEnum(typeof(ProductUnit));
         }
 
         public override IEnumerable<ModuleUpdater> GetModuleUpdaters(IObjectSpace objectSpace, Version versionFromDB)

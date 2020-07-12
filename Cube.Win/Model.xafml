@@ -1,21 +1,73 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Application Logo="ExpressAppLogo">
-  <NavigationItems NavigationStyle="Accordion" ShowImages="True" DefaultChildItemsDisplayStyle="List">
+<Application Logo="ProductOrderDetail-21">
+  <BOModel>
+    <Class Name="Cube.Model.ProductGroup" DefaultDetailViewImage="BO_Product_Group" DefaultListViewImage="BO_Product_Group" ImageName="BO_Product_Group" DefaultListViewShowAutoFilterRow="True" IsVisibleInReports="True" Caption="Группа" />
+  </BOModel>
+  <NavigationItems NavigationStyle="NavBar" ShowImages="True" DefaultChildItemsDisplayStyle="LargeIcons" StartupNavigationItem="@2a02c5db-fe7e-4d04-a12b-2808a02f0d9a">
     <Items>
-      <Item Id="Default">
+      <Item Id="Default" Caption="Основное" ImageName="BO_Sale" Index="0">
         <Items>
-          <Item Id="@a86bd763-750c-4eb4-9894-2dfed3f4383a" ImageName="BO_Order" Caption="Заказы" ViewId="Order_ListView" IsNewNode="True" />
-          <Item Id="PermissionPolicyRole_ListView" Caption="Роли" />
-          <Item Id="PermissionPolicyUser_ListView" Caption="Пользователи" />
+          <Item Id="@a86bd763-750c-4eb4-9894-2dfed3f4383a" ImageName="BO_Order" Caption="Заказы" ViewId="Order_ListView" Index="0" IsNewNode="True" />
+          <Item Id="@2a02c5db-fe7e-4d04-a12b-2808a02f0d9a" Caption="Каталог" ImageName="BO_Product" ViewId="Product_CategorizedView" Index="1" IsNewNode="True" />
+          <Item Id="@2b638508-44af-4e36-95e4-95cad41b9689" Caption="Прайс-листы" ImageName="BO_Price_Item" ViewId="PriceList_ListView" Index="2" IsNewNode="True" />
+          <Item Id="MyDetails" Caption="Мои настройки" Removed="True" />
+          <Item Id="PermissionPolicyRole_ListView" Caption="Роли" Removed="True" />
+          <Item Id="PermissionPolicyUser_ListView" Caption="Пользователи" Removed="True" />
         </Items>
       </Item>
+      <Item Id="@433514ac-a5f5-4934-8e13-14d16639f0d3" Caption="Безопасность" ImageName="Security_Key" Index="1" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="PermissionPolicyUser_ListView" Caption="Пользователи" ViewId="PermissionPolicyUser_ListView" ObjectKey="" Index="0" IsNewNode="True" />
+          <Item Id="PermissionPolicyRole_ListView" Caption="Роли" ViewId="PermissionPolicyRole_ListView" ObjectKey="" Index="1" IsNewNode="True" />
+          <Item Id="MyDetails" ObjectKey="@CurrentUserID" ViewId="PermissionPolicyUser_DetailView" Caption="Мои настройки" ImageName="BO_MyDetails" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="Reports" Caption="Отчеты" ImageName="Business_Report" Index="2" />
     </Items>
   </NavigationItems>
-  <Options UIType="SingleWindowSDI" FormStyle="Ribbon" ShowTabImage="False">
+  <Options UIType="TabbedMDI" FormStyle="Ribbon" ShowTabImage="True" EnableHtmlFormatting="True">
     <LayoutManagerOptions EnableLayoutGroupImages="False" />
   </Options>
   <SchemaModules>
     <SchemaModule Name="SystemModule" Version="19.2.3.0" IsNewNode="True" />
     <SchemaModule Name="SystemWindowsFormsModule" Version="19.2.3.0" IsNewNode="True" />
   </SchemaModules>
+  <Views>
+    <ListView Id="Product_CategorizedView" ClassName="Cube.Model.Product" ImageName="BO_Product" AutoExpandAllGroups="True" IsGroupPanelVisible="True" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="ExternalId" PropertyName="ExternalId" Index="-1" Width="70" IsNewNode="True" />
+        <ColumnInfo Id="Id" PropertyName="Id" Index="-1" Width="70" IsNewNode="True" />
+        <ColumnInfo Id="Name" PropertyName="Name" Index="0" Width="400" SortIndex="0" SortOrder="Ascending" IsNewNode="True" />
+        <ColumnInfo Id="CreatedDate" PropertyName="CreatedDate" Index="1" Width="70" IsNewNode="True" />
+        <ColumnInfo Id="DeletedDate" PropertyName="DeletedDate" Index="2" Width="70" IsNewNode="True" />
+        <ColumnInfo Id="Deleted" PropertyName="Deleted" Index="3" Width="50" IsNewNode="True" />
+        <ColumnInfo Id="Article" PropertyName="Article" Index="4" Width="70" IsNewNode="True" />
+        <ColumnInfo Id="Description" PropertyName="Description" Index="5" Width="70" IsNewNode="True" />
+        <ColumnInfo Id="Width" PropertyName="Width" Index="6" Width="50" IsNewNode="True" />
+        <ColumnInfo Id="Height" PropertyName="Height" Index="7" Width="50" IsNewNode="True" />
+        <ColumnInfo Id="Length" PropertyName="Length" Index="8" Width="50" IsNewNode="True" />
+        <ColumnInfo Id="Unit" PropertyName="Unit" Index="9" Width="70" IsNewNode="True" />
+        <ColumnInfo Id="Category" PropertyName="Category" Index="10" Width="70" IsNewNode="True" />
+        <ColumnInfo Id="IsArchive" PropertyName="IsArchive" Index="11" Width="50" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ProductGroup_DetailView">
+      <Items>
+        <PropertyEditor Id="Products" View="Product_CategorizedView" />
+      </Items>
+    </DetailView>
+    <ListView Id="ProductGroup_ListView" Criteria="[Deleted] == false">
+      <Columns>
+        <ColumnInfo Id="ExternalId" AllowEdit="False" Index="-1" />
+        <ColumnInfo Id="Id" AllowEdit="False" Index="-1" />
+        <ColumnInfo Id="Parent" Index="-1" />
+        <ColumnInfo Id="Name" AllowEdit="True" Width="287" />
+        <ColumnInfo Id="Description" Index="1" />
+        <ColumnInfo Id="CreatedDate" Index="2" />
+        <ColumnInfo Id="DeletedDate" AllowEdit="False" Index="3" />
+        <ColumnInfo Id="Deleted" AllowEdit="False" Index="4" />
+        <ColumnInfo Id="IsArchive" Index="5" />
+      </Columns>
+    </ListView>
+  </Views>
 </Application>

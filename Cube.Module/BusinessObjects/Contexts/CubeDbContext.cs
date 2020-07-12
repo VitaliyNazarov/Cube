@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.Data.SQLite;
 using DevExpress.ExpressApp.EF.Updating;
 using DevExpress.Persistent.BaseImpl.EF;
-using DevExpress.Persistent.BaseImpl.EF.PermissionPolicy;
 using Role = Cube.Model.Security.Role;
 using User = Cube.Model.Security.User;
 
@@ -46,8 +45,6 @@ namespace Cube.Model.Contexts
 
         public virtual DbSet<Product> Products { get; set; }
 
-        public virtual DbSet<Image> Images { get; set; }
-
         public virtual DbSet<PriceList> PriceLists { get; set; }
 
         public virtual DbSet<Order> Orders { get; set; }
@@ -58,7 +55,8 @@ namespace Cube.Model.Contexts
         {
             IDatabaseInitializer<CubeDbContext> initializer = null;
 #if DEBUG
-            initializer = new CubeDropCreateDatabaseAlways(modelBuilder);
+            //initializer = new CubeDropCreateDatabaseAlways(modelBuilder);
+            initializer = new CubeCreateDatabaseIfNotExists(modelBuilder);
 #else
             initializer = new CubeCreateDatabaseIfNotExists(modelBuilder);
 #endif
@@ -67,10 +65,10 @@ namespace Cube.Model.Contexts
 
         #region XAF
 
-        public virtual DbSet<PermissionPolicyUser> PolicyUsers { get; set; }
+        public virtual DbSet<MediaDataObject> Images { get; set; } 
 
-        public virtual DbSet<PermissionPolicyRole> PolicyRoles { get; set; }
-
+        //public virtual DbSet<FileData> Files { get; set; }
+        
         public virtual DbSet<ReportDataV2> ReportDataV2 { get; set; } 
 
         public DbSet<ModuleInfo> ModulesInfo { get; set; }

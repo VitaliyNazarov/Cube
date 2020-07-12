@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using Cube.Model.Contexts;
 using Cube.Model.Interfaces;
@@ -23,7 +24,7 @@ namespace Cube.Model
         /// <summary>
         /// Идентификатор.
         /// </summary>
-        [Autoincrement]
+        [Autoincrement, Browsable(false)]
         public long Id { get; set; }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace Cube.Model
         /// Внешний уникальный идентификатор.
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [SqlDefaultValue(DefaultValue = CubeEFHelper.ExternalIdGenerator)]
+        [SqlDefaultValue(DefaultValue = CubeEFHelper.ExternalIdGenerator), Browsable(false)]
         public Guid ExternalId { get; set; }
 
         /// <summary>
