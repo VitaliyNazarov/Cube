@@ -1,15 +1,107 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Application Logo="ProductOrderDetail-21">
+<Application Logo="ProductOrderDetail-21" Company="МФ Куб" Copyright="2020" Description="Программа создания заказов" Title="МФ Куб. Создание заказов." ProtectedContentText="Все права защищены">
   <BOModel>
-    <Class Name="Cube.Model.ProductGroup" DefaultDetailViewImage="BO_Product_Group" DefaultListViewImage="BO_Product_Group" ImageName="BO_Product_Group" DefaultListViewShowAutoFilterRow="True" IsVisibleInReports="True" Caption="Группа" />
+    <Class Name="Cube.Model.Order" Caption="Заказ" DefaultListViewImage="BO_Order" DefaultDetailViewImage="BO_Order" ImageName="BO_Order" IsVisibleInReports="True">
+      <OwnMembers>
+        <Member Name="ChangedDate" Caption="Дата изменения" />
+        <Member Name="CreatedDate" Caption="Дата создания" />
+        <Member Name="Creator" Caption="Автор" />
+        <Member Name="CustomerName" Caption="ФИО заказчика" />
+        <Member Name="Image" Caption="" />
+        <Member Name="IsArchive" Caption="В архиве" />
+        <Member Name="IsDraft" Caption="Черновик" />
+        <Member Name="Modifier" Caption="Редактировал" />
+        <Member Name="Number" Caption="№ заказа" />
+        <Member Name="OrderType" Caption="Тип заказа" />
+        <Member Name="PlanningDate" Caption="Плановая дата" />
+        <Member Name="PriceList" Caption="Прайс-лист" />
+        <Member Name="Rows" Caption="Состав" />
+        <Member Name="State" Caption="Статус" />
+        <Member Name="Sum" Caption="Итого" />
+      </OwnMembers>
+    </Class>
+    <Class Name="Cube.Model.OrderRow" Caption="Строка заказ" DefaultDetailViewImage="BO_Order_Item" DefaultListViewImage="BO_Order_Item" ImageName="BO_Order_Item" IsVisibleInReports="True">
+      <OwnMembers>
+        <Member Name="CreatedDate" Caption="Дата создания" />
+        <Member Name="Order" Caption="Заказ" />
+        <Member Name="Position" Caption="№" />
+        <Member Name="Price" Caption="Цена" />
+        <Member Name="Product" Caption="Продукт" />
+        <Member Name="Quantity" Caption="Количество" />
+        <Member Name="SourcePrice" Caption="Прайс-лист" />
+        <Member Name="Sum" Caption="Сумма" />
+        <Member Name="Unit" Caption="Ед. измерения" />
+      </OwnMembers>
+    </Class>
+    <Class Name="Cube.Model.Price" DefaultDetailViewImage="BO_Price_Item" DefaultListViewImage="BO_Price_Item" ImageName="BO_Price_Item" Caption="Цена" IsVisibleInReports="True">
+      <OwnMembers>
+        <Member Name="CreatedDate" Caption="Дата создания" />
+        <Member Name="Deleted" Caption="Удалена" />
+        <Member Name="DeletedDate" Caption="Дата удаления" />
+        <Member Name="IsArchive" Caption="В архиве" />
+        <Member Name="PriceList" Caption="Прайс-лист" />
+        <Member Name="Product" Caption="Продукт" />
+        <Member Name="Value" Caption="Значение цены" />
+      </OwnMembers>
+    </Class>
+    <Class Name="Cube.Model.PriceList" Caption="Прайс-лист" DefaultDetailViewImage="BO_Price" DefaultListViewImage="BO_Price" ImageName="BO_Price" IsVisibleInReports="True">
+      <OwnMembers>
+        <Member Name="CreatedDate" Caption="Дата создания" />
+        <Member Name="Deleted" Caption="Удален" />
+        <Member Name="DeletedDate" Caption="Дата удаления" />
+        <Member Name="IsArchive" Caption="В архиве" />
+        <Member Name="Name" Caption="Название" />
+        <Member Name="Prices" Caption="Цены" />
+      </OwnMembers>
+    </Class>
+    <Class Name="Cube.Model.Product" DefaultDetailViewImage="BO_Product" DefaultListViewImage="BO_Product" ImageName="BO_Product" Caption="Продукт" IsVisibleInReports="True">
+      <OwnMembers>
+        <Member Name="Article" Caption="Артикул" />
+        <Member Name="Category" Caption="Группа" />
+        <Member Name="CreatedDate" Caption="Дата создания" />
+        <Member Name="Deleted" Caption="Удален" />
+        <Member Name="DeletedDate" Caption="Дата удаления" />
+        <Member Name="Description" Caption="Описание" />
+        <Member Name="Height" Caption="Высота" />
+        <Member Name="Image" Caption="" />
+        <Member Name="IsArchive" Caption="В архиве" />
+        <Member Name="Length" Caption="Длина" />
+        <Member Name="Name" Caption="Название" />
+        <Member Name="Unit" Caption="Ед. измерения" />
+        <Member Name="Width" Caption="Ширина" />
+      </OwnMembers>
+    </Class>
+    <Class Name="Cube.Model.ProductGroup" DefaultDetailViewImage="BO_Product_Group" DefaultListViewImage="BO_Product_Group" ImageName="BO_Product_Group" DefaultListViewShowAutoFilterRow="True" IsVisibleInReports="True" Caption="Группа">
+      <OwnMembers>
+        <Member Name="Children" Caption="Дочерние группы" />
+        <Member Name="CreatedDate" Caption="Дата создания" />
+        <Member Name="Deleted" Caption="Удалена" />
+        <Member Name="DeletedDate" Caption="Дата удаления" />
+        <Member Name="Description" Caption="Описание" />
+        <Member Name="IsArchive" Caption="В архиве" />
+        <Member Name="Name" Caption="Название" />
+        <Member Name="Parent" Caption="Группа родитель" />
+        <Member Name="Products" Caption="Продукты" />
+      </OwnMembers>
+    </Class>
+    <Class Name="Cube.Model.Security.Role" Caption="Роль">
+      <OwnMembers>
+        <Member Name="Type" Caption="Тип" />
+      </OwnMembers>
+    </Class>
+    <Class Name="Cube.Model.Security.User" Caption="Пользователь">
+      <OwnMembers>
+        <Member Name="CreatedDate" Caption="Дата создания" />
+      </OwnMembers>
+    </Class>
   </BOModel>
   <NavigationItems NavigationStyle="NavBar" ShowImages="True" DefaultChildItemsDisplayStyle="LargeIcons" StartupNavigationItem="@2a02c5db-fe7e-4d04-a12b-2808a02f0d9a">
     <Items>
       <Item Id="Default" Caption="Основное" ImageName="BO_Sale" Index="0">
         <Items>
           <Item Id="@a86bd763-750c-4eb4-9894-2dfed3f4383a" ImageName="BO_Order" Caption="Заказы" ViewId="Order_ListView" Index="0" IsNewNode="True" />
-          <Item Id="@2a02c5db-fe7e-4d04-a12b-2808a02f0d9a" Caption="Каталог" ImageName="BO_Product" ViewId="Product_CategorizedView" Index="1" IsNewNode="True" />
-          <Item Id="@2b638508-44af-4e36-95e4-95cad41b9689" Caption="Прайс-листы" ImageName="BO_Price_Item" ViewId="PriceList_ListView" Index="2" IsNewNode="True" />
+          <Item Id="@2a02c5db-fe7e-4d04-a12b-2808a02f0d9a" Caption="Каталог" ImageName="BO_Product_Group" ViewId="Product_CategorizedView" Index="1" IsNewNode="True" />
+          <Item Id="@2b638508-44af-4e36-95e4-95cad41b9689" Caption="Прайс-листы" ImageName="BO_Price" ViewId="PriceList_ListView" Index="2" IsNewNode="True" />
           <Item Id="MyDetails" Caption="Мои настройки" Removed="True" />
           <Item Id="PermissionPolicyRole_ListView" Caption="Роли" Removed="True" />
           <Item Id="PermissionPolicyUser_ListView" Caption="Пользователи" Removed="True" />
@@ -26,33 +118,66 @@
     </Items>
   </NavigationItems>
   <Options UIType="TabbedMDI" FormStyle="Ribbon" ShowTabImage="True" EnableHtmlFormatting="True">
-    <LayoutManagerOptions EnableLayoutGroupImages="False" />
+    <LayoutManagerOptions EnableLayoutGroupImages="True" />
+    <PrintingSettings Landscape="True" />
   </Options>
   <SchemaModules>
     <SchemaModule Name="SystemModule" Version="19.2.3.0" IsNewNode="True" />
     <SchemaModule Name="SystemWindowsFormsModule" Version="19.2.3.0" IsNewNode="True" />
   </SchemaModules>
   <Views>
-    <ListView Id="Product_CategorizedView" ClassName="Cube.Model.Product" ImageName="BO_Product" AutoExpandAllGroups="True" IsGroupPanelVisible="True" IsNewNode="True">
+    <DetailView Id="Order_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="Order" RelativeSize="22.976190476190474">
+              <LayoutGroup Id="Order_col1" RelativeSize="49.90234375">
+                <LayoutItem Id="Number" RelativeSize="20" Index="0" />
+                <LayoutItem Id="CustomerName" RelativeSize="15" Index="1" />
+                <LayoutItem Id="PlanningDate" RelativeSize="15" Index="2" />
+                <LayoutItem Id="State" RelativeSize="15" Index="3" />
+                <LayoutItem Id="OrderType" RelativeSize="15" Index="4" Removed="True" />
+                <LayoutItem Id="Sum" ViewItem="Sum" Index="4" RelativeSize="15" IsNewNode="True" />
+                <LayoutItem Id="PriceList" ViewItem="PriceList" Index="5" RelativeSize="20" IsNewNode="True" />
+                <LayoutItem Id="IsDraft" RelativeSize="16.939890710382514" Index="6" Removed="True" />
+                <LayoutItem Id="CreatedDate" RelativeSize="17.486338797814209" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Order_col2" RelativeSize="50.09765625">
+                <LayoutItem Id="CreatedDate" ViewItem="CreatedDate" Index="0" RelativeSize="20" IsNewNode="True" />
+                <LayoutItem Id="ChangedDate" RelativeSize="15" Index="1" />
+                <LayoutItem Id="Creator" RelativeSize="15" Index="2" />
+                <LayoutItem Id="Modifier" RelativeSize="50" Index="3" />
+                <LayoutItem Id="Image" ShowCaption="False" ViewItem="Image" Index="4" RelativeSize="35" Removed="True" />
+                <LayoutItem Id="PriceList" RelativeSize="15" Index="4" Removed="True" />
+                <LayoutItem Id="Sum" RelativeSize="17.391304347826086" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <SeparatorItem Id="Item1" Index="1" RelativeSize="0.59523809523809523" IsNewNode="True" />
+            <LayoutGroup Id="Rows_Group" ShowCaption="True" Caption="Rows" TextAlignMode="AlignWithChildren" Index="2" RelativeSize="76.428571428571431" Direction="Horizontal" IsNewNode="True">
+              <LayoutItem Id="Image" ShowCaption="False" ViewItem="Image" Index="0" RelativeSize="45.80078125" IsNewNode="True" />
+              <LayoutItem Id="Rows" ViewItem="Rows" Index="1" RelativeSize="54.19921875" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Rows_Group" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Product_CategorizedView" ClassName="Cube.Model.Product" ImageName="BO_Product" AutoExpandAllGroups="True" IsGroupPanelVisible="True" IsFooterVisible="True" IsNewNode="True">
       <Columns IsNewNode="True">
         <ColumnInfo Id="ExternalId" PropertyName="ExternalId" Index="-1" Width="70" IsNewNode="True" />
         <ColumnInfo Id="Id" PropertyName="Id" Index="-1" Width="70" IsNewNode="True" />
-        <ColumnInfo Id="Name" PropertyName="Name" Index="0" Width="400" SortIndex="0" SortOrder="Ascending" IsNewNode="True" />
-        <ColumnInfo Id="CreatedDate" PropertyName="CreatedDate" Index="1" Width="70" IsNewNode="True" />
-        <ColumnInfo Id="DeletedDate" PropertyName="DeletedDate" Index="2" Width="70" IsNewNode="True" />
-        <ColumnInfo Id="Deleted" PropertyName="Deleted" Index="3" Width="50" IsNewNode="True" />
-        <ColumnInfo Id="Article" PropertyName="Article" Index="4" Width="70" IsNewNode="True" />
-        <ColumnInfo Id="Description" PropertyName="Description" Index="5" Width="70" IsNewNode="True" />
-        <ColumnInfo Id="Width" PropertyName="Width" Index="6" Width="50" IsNewNode="True" />
-        <ColumnInfo Id="Height" PropertyName="Height" Index="7" Width="50" IsNewNode="True" />
-        <ColumnInfo Id="Length" PropertyName="Length" Index="8" Width="50" IsNewNode="True" />
-        <ColumnInfo Id="Unit" PropertyName="Unit" Index="9" Width="70" IsNewNode="True" />
-        <ColumnInfo Id="Category" PropertyName="Category" Index="10" Width="70" IsNewNode="True" />
-        <ColumnInfo Id="IsArchive" PropertyName="IsArchive" Index="11" Width="50" IsNewNode="True" />
+        <ColumnInfo Id="Name" PropertyName="Name" Index="0" Width="600" SortIndex="0" SortOrder="Ascending" AllowEdit="False" Caption="Название" IsNewNode="True" />
+        <ColumnInfo Id="Article" PropertyName="Article" Index="1" Width="70" AllowEdit="False" Caption="Артикул" IsNewNode="True" />
+        <ColumnInfo Id="CreatedDate" PropertyName="CreatedDate" Index="2" Width="70" Caption="Дата создания" IsNewNode="True" />
+        <ColumnInfo Id="Width" PropertyName="Width" Index="4" Width="50" Caption="Ширина" IsNewNode="True" />
+        <ColumnInfo Id="Height" PropertyName="Height" Index="5" Width="50" Caption="Высота" IsNewNode="True" />
+        <ColumnInfo Id="Length" PropertyName="Length" Index="6" Width="50" Caption="Длина" IsNewNode="True" />
       </Columns>
     </ListView>
     <DetailView Id="ProductGroup_DetailView">
       <Items>
+        <PropertyEditor Id="Deleted" Removed="True" />
+        <PropertyEditor Id="DeletedDate" Removed="True" />
         <PropertyEditor Id="Products" View="Product_CategorizedView" />
       </Items>
     </DetailView>
@@ -61,12 +186,12 @@
         <ColumnInfo Id="ExternalId" AllowEdit="False" Index="-1" />
         <ColumnInfo Id="Id" AllowEdit="False" Index="-1" />
         <ColumnInfo Id="Parent" Index="-1" />
-        <ColumnInfo Id="Name" AllowEdit="True" Width="287" />
-        <ColumnInfo Id="Description" Index="1" />
-        <ColumnInfo Id="CreatedDate" Index="2" />
-        <ColumnInfo Id="DeletedDate" AllowEdit="False" Index="3" />
-        <ColumnInfo Id="Deleted" AllowEdit="False" Index="4" />
-        <ColumnInfo Id="IsArchive" Index="5" />
+        <ColumnInfo Id="Name" AllowEdit="True" Width="287" Caption="Название" />
+        <ColumnInfo Id="Description" Index="1" Removed="True" />
+        <ColumnInfo Id="CreatedDate" Index="2" Caption="Дата создания" />
+        <ColumnInfo Id="DeletedDate" AllowEdit="False" Index="3" Removed="True" />
+        <ColumnInfo Id="Deleted" AllowEdit="False" Index="4" Removed="True" />
+        <ColumnInfo Id="IsArchive" Index="5" Removed="True" />
       </Columns>
     </ListView>
   </Views>

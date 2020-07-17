@@ -47,6 +47,8 @@ namespace Cube.Model.Contexts
 
         public virtual DbSet<PriceList> PriceLists { get; set; }
 
+        public virtual DbSet<Price> Prices { get; set; }
+
         public virtual DbSet<Order> Orders { get; set; }
 
         public virtual DbSet<OrderRow> OrderRows { get; set; }
@@ -55,8 +57,8 @@ namespace Cube.Model.Contexts
         {
             IDatabaseInitializer<CubeDbContext> initializer = null;
 #if DEBUG
-            //initializer = new CubeDropCreateDatabaseAlways(modelBuilder);
-            initializer = new CubeCreateDatabaseIfNotExists(modelBuilder);
+            initializer = new CubeDropCreateDatabaseAlways(modelBuilder);
+            //initializer = new CubeCreateDatabaseIfNotExists(modelBuilder);
 #else
             initializer = new CubeCreateDatabaseIfNotExists(modelBuilder);
 #endif
@@ -64,10 +66,6 @@ namespace Cube.Model.Contexts
         }
 
         #region XAF
-
-        public virtual DbSet<MediaDataObject> Images { get; set; } 
-
-        //public virtual DbSet<FileData> Files { get; set; }
         
         public virtual DbSet<ReportDataV2> ReportDataV2 { get; set; } 
 

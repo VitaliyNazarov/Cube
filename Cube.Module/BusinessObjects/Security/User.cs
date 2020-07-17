@@ -34,7 +34,7 @@ namespace Cube.Model.Security
         //[Unique]
         //[Index("UX_User_Login", IsUnique = true)]
         //[Required(AllowEmptyStrings = false, ErrorMessage = "Необходмо указать уникальный логин пользователя.")]
-        //[MaxLength(64, ErrorMessage = "Логин пользователя не должнен превышать 64 символа.")]
+        //// [MaxLength(64, ErrorMessage = "Логин пользователя не должнен превышать 64 символа.")]
         //[MinLength(3, ErrorMessage = "Логин пользователя должен быть больше 3 символов.")]
         //public string Login { get; set; }
 

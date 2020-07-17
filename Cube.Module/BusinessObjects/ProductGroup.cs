@@ -51,11 +51,13 @@ namespace Cube.Model
         /// <summary>
         /// Дата удаления группы.
         /// </summary>
+        [Browsable(false)]
         public DateTime? DeletedDate { get; set; }
 
         /// <summary>
         /// Удаленная группа.
         /// </summary>
+        [Browsable(false)]
         public bool Deleted { get; set; }
 
         #endregion
@@ -64,13 +66,13 @@ namespace Cube.Model
         /// Название группы.
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Необходмо название группы.")]
-        [MaxLength(256, ErrorMessage = "Название группы не должно превышать 256 символов.")]
+        // [MaxLength(256, ErrorMessage = "Название группы не должно превышать 256 символов.")]
         public string Name { get; set; }
 
         /// <summary>
         /// Название группы.
         /// </summary>
-        [MaxLength(1024, ErrorMessage = "Название группы не должно превышать 1024 символа.")]
+        // [MaxLength(1024, ErrorMessage = "Название группы не должно превышать 1024 символа.")]
         public string Description { get; set; }
 
         [NotMapped]
@@ -121,6 +123,7 @@ namespace Cube.Model
         /// <summary>
         /// Группа в архиве.
         /// </summary>
+        [Browsable(false)]
         public bool IsArchive { get; set; }
 
         #endregion

@@ -44,11 +44,13 @@ namespace Cube.Model
         /// <summary>
         /// Дата удаления.
         /// </summary>
+        [Browsable(false)]
         public DateTime? DeletedDate { get; set; }
 
         /// <summary>
         /// Удаленный прайс.
         /// </summary>
+        [Browsable(false)]
         public bool Deleted { get; set; }
 
         #endregion
@@ -77,6 +79,7 @@ namespace Cube.Model
         /// <summary>
         /// Цена в архиве.
         /// </summary>
+        [Browsable(false)]
         public bool IsArchive { get; set; }
 
         #endregion

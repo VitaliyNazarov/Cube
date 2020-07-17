@@ -163,7 +163,6 @@
     <Compile Include="BusinessObjects\Enums\OrderState.cs" />
     <Compile Include="BusinessObjects\Enums\OrderType.cs" />
     <Compile Include="BusinessObjects\Enums\ProductUnit.cs" />
-    <Compile Include="BusinessObjects\Image.cs" />
     <Compile Include="BusinessObjects\Interfaces\IArchivable.cs" />
     <Compile Include="BusinessObjects\Interfaces\IBaseEntity.cs" />
     <Compile Include="BusinessObjects\Interfaces\IFileHolder.cs" />

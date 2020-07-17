@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using Cube.Model.Contexts;
 using Cube.Model.Enums;
 using Cube.Model.Interfaces;
-using DevExpress.Persistent.BaseImpl.EF;
+using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.DC;
+using DevExpress.ExpressApp.EF.Utils;
+using DevExpress.Persistent.Base;
 using SQLite.CodeFirst;
 using User = Cube.Model.Security.User;
 
@@ -15,7 +19,7 @@ namespace Cube.Model
     /// <summary>
     /// Заказ.
     /// </summary>
-    public class Order : IBaseEntity, IArchivable, IImageHolder//, IFileHolder
+    public class Order : IBaseEntity, IArchivable, IImageHolder, IXafEntityObject
     {
         /// <summary>
         /// ctor
@@ -23,7 +27,6 @@ namespace Cube.Model
         public Order()
         {
             Rows = new List<OrderRow>();
-            Images = new List<Image>();
         }
 
         #region Base properties
@@ -119,6 +122,7 @@ namespace Cube.Model
         /// <summary>
         /// Заказ в архиве.
         /// </summary>
+        [Browsable(false)]
         public bool IsArchive { get; set; }
 
         #endregion
@@ -126,18 +130,32 @@ namespace Cube.Model
         #region Implementation of IImageHolder
 
         /// <summary>
-        /// Коллекция картинок заказа.
+        /// Картинка.
         /// </summary>
-        public virtual IList<Image> Images { get; }
+        [ImageEditor(ListViewImageEditorMode = ImageEditorMode.PopupPictureEdit, ListViewImageEditorCustomHeight = 400, ImageSizeMode = ImageSizeMode.Normal), 
+         Delayed, 
+         VisibleInListView(true), 
+         XafDisplayName("Изображение")]
+        public byte[] Image { get; set; }
 
         #endregion
 
-        #region Implementation of IFileHolder
+        #region Implementation of IXafEntityObject
 
-        /// <summary>
-        /// Коллекция файлов заказа.
-        /// </summary>
-        //public virtual IList<FileData> Files { get; }
+        public void OnCreated()
+        {
+            
+        }
+
+        public void OnSaving()
+        {
+            Sum = Rows.Sum(x => x.Sum);
+        }
+
+        public void OnLoaded()
+        {
+            
+        }
 
         #endregion
     }

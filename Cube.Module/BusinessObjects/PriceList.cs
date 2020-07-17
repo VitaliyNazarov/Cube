@@ -47,11 +47,13 @@ namespace Cube.Model
         /// <summary>
         /// Дата удаления.
         /// </summary>
+        [Browsable(false)]
         public DateTime? DeletedDate { get; set; }
 
         /// <summary>
         /// Удаленный прайс.
         /// </summary>
+        [Browsable(false)]
         public bool Deleted { get; set; }
 
         #endregion
@@ -60,7 +62,7 @@ namespace Cube.Model
         /// Название прайса.
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Необходмо название прайс-листа.")]
-        [MaxLength(256, ErrorMessage = "Название прайс-листа не должно превышать 256 символов.")]
+        // [MaxLength(256, ErrorMessage = "Название прайс-листа не должно превышать 256 символов.")]
         public string Name { get; set; }
 
         #region References
@@ -77,6 +79,7 @@ namespace Cube.Model
         /// <summary>
         /// Прайс в архиве.
         /// </summary>
+        [Browsable(false)]
         public bool IsArchive { get; set; }
 
         #endregion

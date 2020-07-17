@@ -26,7 +26,7 @@ namespace Cube.Model.Security
         ///// Название роли.
         ///// </summary>
         //[Required(AllowEmptyStrings = false, ErrorMessage = "Необходмо указать название роли.")]
-        //[MaxLength(256, ErrorMessage = "Название роли не должно превышать 256 символов.")]
+        //// [MaxLength(256, ErrorMessage = "Название роли не должно превышать 256 символов.")]
         //public string Name { get; set; }
 
         /// <summary>

@@ -6,6 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Cube.Model.Contexts;
 using Cube.Model.Enums;
 using Cube.Model.Interfaces;
+using DevExpress.ExpressApp.DC;
+using DevExpress.ExpressApp.EF.Utils;
+using DevExpress.Persistent.Base;
 using DevExpress.Persistent.Base.General;
 using SQLite.CodeFirst;
 
@@ -21,7 +24,6 @@ namespace Cube.Model
         /// </summary>
         public Product()
         {
-            Images = new List<Image>();
         }
 
         #region Base properties
@@ -47,19 +49,21 @@ namespace Cube.Model
         public Guid ExternalId { get; set; }
 
         /// <summary>
-        /// Дата удаления группы.
+        /// Дата удаления продукта.
         /// </summary>
+        [Browsable(false)]
         public DateTime? DeletedDate { get; set; }
 
         /// <summary>
-        /// Удаленная группа.
+        /// Удаленный продукт.
         /// </summary>
+        [Browsable(false)]
         public bool Deleted { get; set; }
 
         #endregion
 
         [Unique]
-        [Index("UX_Product_Article", IsUnique = true)]
+        [System.ComponentModel.DataAnnotations.Schema.Index("UX_Product_Article", IsUnique = true)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Необходмо задать артикул.")]
         public string Article { get; set; }
 
@@ -67,13 +71,13 @@ namespace Cube.Model
         /// Название продукта.
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Необходмо название продукта.")]
-        [MaxLength(256, ErrorMessage = "Название продукта не должно превышать 256 символов.")]
+        // [MaxLength(256, ErrorMessage = "Название продукта не должно превышать 256 символов.")]
         public string Name { get; set; }
 
         /// <summary>
         /// Описание продукта.
         /// </summary>
-        [MaxLength(1024, ErrorMessage = "Название продукта не должно превышать 1024 символа.")]
+        // [MaxLength(1024, ErrorMessage = "Название продукта не должно превышать 1024 символа.")]
         public string Description { get; set; }
 
         /// <summary>
@@ -107,8 +111,15 @@ namespace Cube.Model
 
         #region Implementation of IImageHolder
 
-        /// <inheritdoc />
-        public virtual IList<Image> Images { get; set; }
+        /// <summary>
+        /// Картинка.
+        /// </summary>
+        [ImageEditor(ListViewImageEditorMode = ImageEditorMode.PopupPictureEdit, ListViewImageEditorCustomHeight = 400, ImageSizeMode = ImageSizeMode.Normal), 
+         Delayed, 
+         VisibleInListView(true), 
+         XafDisplayName("Изображение")]
+        public byte[] Image { get; set; }
+
 
         #endregion
 
@@ -117,6 +128,7 @@ namespace Cube.Model
         /// <summary>
         /// Продукт в архиве.
         /// </summary>
+        [Browsable(false)]
         public bool IsArchive { get; set; }
 
         ITreeNode ICategorizedItem.Category

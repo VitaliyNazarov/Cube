@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Cube.Model.Contexts;
 using Cube.Model.Enums;
 using Cube.Model.Interfaces;
+using DevExpress.ExpressApp;
 using SQLite.CodeFirst;
 
 namespace Cube.Model
@@ -11,7 +12,7 @@ namespace Cube.Model
     /// <summary>
     /// Строка заказа.
     /// </summary>
-    public class OrderRow : IBaseEntity
+    public class OrderRow : IBaseEntity, IXafEntityObject
     {
         #region Base properties
 
@@ -78,6 +79,24 @@ namespace Cube.Model
         /// Цена источник.
         /// </summary>
         public virtual Price SourcePrice { get; set; }
+
+        #endregion
+
+        #region Implementation of IXafEntityObject
+
+        public void OnCreated()
+        {
+        }
+
+        public void OnSaving()
+        {
+            Sum = Price * Quantity;
+            Order.OnSaving();
+        }
+
+        public void OnLoaded()
+        {
+        }
 
         #endregion
     }

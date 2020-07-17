@@ -22,7 +22,7 @@ namespace Cube.Module.DatabaseUpdate
         public override void UpdateDatabaseAfterUpdateSchema()
         {
             base.UpdateDatabaseAfterUpdateSchema();
-            var sampleUser = ObjectSpace.FindObject<Cube.Model.Security.User>(new BinaryOperator("UserName", "User"));
+            var sampleUser = ObjectSpace.FindObject<User>(new BinaryOperator("UserName", "User"));
             if (sampleUser == null)
             {
                 sampleUser = ObjectSpace.CreateObject<User>();
