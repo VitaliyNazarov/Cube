@@ -95,6 +95,12 @@ namespace Cube.Model
         [NotMapped]
         public bool IsKitchen => (Order?.OrderType ?? OrderType.General) == OrderType.Kitchen;
 
+        [ImageEditor(ListViewImageEditorMode = ImageEditorMode.PictureEdit, ListViewImageEditorCustomHeight = 100, ImageSizeMode = ImageSizeMode.AutoSize), 
+         VisibleInListView(true), 
+         VisibleInDetailView(true),
+         XafDisplayName("Изображение")]
+        public byte[] Image => Product?.Image;
+
         #region References
 
         /// <summary>

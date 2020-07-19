@@ -19,7 +19,7 @@ namespace Cube.Module.Win.Controllers
                 this, "OrderPrintScpecification",
                 DevExpress.Persistent.Base.PredefinedCategory.Reports)
             {
-                ImageName = "ExportToImg",
+                ImageName = "ProductOrderDetail-21",
                 Caption = "Спецификация"
             };
             printProductionSpecification.Execute += (s, e) =>
@@ -36,6 +36,4 @@ namespace Cube.Module.Win.Controllers
             printingService = Frame.GetController<PrintingController>();
         }
     }
-
-    // For more typical usage scenarios, be sure to check out https://documentation.devexpress.com/eXpressAppFramework/clsDevExpressExpressAppViewControllertopic.aspx.
 }

@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application Logo="ProductOrderDetail-21" Company="МФ Куб" Copyright="2020" Description="Программа создания заказов" Title="МФ Куб. Создание заказов." ProtectedContentText="Все права защищены">
+  <ActionDesign>
+    <ActionToContainerMapping>
+      <ActionContainer Id="Tools">
+        <ActionLink ActionId="EditModel" Removed="True" />
+      </ActionContainer>
+      <ActionContainer Id="View">
+        <ActionLink ActionId="ResetViewSettings" Removed="True" />
+      </ActionContainer>
+    </ActionToContainerMapping>
+  </ActionDesign>
   <BOModel>
     <Class Name="Cube.Model.Order" Caption="Заказ" DefaultListViewImage="BO_Order" DefaultDetailViewImage="BO_Order" ImageName="BO_Order" IsVisibleInReports="True">
       <OwnMembers>
@@ -223,9 +233,10 @@
         <ColumnInfo Id="Image" PropertyName="Image" Width="40" Index="8" IsNewNode="True" />
       </Columns>
       <Filters IsNewNode="True">
-        <Filter Id="@4061fbf8-877a-4119-b661-a14073a5b168" Caption="Закрытые заказы" Description="Покажет закрытые заказы" Criteria="[State] == 'Completed'" IsNewNode="True" />
-        <Filter Id="@728403d0-03ef-4337-842b-3a72e6a79d2c" Criteria="[State] == 'New'" Caption="Новые заказы" IsNewNode="True" />
-        <Filter Id="@d66a1369-480b-4a94-a371-f0b2ec53276c" Caption="Невыполненные заказы" Criteria="[State] == 'InProgress'" IsNewNode="True" />
+        <Filter Id="@4061fbf8-877a-4119-b661-a14073a5b168" Caption="Закрытые заказы" Description="" Criteria="[State] == 'Completed'" ImageName="Completed" IsNewNode="True" />
+        <Filter Id="@728403d0-03ef-4337-842b-3a72e6a79d2c" Criteria="[State] == 'New'" Caption="Новые заказы" ImageName="New" IsNewNode="True" />
+        <Filter Id="@d66a1369-480b-4a94-a371-f0b2ec53276c" Caption="Заказы в работе" Criteria="[State] == 'InProgress'" ImageName="InProgress" IsNewNode="True" />
+        <Filter Id="@de57dff0-2299-4364-99da-27d92d04422b" Caption="Все" ImageName="ResetLayoutOptions" IsNewNode="True" />
       </Filters>
     </ListView>
     <ListView Id="Order_Rows_ListView" AllowLink="False" AllowUnlink="False" Caption="Состав заказа" NewItemRowPosition="Top" DetailViewID="OrderRow_CreateNew">
@@ -234,13 +245,14 @@
         <ColumnInfo Id="Order" Index="-1" />
         <ColumnInfo Id="Position" Index="-1" SortIndex="0" SortOrder="Ascending" />
         <ColumnInfo Id="SourcePrice" Index="-1" />
-        <ColumnInfo Id="Product" Index="0" Width="212" />
-        <ColumnInfo Id="Size" Index="1" />
-        <ColumnInfo Id="Facade" Index="2" />
-        <ColumnInfo Id="Unit" Index="3" Width="86" />
-        <ColumnInfo Id="Quantity" Index="4" Width="90" />
-        <ColumnInfo Id="Price" Index="5" Width="77" />
-        <ColumnInfo Id="Sum" Index="6" Width="0" />
+        <ColumnInfo Id="Image" Index="0" Width="0" ImageSizeMode="Zoom" ImageEditorCustomHeight="100" ImageEditorFixedHeight="0" />
+        <ColumnInfo Id="Product" Index="1" Width="212" />
+        <ColumnInfo Id="Size" Index="2" />
+        <ColumnInfo Id="Facade" Index="3" />
+        <ColumnInfo Id="Unit" Index="4" Width="86" />
+        <ColumnInfo Id="Quantity" Index="5" Width="90" />
+        <ColumnInfo Id="Price" Index="6" Width="77" />
+        <ColumnInfo Id="Sum" Index="7" Width="0" />
       </Columns>
     </ListView>
     <DetailView Id="OrderRow_CreateNew" ClassName="Cube.Model.OrderRow" DefaultFocusedItem="Product" IsNewNode="True">
@@ -273,7 +285,11 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="OrderRow_ListView" AllowLink="False" AllowNew="False" />
+    <ListView Id="OrderRow_ListView" AllowLink="False" AllowNew="False">
+      <Columns>
+        <ColumnInfo Id="Image" Caption="" ImageSizeMode="StretchImage" ImageEditorFixedHeight="100" ImageEditorFixedWidth="100" />
+      </Columns>
+    </ListView>
     <DetailView Id="PriceList_DetailView">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
@@ -313,7 +329,48 @@
     <DetailView Id="Product_DetailView">
       <Items>
         <PropertyEditor Id="Facade" Caption="Фасад" />
+        <PropertyEditor Id="Image" Caption="Image(16)" />
       </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="Product" RelativeSize="100" Direction="Vertical" Caption="Продукт" TextAlignMode="AlignWithChildren">
+              <LayoutGroup Id="Autoadc45750-806f-406a-ad81-f81957996c0a" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="16.281895504252734" IsNewNode="True">
+                <LayoutGroup Id="Item1" ShowCaption="False" Caption="Основное" CaptionLocation="Top" Index="0" RelativeSize="59.635119726339795" IsNewNode="True">
+                  <LayoutItem Id="Name" ViewItem="Name" Index="0" RelativeSize="23.880597014925375" IsNewNode="True" />
+                  <LayoutItem Id="Article" ViewItem="Article" Index="1" RelativeSize="17.910447761194028" IsNewNode="True" />
+                  <LayoutItem Id="Description" ViewItem="Description" Index="2" RelativeSize="17.910447761194028" IsNewNode="True" />
+                  <LayoutItem Id="Facade" ViewItem="Facade" Index="3" RelativeSize="17.910447761194028" IsNewNode="True" />
+                  <LayoutItem Id="Category" ViewItem="Category" Index="4" RelativeSize="22.388059701492537" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Item2" ShowCaption="False" CaptionLocation="Top" Index="1" RelativeSize="40.364880273660205" IsNewNode="True">
+                  <LayoutItem Id="Unit" ViewItem="Unit" Index="0" RelativeSize="23.880597014925375" IsNewNode="True" />
+                  <LayoutItem Id="Height" ViewItem="Height" Index="1" RelativeSize="17.910447761194028" IsNewNode="True" />
+                  <LayoutItem Id="Length" ViewItem="Length" Index="2" RelativeSize="17.910447761194028" IsNewNode="True" />
+                  <LayoutItem Id="Width" ViewItem="Width" Index="3" RelativeSize="17.910447761194028" IsNewNode="True" />
+                  <LayoutItem Id="CreatedDate" ViewItem="CreatedDate" Index="4" RelativeSize="22.388059701492537" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutItem Id="Image" ShowCaption="False" ViewItem="Image" Index="1" RelativeSize="83.718104495747269" IsNewNode="True" />
+              <LayoutGroup Id="Product_col1" RelativeSize="49.942987457240591" Removed="True">
+                <LayoutItem Id="Article" RelativeSize="3.0037546933667083" />
+                <LayoutItem Id="CreatedDate" RelativeSize="4.005006257822278" />
+                <LayoutItem Id="Description" RelativeSize="3.0037546933667083" />
+                <LayoutItem Id="Height" RelativeSize="83.979974968710891" />
+                <LayoutItem Id="Name" RelativeSize="3.0037546933667083" />
+                <LayoutItem Id="Width" RelativeSize="3.0037546933667083" />
+              </LayoutGroup>
+              <LayoutGroup Id="Product_col2" RelativeSize="50.057012542759409" Removed="True">
+                <LayoutItem Id="Category" RelativeSize="3.0037546933667083" />
+                <LayoutItem Id="Facade" RelativeSize="3.0037546933667083" />
+                <LayoutItem Id="Image" ShowCaption="False" RelativeSize="86.9837296620776" />
+                <LayoutItem Id="Length" RelativeSize="4.005006257822278" />
+                <LayoutItem Id="Unit" RelativeSize="3.0037546933667083" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
     </DetailView>
     <ListView Id="Product_ListView">
       <Columns>

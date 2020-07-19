@@ -127,9 +127,9 @@ namespace Cube.Model
         /// <summary>
         /// Картинка.
         /// </summary>
-        [ImageEditor(ListViewImageEditorMode = ImageEditorMode.PopupPictureEdit, ListViewImageEditorCustomHeight = 400, ImageSizeMode = ImageSizeMode.Normal), 
-         Delayed, 
+        [ImageEditor(ListViewImageEditorMode = ImageEditorMode.PictureEdit, ListViewImageEditorCustomHeight = 200, ImageSizeMode = ImageSizeMode.StretchImage), 
          VisibleInListView(true), 
+         VisibleInDetailView(true),
          XafDisplayName("Изображение")]
         public byte[] Image { get; set; }
 
