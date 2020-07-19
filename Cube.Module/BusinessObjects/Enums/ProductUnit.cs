@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DevExpress.ExpressApp.DC;
 
 namespace Cube.Model.Enums
 {
@@ -7,13 +7,28 @@ namespace Cube.Model.Enums
     /// </summary>
     public enum ProductUnit
     {
-        [Display(Name = "шт.")]
+        /// <summary>
+        /// Шт
+        /// </summary>
+        [XafDisplayName("шт.")]
         pce = 0,
 
-        [Display(Name = "компл.")]
+        /// <summary>
+        /// Комплект
+        /// </summary>
+        [XafDisplayName("комплект")]
         nmp,
 
-        [Display(Name = "м.")]
-        mt
+        /// <summary>
+        /// Метры погонные
+        /// </summary>
+        [XafDisplayName("м.п.")]
+        mt,
+
+        /// <summary>
+        /// Метры кв
+        /// </summary>
+        [XafDisplayName("м2")]
+        mt2
     }
 }

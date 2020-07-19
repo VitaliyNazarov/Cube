@@ -21,7 +21,7 @@ namespace Cube.Win
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             EditModelPermission.AlwaysGranted = System.Diagnostics.Debugger.IsAttached;
-            if (Tracing.GetFileLocationFromSettings() == DevExpress.Persistent.Base.FileLocation.CurrentUserApplicationDataFolder)
+            if (Tracing.GetFileLocationFromSettings() == FileLocation.CurrentUserApplicationDataFolder)
             {
                 Tracing.LocalUserAppDataPath = Application.LocalUserAppDataPath;
             }

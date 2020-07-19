@@ -64,7 +64,7 @@
             this.labelCopyright.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.labelCopyright.Location = new System.Drawing.Point(24, 324);
             this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(47, 13);
+            this.labelCopyright.Size = new System.Drawing.Size(57, 17);
             this.labelCopyright.TabIndex = 6;
             this.labelCopyright.Text = "Copyright";
             // 
@@ -72,7 +72,7 @@
             // 
             this.labelStatus.Location = new System.Drawing.Point(75, 253);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(50, 13);
+            this.labelStatus.Size = new System.Drawing.Size(54, 17);
             this.labelStatus.TabIndex = 7;
             this.labelStatus.Text = "Starting...";
             // 
@@ -107,15 +107,15 @@
             // 
             // labelSubtitle
             // 
-            this.labelSubtitle.Appearance.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSubtitle.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSubtitle.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelSubtitle.Appearance.Options.UseFont = true;
             this.labelSubtitle.Appearance.Options.UseForeColor = true;
-            this.labelSubtitle.Location = new System.Drawing.Point(168, 131);
+            this.labelSubtitle.Location = new System.Drawing.Point(147, 131);
             this.labelSubtitle.Name = "labelSubtitle";
-            this.labelSubtitle.Size = new System.Drawing.Size(154, 25);
+            this.labelSubtitle.Size = new System.Drawing.Size(198, 17);
             this.labelSubtitle.TabIndex = 1;
-            this.labelSubtitle.Text = "Cоздание заказов";
+            this.labelSubtitle.Text = "Cоздание заказов. Версия 1.1.1.1";
             // 
             // labelApplicationName
             // 

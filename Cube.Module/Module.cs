@@ -2,8 +2,12 @@
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.DC;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
+using System.Data.Entity.Infrastructure;
+using Cube.Model.Contexts;
 using Cube.Model.Enums;
 using DevExpress.Data.Filtering;
+using DevExpress.ExpressApp.EF;
 using DevExpress.ExpressApp.Updating;
 using DevExpress.Persistent.BaseImpl;
 
@@ -22,6 +26,10 @@ namespace Cube.Module
             // #if DEBUG
             // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CubeDbContext>());
             // #endif 
+            //var efDemoDbContext = new CubeDbContext(null);  
+            //MetadataWorkspace metadataWorkspace = ((IObjectContextAdapter)efDemoDbContext).ObjectContext.MetadataWorkspace;  
+            //EFTypeInfoSource efTypeInfoSource = new EFTypeInfoSource(XafTypesInfo.Instance, typeof(CubeDbContext), metadataWorkspace);  
+            //((TypesInfo)XafTypesInfo.Instance).AddEntityStore(efTypeInfoSource);  
         }
 
         public CubeModule()
@@ -31,6 +39,7 @@ namespace Cube.Module
             EnumProcessingHelper.RegisterEnum(typeof(OrderState));
             EnumProcessingHelper.RegisterEnum(typeof(OrderType));
             EnumProcessingHelper.RegisterEnum(typeof(ProductUnit));
+            EnumProcessingHelper.RegisterEnum(typeof(FacadeType));
         }
 
         public override IEnumerable<ModuleUpdater> GetModuleUpdaters(IObjectSpace objectSpace, Version versionFromDB)

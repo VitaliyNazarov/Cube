@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Cube.Model.Contexts;
 using Cube.Model.Interfaces;
+using DevExpress.ExpressApp.DC;
+using DevExpress.Persistent.Validation;
 using SQLite.CodeFirst;
 
 namespace Cube.Model
@@ -12,6 +13,8 @@ namespace Cube.Model
     /// <summary>
     /// Прайс-лист.
     /// </summary>
+    [XafDefaultProperty("Name")]
+    [XafDisplayName("Прайс-лист")]
     public class PriceList : IBaseEntity, ISoftDeletable, IArchivable
     {
         /// <summary>
@@ -61,8 +64,14 @@ namespace Cube.Model
         /// <summary>
         /// Название прайса.
         /// </summary>
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Необходмо название прайс-листа.")]
-        // [MaxLength(256, ErrorMessage = "Название прайс-листа не должно превышать 256 символов.")]
+        [RuleUniqueValue("PriceList_Name_Unique",
+            DefaultContexts.Save, 
+            CustomMessageTemplate = "Указанное название прайс-листа уже существует.", 
+            ResultType = ValidationResultType.Error)]
+        [RuleRequiredField("PriceList_Name_Required",
+            DefaultContexts.Save,
+            SkipNullOrEmptyValues = false,
+            CustomMessageTemplate = "Необходмо задать имя прайс-листа.")]
         public string Name { get; set; }
 
         #region References
@@ -70,6 +79,7 @@ namespace Cube.Model
         /// <summary>
         /// Цены продуктов по прайсу.
         /// </summary>
+        [Aggregated]
         public virtual IList<Price> Prices { get; set; }
 
         #endregion

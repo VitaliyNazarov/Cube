@@ -8,25 +8,26 @@ namespace Cube.Import.Excel
         {
             try
             {
-                if (args.Length < 2)
+                if (args.Length < 3)
                 {
-                    Console.WriteLine($"Format: {typeof(Program).Assembly.GetName().Name} -command -path");
+                    Console.WriteLine($"Format: {typeof(Program).Assembly.GetName().Name} -command -path -clearAllData");
                     return;
                 }
 
                 var command = args[0];
                 var path = args[1];
+                var clearAllData = bool.TryParse(args[2], out var c) && c;
 
                 switch (command)
                 {
                     case "group":
-                        using (var loader = new GroupLoader())
+                        using (var loader = new GroupLoader(clearAllData))
                         {
                             loader.Load(path);
                         }
                         break;
                     case "kitchen":
-                        var kitchenLoader = new KitchenProductLoader();
+                        var kitchenLoader = new KitchenProductLoader(clearAllData);
                         kitchenLoader.Load(path);
                         break;
                 }

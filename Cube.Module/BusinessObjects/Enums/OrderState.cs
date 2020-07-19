@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DevExpress.ExpressApp.DC;
+using DevExpress.Persistent.Base;
 
 namespace Cube.Model.Enums
 {
@@ -7,13 +8,16 @@ namespace Cube.Model.Enums
     /// </summary>
     public enum OrderState
     {
-        [Display(Name = "Новый")]
+        [ImageName("New")]
+        [XafDisplayName("Новый")]
         New,
 
-        [Display(Name = "В работе")]
+        [ImageName("InProgress")]
+        [XafDisplayName("В работе")]
         InProgress,
 
-        [Display(Name = "Завершен")]
+        [ImageName("Completed")]
+        [XafDisplayName("Завершен")]
         Completed
     }
 }

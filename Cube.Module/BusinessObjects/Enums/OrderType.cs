@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DevExpress.ExpressApp.DC;
 
 namespace Cube.Model.Enums
 {
@@ -10,19 +11,19 @@ namespace Cube.Model.Enums
         /// <summary>
         /// Произвольный заказ.
         /// </summary>
-        [Display(Name = "Произвольный заказ")]
+        [XafDisplayName("Не задан")]
         General,
 
         /// <summary>
         /// Кухня.
         /// </summary>
-        [Display(Name = "Кухня")]
+        [XafDisplayName("Кухня")]
         Kitchen,
 
         /// <summary>
         /// Шкаф
         /// </summary>
-        [Display(Name = "Шкаф")]
+        [XafDisplayName("Шкаф")]
         Сupboard 
     }
 }

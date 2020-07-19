@@ -2,7 +2,9 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using Cube.Model.Contexts;
+using Cube.Model.Enums;
 using Cube.Model.Interfaces;
+using DevExpress.ExpressApp.DC;
 using SQLite.CodeFirst;
 
 namespace Cube.Model
@@ -59,6 +61,20 @@ namespace Cube.Model
         /// Значение цены за единицу продукта.
         /// </summary>
         public double Value { get; set; }
+
+        /// <summary>
+        /// Размер
+        /// </summary>
+        [XafDisplayName("Размер")]
+        [NotMapped]
+        public string Size => Product.GetSize();
+
+        /// <summary>
+        /// Фасад
+        /// </summary>
+        [XafDisplayName("Фасад")]
+        [NotMapped]
+        public FacadeType Facade => Product.Facade;
 
         #region References
 

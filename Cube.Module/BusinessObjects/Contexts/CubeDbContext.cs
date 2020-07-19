@@ -1,6 +1,4 @@
-﻿using System;
-using System.Data.Common;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.SQLite;
 using DevExpress.ExpressApp.EF.Updating;
 using DevExpress.Persistent.BaseImpl.EF;
@@ -9,24 +7,25 @@ using User = Cube.Model.Security.User;
 
 namespace Cube.Model.Contexts
 {
-    [DbConfigurationType(typeof(SQLiteConfiguration))]
+    //[TypesInfoInitializer(typeof(CubeContextInitializer))]
+    [DbConfigurationType(typeof(CubeSQLiteConfiguration))]
     public class CubeDbContext : DbContext
     {
+        private bool _dropAndCreate;
+
         public CubeDbContext(string connectionString)
             : base(CreateConnection(), true)
         {
+            Configuration.ProxyCreationEnabled = true;
+            Configuration.LazyLoadingEnabled = true;
         }
 
-        // wondering what to fix here  
-        public CubeDbContext(DbConnection connection)
-            : base(connection, false)
+        public CubeDbContext(string connectionString, bool dropAndCreate)
+            : base(CreateConnection(), true)
         {
-        }
-
-        // wondering what to fix here  
-        public CubeDbContext()
-            : base($"name={nameof(CubeDbContext)}")
-        {
+            _dropAndCreate = dropAndCreate;
+            Configuration.ProxyCreationEnabled = true;
+            Configuration.LazyLoadingEnabled = true;
         }
 
         private static SQLiteConnection CreateConnection()
@@ -55,19 +54,16 @@ namespace Cube.Model.Contexts
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            IDatabaseInitializer<CubeDbContext> initializer = null;
-#if DEBUG
-            initializer = new CubeDropCreateDatabaseAlways(modelBuilder);
-            //initializer = new CubeCreateDatabaseIfNotExists(modelBuilder);
-#else
-            initializer = new CubeCreateDatabaseIfNotExists(modelBuilder);
-#endif
+            var initializer = _dropAndCreate 
+                ? (IDatabaseInitializer<CubeDbContext>)new CubeDropCreateDatabaseAlways(modelBuilder) 
+                : new CubeCreateDatabaseIfNotExists(modelBuilder);
+
             Database.SetInitializer(initializer);
         }
 
         #region XAF
-        
-        public virtual DbSet<ReportDataV2> ReportDataV2 { get; set; } 
+
+        public virtual DbSet<ReportDataV2> ReportDataV2 { get; set; }
 
         public DbSet<ModuleInfo> ModulesInfo { get; set; }
 
@@ -77,4 +73,6 @@ namespace Cube.Model.Contexts
 
         #endregion
     }
+
+
 }

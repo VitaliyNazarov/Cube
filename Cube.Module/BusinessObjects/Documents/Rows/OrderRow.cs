@@ -1,10 +1,17 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using Cube.Model.Contexts;
 using Cube.Model.Enums;
 using Cube.Model.Interfaces;
+using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.ConditionalAppearance;
+using DevExpress.ExpressApp.DC;
+using DevExpress.ExpressApp.Editors;
+using DevExpress.Persistent.Base;
+using DevExpress.Persistent.Validation;
 using SQLite.CodeFirst;
 
 namespace Cube.Model
@@ -12,7 +19,7 @@ namespace Cube.Model
     /// <summary>
     /// Строка заказа.
     /// </summary>
-    public class OrderRow : IBaseEntity, IXafEntityObject
+    public class OrderRow : IBaseEntity, IXafEntityObject, IObjectSpaceLink
     {
         #region Base properties
 
@@ -51,6 +58,10 @@ namespace Cube.Model
         /// <summary>
         /// Количество товара.
         /// </summary>
+        [RuleRequiredField("OrderRow_Quantity_Required",
+            DefaultContexts.Save,
+            SkipNullOrEmptyValues = false,
+            CustomMessageTemplate = "Количество товара должно быть больше 0.")]
         public int Quantity { get; set; }
 
         /// <summary>
@@ -63,11 +74,37 @@ namespace Cube.Model
         /// </summary>
         public ProductUnit Unit { get; set; }
 
+        /// <summary>
+        /// Размеры
+        /// </summary>
+        [XafDisplayName("Размер")]
+        [Appearance("Kitchen_Size", Visibility = ViewItemVisibility.Hide, Criteria = "!IsKitchen", Context = "Any")]
+        public string Size { get; set; }
+
+        /// <summary>
+        /// Фасад для кухни
+        /// </summary>
+        [XafDisplayName("Фасад")]
+        [Appearance("Kitchen_Facade", Visibility = ViewItemVisibility.Hide, Criteria = "!IsKitchen", Context = "Any")]
+        public FacadeType Facade { get; set; }
+
+        /// <summary>
+        /// Признак того что продукт для кухни
+        /// </summary>
+        [Browsable(false)]
+        [NotMapped]
+        public bool IsKitchen => (Order?.OrderType ?? OrderType.General) == OrderType.Kitchen;
+
         #region References
 
         /// <summary>
         /// Продукт.
         /// </summary>
+        [ImmediatePostData]
+        [RuleRequiredField("OrderRow_Product_Required",
+            DefaultContexts.Save,
+            SkipNullOrEmptyValues = false,
+            CustomMessageTemplate = "Необходмо выбрать продукт.")]
         public virtual Product Product { get; set; }
 
         /// <summary>
@@ -86,16 +123,51 @@ namespace Cube.Model
 
         public void OnCreated()
         {
+            CreatedDate = DateTime.Now;
         }
 
         public void OnSaving()
         {
-            Sum = Price * Quantity;
-            Order.OnSaving();
+            if (Product != null && Order != null)
+            {
+                SourcePrice = _objectSpace.FindObject<Price>(CriteriaOperator.And(
+                    new BinaryOperator("Product.Id", Product.Id),
+                    new BinaryOperator("PriceList.Id", Order.PriceList.Id)));
+
+                if (SourcePrice == null)
+                {
+                    throw new Exception("Не найдена цена.");
+                }
+
+                Facade = Product.Facade;
+                Size = Product.GetSize();
+                Unit = Product.Unit;
+                Price = SourcePrice?.Value ?? 0;
+                Sum = Price * Quantity;
+                Order?.OnSaving();
+            }
+
+            if (Position == 0)
+            {
+                Position = (Order?.Rows.Count ?? 0 );
+            }
         }
 
         public void OnLoaded()
         {
+        }
+
+        #endregion
+
+        #region Implementation of IObjectSpaceLink
+
+        private IObjectSpace _objectSpace;
+
+        [Browsable(false)]
+        public IObjectSpace ObjectSpace
+        {
+            get => _objectSpace;
+            set => _objectSpace = value;
         }
 
         #endregion

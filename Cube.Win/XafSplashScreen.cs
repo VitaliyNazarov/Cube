@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
 using System.Reflection;
 using DevExpress.ExpressApp.Win.Utils;
 using DevExpress.Skins;
 using DevExpress.Utils.Drawing;
-using DevExpress.Utils.Svg;
 using DevExpress.XtraSplashScreen;
 
 namespace Cube.Win
@@ -15,11 +13,7 @@ namespace Cube.Win
         private void LoadBlankLogo()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            //string blankLogoResourceName = assembly.GetName().Name + ".Images.Logo.svg";
-            //Stream svgStream = assembly.GetManifestResourceStream(blankLogoResourceName);
-            //if(svgStream != null) {
-            //svgStream.Position = 0;
-            //}
+            labelSubtitle.Text = $"Cоздание заказов. Версия {assembly.GetName().Version}";
         }
         protected override void DrawContent(GraphicsCache graphicsCache, Skin skin)
         {
@@ -40,7 +34,7 @@ namespace Cube.Win
         {
             InitializeComponent();
             LoadBlankLogo();
-            this.labelCopyright.Text = "Copyright © " + DateTime.Now.Year.ToString() + " Company Name" + System.Environment.NewLine + "All rights reserved.";
+            this.labelCopyright.Text = "Copyright © " + DateTime.Now.Year + "МФ Куб" + System.Environment.NewLine + "Все права защищены.";
             UpdateLabelsPosition();
         }
 

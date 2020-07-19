@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Cube.Model.Contexts;
 using Cube.Model.Enums;
@@ -10,6 +8,7 @@ using DevExpress.ExpressApp.DC;
 using DevExpress.ExpressApp.EF.Utils;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.Base.General;
+using DevExpress.Persistent.Validation;
 using SQLite.CodeFirst;
 
 namespace Cube.Model
@@ -24,6 +23,7 @@ namespace Cube.Model
         /// </summary>
         public Product()
         {
+            Facade = FacadeType.Undefined;
         }
 
         #region Base properties
@@ -62,22 +62,30 @@ namespace Cube.Model
 
         #endregion
 
-        [Unique]
-        [System.ComponentModel.DataAnnotations.Schema.Index("UX_Product_Article", IsUnique = true)]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Необходмо задать артикул.")]
+        //[Unique]
+        [System.ComponentModel.DataAnnotations.Schema.Index("UX_Product_Article", IsUnique = false)]
+        //[RuleUniqueValue("Product_Article_Unique",
+        //    DefaultContexts.Save, 
+        //    CustomMessageTemplate = "Указанный артикул продукта уже существует.", 
+        //    ResultType = ValidationResultType.Error)]
+        [RuleRequiredField("Product_Article_Required",
+            DefaultContexts.Save,
+            SkipNullOrEmptyValues = false,
+            CustomMessageTemplate = "Необходмо задать артикул.")]
         public string Article { get; set; }
 
         /// <summary>
         /// Название продукта.
         /// </summary>
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Необходмо название продукта.")]
-        // [MaxLength(256, ErrorMessage = "Название продукта не должно превышать 256 символов.")]
+        [RuleRequiredField("Product_Name_Required",
+            DefaultContexts.Save,
+            SkipNullOrEmptyValues = false,
+            CustomMessageTemplate = "Необходмо указать название продукта.")]
         public string Name { get; set; }
 
         /// <summary>
         /// Описание продукта.
         /// </summary>
-        // [MaxLength(1024, ErrorMessage = "Название продукта не должно превышать 1024 символа.")]
         public string Description { get; set; }
 
         /// <summary>
@@ -99,6 +107,11 @@ namespace Cube.Model
         /// Единицы измерения.
         /// </summary>
         public ProductUnit Unit { get; set; }
+
+        /// <summary>
+        /// Фасад
+        /// </summary>
+        public FacadeType Facade { get; set; }
 
         #region References
 
@@ -139,5 +152,9 @@ namespace Cube.Model
 
         #endregion
 
+        public string GetSize()
+        {
+            return $"{Height} x {Length} x {Width}";
+        }
     }
 }

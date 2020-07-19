@@ -156,10 +156,11 @@
     <Compile Include="BusinessObjects\Contexts\CubeDropCreateDatabaseAlways.cs" />
     <Compile Include="BusinessObjects\Contexts\CubeEFHelper.cs" />
     <Compile Include="BusinessObjects\Contexts\CubeContextInitializer.cs" />
-    <Compile Include="BusinessObjects\Contexts\SQLiteConfiguration.cs" />
+    <Compile Include="BusinessObjects\Contexts\CubeSQLiteConfiguration.cs" />
     <Compile Include="BusinessObjects\Documents\Order.cs" />
     <Compile Include="BusinessObjects\Documents\Rows\OrderRow.cs" />
     <Compile Include="BusinessObjects\Enums\CubeImageType.cs" />
+    <Compile Include="BusinessObjects\Enums\FacadeType.cs" />
     <Compile Include="BusinessObjects\Enums\OrderState.cs" />
     <Compile Include="BusinessObjects\Enums\OrderType.cs" />
     <Compile Include="BusinessObjects\Enums\ProductUnit.cs" />

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="Cube.Model.Security.Role">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Type" Caption="Тип" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+</Application>

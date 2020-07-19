@@ -12,12 +12,13 @@ namespace Cube.Import.Excel
     internal class GroupLoader : IDisposable
     {
         private readonly CubeDbContext _context;
+        private readonly PriceList _defaultPriceList;
         private static int Index = 1;
 
-        public GroupLoader()
+        public GroupLoader(bool clearData)
         {
-            _context = new CubeDbContext();    
-
+            _context = new CubeDbContext(null, clearData);
+            _defaultPriceList = _context.PriceLists.FirstOrDefault();
         }
 
         public void Load(string path)
@@ -62,11 +63,18 @@ namespace Cube.Import.Excel
 
         private void CreateProduct(Node node, ProductGroup parent)
         {
-            _context.Products.Add(new Product
+            var product = _context.Products.Add(new Product
             {
                 Name = node.Name,
                 Article = $"{node.Key}-{Index++}",
                 Category = parent
+            });
+
+            _context.Prices.Add(new Price
+            {
+                PriceList = _defaultPriceList,
+                Product = product,
+                Value = 1.0
             });
         }
 

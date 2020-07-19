@@ -3,14 +3,14 @@
   <BOModel>
     <Class Name="Cube.Model.Order" Caption="Заказ" DefaultListViewImage="BO_Order" DefaultDetailViewImage="BO_Order" ImageName="BO_Order" IsVisibleInReports="True">
       <OwnMembers>
-        <Member Name="ChangedDate" Caption="Дата изменения" />
-        <Member Name="CreatedDate" Caption="Дата создания" />
-        <Member Name="Creator" Caption="Автор" />
+        <Member Name="ChangedDate" Caption="Дата изменения" AllowEdit="False" />
+        <Member Name="CreatedDate" Caption="Дата создания" AllowEdit="False" />
+        <Member Name="Creator" Caption="Автор" AllowEdit="False" DisplayFormat="{0:UserName}" />
         <Member Name="CustomerName" Caption="ФИО заказчика" />
         <Member Name="Image" Caption="" />
         <Member Name="IsArchive" Caption="В архиве" />
         <Member Name="IsDraft" Caption="Черновик" />
-        <Member Name="Modifier" Caption="Редактировал" />
+        <Member Name="Modifier" Caption="Редактировал" AllowEdit="False" />
         <Member Name="Number" Caption="№ заказа" />
         <Member Name="OrderType" Caption="Тип заказа" />
         <Member Name="PlanningDate" Caption="Плановая дата" />
@@ -84,14 +84,24 @@
         <Member Name="Products" Caption="Продукты" />
       </OwnMembers>
     </Class>
-    <Class Name="Cube.Model.Security.Role" Caption="Роль">
-      <OwnMembers>
-        <Member Name="Type" Caption="Тип" />
-      </OwnMembers>
-    </Class>
+    <Class Name="Cube.Model.Security.Role" Caption="Роль" />
     <Class Name="Cube.Model.Security.User" Caption="Пользователь">
       <OwnMembers>
         <Member Name="CreatedDate" Caption="Дата создания" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyRole">
+      <OwnMembers>
+        <Member Name="Users" Caption="Пользователи" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyUser">
+      <OwnMembers>
+        <Member Name="ChangePasswordOnFirstLogon" Caption="Изменить пароль при первом входе" />
+        <Member Name="IsActive" Caption="Разрешен вход" />
+        <Member Name="Roles" Caption="Роли" />
+        <Member Name="StoredPassword" Caption="Пароль" />
+        <Member Name="UserName" Caption="Имя" />
       </OwnMembers>
     </Class>
   </BOModel>
@@ -99,7 +109,7 @@
     <Items>
       <Item Id="Default" Caption="Основное" ImageName="BO_Sale" Index="0">
         <Items>
-          <Item Id="@a86bd763-750c-4eb4-9894-2dfed3f4383a" ImageName="BO_Order" Caption="Заказы" ViewId="Order_ListView" Index="0" IsNewNode="True" />
+          <Item Id="@a86bd763-750c-4eb4-9894-2dfed3f4383a" ImageName="BO_Order" Caption="Заказы" Index="0" ViewId="Order_ListView_Navigator" QuickAccessItem="True" IsNewNode="True" />
           <Item Id="@2a02c5db-fe7e-4d04-a12b-2808a02f0d9a" Caption="Каталог" ImageName="BO_Product_Group" ViewId="Product_CategorizedView" Index="1" IsNewNode="True" />
           <Item Id="@2b638508-44af-4e36-95e4-95cad41b9689" Caption="Прайс-листы" ImageName="BO_Price" ViewId="PriceList_ListView" Index="2" IsNewNode="True" />
           <Item Id="MyDetails" Caption="Мои настройки" Removed="True" />
@@ -125,53 +135,201 @@
     <SchemaModule Name="SystemModule" Version="19.2.3.0" IsNewNode="True" />
     <SchemaModule Name="SystemWindowsFormsModule" Version="19.2.3.0" IsNewNode="True" />
   </SchemaModules>
+  <ViewItems>
+    <PropertyEditor Name="PropertyEditors">
+      <RegisteredPropertyEditor PropertyType="System.Double" DefaultDisplayFormat="{0:#,###,##0.##}" DefaultEditMask="#,###,##0.##" />
+    </PropertyEditor>
+  </ViewItems>
   <Views>
     <DetailView Id="Order_DetailView">
+      <HiddenActions>
+        <ActionLink ActionId="ExecuteReportV2" IsNewNode="True" />
+      </HiddenActions>
+      <Items>
+        <PropertyEditor Id="Image" Caption="Image(18)" />
+        <PropertyEditor Id="Rows" Caption="Состав заказа" LinkView="Order_Rows_ListView" />
+        <PropertyEditor Id="Sum" Caption="Сумма" />
+      </Items>
       <Layout>
-        <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
-            <LayoutGroup Id="Order" RelativeSize="22.976190476190474">
-              <LayoutGroup Id="Order_col1" RelativeSize="49.90234375">
-                <LayoutItem Id="Number" RelativeSize="20" Index="0" />
-                <LayoutItem Id="CustomerName" RelativeSize="15" Index="1" />
-                <LayoutItem Id="PlanningDate" RelativeSize="15" Index="2" />
-                <LayoutItem Id="State" RelativeSize="15" Index="3" />
+        <LayoutGroup Id="Main" RelativeSize="100" Direction="Vertical">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100" Index="0" Direction="Vertical">
+            <LayoutGroup Id="Auto2fe49303-b53d-40b6-9395-0189e7f09f31" ShowCaption="False" Caption="Auto2fe49303-b53d-40b6-9395-0189e7f09f31(3)" Direction="Horizontal" Index="0" RelativeSize="13.095238095238095" IsNewNode="True">
+              <LayoutGroup Id="Item3" ShowCaption="False" CaptionLocation="Top" Index="0" RelativeSize="33.221476510067113" IsNewNode="True">
+                <LayoutItem Id="Number" ViewItem="Number" Index="0" RelativeSize="29.09090909090909" IsNewNode="True" />
+                <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="1" RelativeSize="21.818181818181817" IsNewNode="True" />
+                <LayoutItem Id="PlanningDate" ViewItem="PlanningDate" Index="2" RelativeSize="21.818181818181817" IsNewNode="True" />
+                <LayoutItem Id="State" ViewItem="State" Index="3" RelativeSize="27.272727272727273" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Item2" ShowCaption="False" CaptionLocation="Top" Index="1" RelativeSize="33.053691275167786" IsNewNode="True">
+                <LayoutItem Id="PriceList" ViewItem="PriceList" Index="0" RelativeSize="29.09090909090909" IsNewNode="True" />
+                <LayoutItem Id="Sum" ViewItem="Sum" Index="1" RelativeSize="21.818181818181817" IsNewNode="True" />
+                <LayoutItem Id="OrderType" ViewItem="OrderType" Index="2" RelativeSize="49.090909090909093" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Item4" ShowCaption="False" CaptionLocation="Top" Index="2" RelativeSize="33.7248322147651" IsNewNode="True">
+                <LayoutItem Id="CreatedDate" ViewItem="CreatedDate" Index="0" RelativeSize="29.09090909090909" IsNewNode="True" />
+                <LayoutItem Id="ChangedDate" ViewItem="ChangedDate" Index="1" RelativeSize="21.818181818181817" IsNewNode="True" />
+                <LayoutItem Id="Creator" ViewItem="Creator" Index="2" RelativeSize="21.818181818181817" IsNewNode="True" />
+                <LayoutItem Id="Modifier" ViewItem="Modifier" Index="3" RelativeSize="27.272727272727273" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="Order" RelativeSize="16.30952380952381" Caption="Основное" Index="1" Removed="True">
+              <LayoutGroup Id="Order_col1" RelativeSize="32.094288304623753">
+                <LayoutItem Id="Number" RelativeSize="28.571428571428573" Index="0" />
+                <LayoutItem Id="CustomerName" RelativeSize="21.428571428571427" Index="1" />
+                <LayoutItem Id="PlanningDate" RelativeSize="21.428571428571427" Index="2" />
+                <LayoutItem Id="State" RelativeSize="28.571428571428573" Index="3" />
                 <LayoutItem Id="OrderType" RelativeSize="15" Index="4" Removed="True" />
-                <LayoutItem Id="Sum" ViewItem="Sum" Index="4" RelativeSize="15" IsNewNode="True" />
-                <LayoutItem Id="PriceList" ViewItem="PriceList" Index="5" RelativeSize="20" IsNewNode="True" />
                 <LayoutItem Id="IsDraft" RelativeSize="16.939890710382514" Index="6" Removed="True" />
                 <LayoutItem Id="CreatedDate" RelativeSize="17.486338797814209" Removed="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Order_col2" RelativeSize="50.09765625">
-                <LayoutItem Id="CreatedDate" ViewItem="CreatedDate" Index="0" RelativeSize="20" IsNewNode="True" />
-                <LayoutItem Id="ChangedDate" RelativeSize="15" Index="1" />
-                <LayoutItem Id="Creator" RelativeSize="15" Index="2" />
-                <LayoutItem Id="Modifier" RelativeSize="50" Index="3" />
+              <LayoutGroup Id="Order_col2" RelativeSize="67.90571169537624" Direction="Vertical">
+                <LayoutItem Id="CreatedDate" ViewItem="CreatedDate" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+                <LayoutItem Id="ChangedDate" ViewItem="ChangedDate" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" Removed="True" />
+                <LayoutItem Id="Creator" ViewItem="Creator" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" Removed="True" />
+                <LayoutItem Id="Modifier" ViewItem="Modifier" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" Removed="True" />
                 <LayoutItem Id="Image" ShowCaption="False" ViewItem="Image" Index="4" RelativeSize="35" Removed="True" />
                 <LayoutItem Id="PriceList" RelativeSize="15" Index="4" Removed="True" />
                 <LayoutItem Id="Sum" RelativeSize="17.391304347826086" Removed="True" />
               </LayoutGroup>
             </LayoutGroup>
-            <SeparatorItem Id="Item1" Index="1" RelativeSize="0.59523809523809523" IsNewNode="True" />
-            <LayoutGroup Id="Rows_Group" ShowCaption="True" Caption="Rows" TextAlignMode="AlignWithChildren" Index="2" RelativeSize="76.428571428571431" Direction="Horizontal" IsNewNode="True">
-              <LayoutItem Id="Image" ShowCaption="False" ViewItem="Image" Index="0" RelativeSize="45.80078125" IsNewNode="True" />
-              <LayoutItem Id="Rows" ViewItem="Rows" Index="1" RelativeSize="54.19921875" IsNewNode="True" />
+            <LayoutGroup Id="Rows_Group" ShowCaption="True" Caption="Состав заказа" TextAlignMode="AlignWithChildren" Direction="Horizontal" Index="1" RelativeSize="86.9047619047619" IsNewNode="True">
+              <LayoutItem Id="Image" ShowCaption="False" ViewItem="Image" Index="0" RelativeSize="43.760683760683762" IsNewNode="True" />
+              <SplitterItem Id="SplitterItem1" Index="1" RelativeSize="1.0256410256410256" IsNewNode="True" />
+              <LayoutItem Id="Rows" ViewItem="Rows" Index="2" RelativeSize="55.213675213675216" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
           <LayoutGroup Id="Rows_Group" Removed="True" />
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <ListView Id="Order_ListView_Navigator" ClassName="Cube.Model.Order" FilterEnabled="True" Filter="[IsDraft] = False" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="ChangedDate" PropertyName="ChangedDate" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Creator" PropertyName="Creator" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ExternalId" PropertyName="ExternalId" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Id" PropertyName="Id" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsArchive" PropertyName="IsArchive" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsDraft" PropertyName="IsDraft" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Modifier" PropertyName="Modifier" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ObjectSpace" PropertyName="ObjectSpace" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Number" PropertyName="Number" Width="70" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="CreatedDate" PropertyName="CreatedDate" Width="96" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="CustomerName" PropertyName="CustomerName" Width="111" SortIndex="0" SortOrder="Ascending" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="PlanningDate" PropertyName="PlanningDate" Width="97" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="State" PropertyName="State" Width="56" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="OrderType" PropertyName="OrderType" Width="0" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="Sum" PropertyName="Sum" Width="50" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="PriceList" PropertyName="PriceList" Width="77" Index="7" IsNewNode="True" />
+        <ColumnInfo Id="Image" PropertyName="Image" Width="40" Index="8" IsNewNode="True" />
+      </Columns>
+      <Filters IsNewNode="True">
+        <Filter Id="@4061fbf8-877a-4119-b661-a14073a5b168" Caption="Закрытые заказы" Description="Покажет закрытые заказы" Criteria="[State] == 'Completed'" IsNewNode="True" />
+        <Filter Id="@728403d0-03ef-4337-842b-3a72e6a79d2c" Criteria="[State] == 'New'" Caption="Новые заказы" IsNewNode="True" />
+        <Filter Id="@d66a1369-480b-4a94-a371-f0b2ec53276c" Caption="Невыполненные заказы" Criteria="[State] == 'InProgress'" IsNewNode="True" />
+      </Filters>
+    </ListView>
+    <ListView Id="Order_Rows_ListView" AllowLink="False" AllowUnlink="False" Caption="Состав заказа" NewItemRowPosition="Top" DetailViewID="OrderRow_CreateNew">
+      <Columns>
+        <ColumnInfo Id="CreatedDate" Index="-1" Width="128" />
+        <ColumnInfo Id="Order" Index="-1" />
+        <ColumnInfo Id="Position" Index="-1" SortIndex="0" SortOrder="Ascending" />
+        <ColumnInfo Id="SourcePrice" Index="-1" />
+        <ColumnInfo Id="Product" Index="0" Width="212" />
+        <ColumnInfo Id="Size" Index="1" />
+        <ColumnInfo Id="Facade" Index="2" />
+        <ColumnInfo Id="Unit" Index="3" Width="86" />
+        <ColumnInfo Id="Quantity" Index="4" Width="90" />
+        <ColumnInfo Id="Price" Index="5" Width="77" />
+        <ColumnInfo Id="Sum" Index="6" Width="0" />
+      </Columns>
+    </ListView>
+    <DetailView Id="OrderRow_CreateNew" ClassName="Cube.Model.OrderRow" DefaultFocusedItem="Product" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="CreatedDate" PropertyName="CreatedDate" IsNewNode="True" />
+        <PropertyEditor Id="ExternalId" PropertyName="ExternalId" IsNewNode="True" />
+        <PropertyEditor Id="Facade" PropertyName="Facade" IsNewNode="True" />
+        <PropertyEditor Id="Id" PropertyName="Id" IsNewNode="True" />
+        <PropertyEditor Id="ObjectSpace" PropertyName="ObjectSpace" IsNewNode="True" />
+        <PropertyEditor Id="Order" PropertyName="Order" IsNewNode="True" />
+        <PropertyEditor Id="Position" PropertyName="Position" IsNewNode="True" />
+        <PropertyEditor Id="Price" PropertyName="Price" IsNewNode="True" />
+        <PropertyEditor Id="Product" PropertyName="Product" IsNewNode="True" />
+        <PropertyEditor Id="Quantity" PropertyName="Quantity" IsNewNode="True" />
+        <PropertyEditor Id="SourcePrice" PropertyName="SourcePrice" IsNewNode="True" />
+        <PropertyEditor Id="Sum" PropertyName="Sum" IsNewNode="True" />
+        <PropertyEditor Id="Unit" PropertyName="Unit" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+            <LayoutGroup Id="OrderRow" Index="0" Direction="Vertical" ShowCaption="True" Caption="Строка заказа" RelativeSize="100" IsNewNode="True">
+              <LayoutGroup Id="OrderRow_col1" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+                <LayoutItem Id="Product" ViewItem="Product" Index="0" RelativeSize="4.005006257822278" IsNewNode="True" />
+                <LayoutItem Id="Facade" ViewItem="Facade" Index="1" RelativeSize="3.0037546933667083" IsNewNode="True" />
+                <LayoutItem Id="Quantity" ViewItem="Quantity" ShowCaption="" Index="2" RelativeSize="92.991239048811011" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="OrderRow_ListView" AllowLink="False" AllowNew="False" />
+    <DetailView Id="PriceList_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="7.3809523809523814">
+            <LayoutGroup Id="PriceList" RelativeSize="100">
+              <LayoutItem Id="Name" Index="0" RelativeSize="51.612903225806448" />
+              <LayoutItem Id="CreatedDate" Index="1" RelativeSize="48.387096774193552" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Prices_Group" TextAlignMode="AlignWithChildren" Direction="Vertical" RelativeSize="92.61904761904762">
+            <LayoutItem Id="Prices" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PriceList_Prices_ListView" AllowDelete="False" AllowLink="False" AllowNew="True" IsGroupPanelVisible="False" ShowAutoFilterRow="False" ShowFindPanel="True" MasterDetailMode="ListViewOnly" PreviewColumnName="">
+      <Columns>
+        <ColumnInfo Id="CreatedDate" Index="-1" Width="82" />
+        <ColumnInfo Id="PriceList" Index="-1" />
+        <ColumnInfo Id="Product" Index="0" Width="260" />
+        <ColumnInfo Id="Value" Index="1" Width="88" Caption="Цена за единицу" />
+      </Columns>
+    </ListView>
     <ListView Id="Product_CategorizedView" ClassName="Cube.Model.Product" ImageName="BO_Product" AutoExpandAllGroups="True" IsGroupPanelVisible="True" IsFooterVisible="True" IsNewNode="True">
       <Columns IsNewNode="True">
+        <ColumnInfo Id="CreatedDate" PropertyName="CreatedDate" Index="-1" Width="70" Caption="Дата создания" IsNewNode="True" />
         <ColumnInfo Id="ExternalId" PropertyName="ExternalId" Index="-1" Width="70" IsNewNode="True" />
         <ColumnInfo Id="Id" PropertyName="Id" Index="-1" Width="70" IsNewNode="True" />
-        <ColumnInfo Id="Name" PropertyName="Name" Index="0" Width="600" SortIndex="0" SortOrder="Ascending" AllowEdit="False" Caption="Название" IsNewNode="True" />
-        <ColumnInfo Id="Article" PropertyName="Article" Index="1" Width="70" AllowEdit="False" Caption="Артикул" IsNewNode="True" />
-        <ColumnInfo Id="CreatedDate" PropertyName="CreatedDate" Index="2" Width="70" Caption="Дата создания" IsNewNode="True" />
-        <ColumnInfo Id="Width" PropertyName="Width" Index="4" Width="50" Caption="Ширина" IsNewNode="True" />
-        <ColumnInfo Id="Height" PropertyName="Height" Index="5" Width="50" Caption="Высота" IsNewNode="True" />
-        <ColumnInfo Id="Length" PropertyName="Length" Index="6" Width="50" Caption="Длина" IsNewNode="True" />
+        <ColumnInfo Id="Facade" PropertyName="Facade" Caption="Фасад" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Name" PropertyName="Name" Index="1" Width="81" SortIndex="0" SortOrder="Ascending" AllowEdit="False" Caption="Название" IsNewNode="True" />
+        <ColumnInfo Id="Width" PropertyName="Width" Index="2" Width="50" Caption="Ширина" IsNewNode="True" />
+        <ColumnInfo Id="Height" PropertyName="Height" Index="3" Width="50" Caption="Высота" IsNewNode="True" />
+        <ColumnInfo Id="Length" PropertyName="Length" Index="4" Width="50" Caption="Длина" IsNewNode="True" />
+        <ColumnInfo Id="Article" PropertyName="Article" Index="5" Width="70" AllowEdit="False" Caption="Артикул" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Product_DetailView">
+      <Items>
+        <PropertyEditor Id="Facade" Caption="Фасад" />
+      </Items>
+    </DetailView>
+    <ListView Id="Product_ListView">
+      <Columns>
+        <ColumnInfo Id="Facade" Caption="Фасад" />
+      </Columns>
+    </ListView>
+    <ListView Id="Product_LookupListView">
+      <Columns>
+        <ColumnInfo Id="Facade" PropertyName="Facade" Caption="Фасад" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="ProductGroup_Children_ListView">
+      <Columns>
+        <ColumnInfo Id="CreatedDate" Index="-1" />
+        <ColumnInfo Id="Parent" Index="-1" />
+        <ColumnInfo Id="Description" Index="1" />
       </Columns>
     </ListView>
     <DetailView Id="ProductGroup_DetailView">
@@ -181,14 +339,14 @@
         <PropertyEditor Id="Products" View="Product_CategorizedView" />
       </Items>
     </DetailView>
-    <ListView Id="ProductGroup_ListView" Criteria="[Deleted] == false">
+    <ListView Id="ProductGroup_ListView" Criteria="[Deleted] == false" AllowDelete="False" AllowLink="False" AllowNew="False" ShowAutoFilterRow="False">
       <Columns>
+        <ColumnInfo Id="CreatedDate" Index="-1" Caption="Дата создания" />
         <ColumnInfo Id="ExternalId" AllowEdit="False" Index="-1" />
         <ColumnInfo Id="Id" AllowEdit="False" Index="-1" />
         <ColumnInfo Id="Parent" Index="-1" />
         <ColumnInfo Id="Name" AllowEdit="True" Width="287" Caption="Название" />
         <ColumnInfo Id="Description" Index="1" Removed="True" />
-        <ColumnInfo Id="CreatedDate" Index="2" Caption="Дата создания" />
         <ColumnInfo Id="DeletedDate" AllowEdit="False" Index="3" Removed="True" />
         <ColumnInfo Id="Deleted" AllowEdit="False" Index="4" Removed="True" />
         <ColumnInfo Id="IsArchive" Index="5" Removed="True" />

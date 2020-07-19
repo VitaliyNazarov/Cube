@@ -9,7 +9,8 @@ namespace Cube.Module.Contexts
     {
         protected override DbContext CreateDbContext()
         {
-            var contextInfo = new DbContextInfo(typeof(CubeDbContext), new DbProviderInfo(providerInvariantName: "System.Data.SQLite", providerManifestToken: "SQLite"));
+            var contextInfo = new DbContextInfo(typeof(CubeDbContext), new DbConnectionInfo(nameof(CubeDbContext), "System.Data.SQLite"));
+            //new DbProviderInfo(providerInvariantName: "System.Data.SQLite", providerManifestToken: string.Empty));
             return contextInfo.CreateInstance();
         }
     }
