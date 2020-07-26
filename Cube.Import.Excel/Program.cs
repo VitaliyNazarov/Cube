@@ -10,7 +10,7 @@ namespace Cube.Import.Excel
     {
         static void Main(string[] args)
         {
-            var s = GenerateWixComponents(@"c:\!!!Work\!!!Cube\src\Cube\Output\Release\", new []{".xml", ".log", ".pdb"});
+            //var s = GenerateWixComponents(@"c:\!!!Work\!!!Cube\src\Cube\Output\Release\", new []{".xml", ".log", ".pdb"});
             try
             {
                 if (args.Length < 3)

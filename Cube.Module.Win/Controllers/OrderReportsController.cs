@@ -73,7 +73,29 @@ namespace Cube.Module.Win.Controllers
 
         private void ProductionSpecificationAction_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
-            throw new Exception("Test");
+            var dataSource = View.SelectedObjects
+                .OfType<Order>()
+                .Select(_reportManager.CreateOrderReportView)
+                .ToList();
+
+            var orderView = dataSource.First();
+            var report = new ProdcutionSpecification
+            {
+                DataSource = dataSource
+            };
+            if (!Directory.Exists(".\\Reports"))
+                Directory.CreateDirectory(".\\Reports");
+
+            var filePath = $".\\Reports\\Спецификация_{orderView.GetImageFileName()}.jpeg";
+            report.ExportToImage(filePath, new ImageExportOptions
+            {
+                ExportMode = ImageExportMode.SingleFile,
+                Format = ImageFormat.Jpeg,
+                Resolution = 600,
+                TextRenderingMode = TextRenderingMode.AntiAlias
+            });
+
+            Process.Start(filePath);
         }
 
         protected override void OnActivated()

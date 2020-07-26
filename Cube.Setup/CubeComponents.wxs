@@ -73,10 +73,10 @@
       <ComponentRef Id='DevExpress.XtraVerticalGrid.v19.2.dll'/>
       <ComponentRef Id='EntityFramework.dll'/>
       <ComponentRef Id='EntityFramework.SqlServer.dll'/>
-      <ComponentRef Id='LogonParameters'/>
+      <!--<ComponentRef Id='LogonParameters'/>-->
       <ComponentRef Id='Model.xafml'/>
-      <ComponentRef Id='ModelAssembly.dll'/>
-      <ComponentRef Id='ModulesVersionInfo'/>
+      <!--<ComponentRef Id='ModelAssembly.dll'/>
+      <ComponentRef Id='ModulesVersionInfo'/>-->
       <ComponentRef Id='SQLite.CodeFirst.dll'/>
       <ComponentRef Id='System.Data.SQLite.dll'/>
       <ComponentRef Id='System.Data.SQLite.dll.config'/>
@@ -331,18 +331,18 @@
       <Component Id='EntityFramework.SqlServer.dll' Guid='{941DBD5F-67CA-4D9F-B6EF-507476F1C2C5}'>
         <File Id='EntityFramework.SqlServer.dll' Source='$(var.bin.path)EntityFramework.SqlServer.dll' />
       </Component>
-      <Component Id='LogonParameters' Guid='{2002F35A-9481-4B51-86A9-6BACB7A89203}'>
+      <!--<Component Id='LogonParameters' Guid='{2002F35A-9481-4B51-86A9-6BACB7A89203}'>
         <File Id='LogonParameters' Source='$(var.bin.path)LogonParameters' />
-      </Component>
+      </Component>-->
       <Component Id='Model.xafml' Guid='{9F89C96B-B162-4E71-9D1B-D0F662A5A7F5}'>
         <File Id='Model.xafml' Source='$(var.bin.path)Model.xafml' />
       </Component>
-      <Component Id='ModelAssembly.dll' Guid='{FE94CEEF-2122-44EB-AFC8-F2573FDEF420}'>
+      <!--<Component Id='ModelAssembly.dll' Guid='{FE94CEEF-2122-44EB-AFC8-F2573FDEF420}'>
         <File Id='ModelAssembly.dll' Source='$(var.bin.path)ModelAssembly.dll' />
       </Component>
       <Component Id='ModulesVersionInfo' Guid='{66FEC39F-FEC8-414C-B825-D6A7D34458CD}'>
         <File Id='ModulesVersionInfo' Source='$(var.bin.path)ModulesVersionInfo' />
-      </Component>
+      </Component>-->
       <Component Id='SQLite.CodeFirst.dll' Guid='{07751C48-FF5A-4C79-9D9B-1A04E6402514}'>
         <File Id='SQLite.CodeFirst.dll' Source='$(var.bin.path)SQLite.CodeFirst.dll' />
       </Component>

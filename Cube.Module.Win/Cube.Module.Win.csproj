@@ -228,6 +228,12 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\CubeReportManager.cs" />
+    <Compile Include="Reports\ProdcutionSpecification.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ProdcutionSpecification.Designer.cs">
+      <DependentUpon>ProdcutionSpecification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\CusomerOrderCardReport.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -247,6 +253,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Reports\ProdcutionSpecification.resx">
+      <DependentUpon>ProdcutionSpecification.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\CusomerOrderCardReport.resx">
       <DependentUpon>CusomerOrderCardReport.cs</DependentUpon>
     </EmbeddedResource>

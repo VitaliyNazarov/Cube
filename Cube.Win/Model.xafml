@@ -115,19 +115,19 @@
       </OwnMembers>
     </Class>
   </BOModel>
-  <NavigationItems NavigationStyle="NavBar" ShowImages="True" DefaultChildItemsDisplayStyle="LargeIcons" StartupNavigationItem="@a86bd763-750c-4eb4-9894-2dfed3f4383a">
+  <NavigationItems NavigationStyle="NavBar" ShowImages="True" DefaultChildItemsDisplayStyle="LargeIcons" StartupNavigationItem="Orders">
     <Items>
       <Item Id="Default" Caption="Основное" ImageName="BO_Sale" Index="0">
         <Items>
-          <Item Id="@a86bd763-750c-4eb4-9894-2dfed3f4383a" ImageName="BO_Order" Caption="Заказы" Index="0" ViewId="Order_ListView_Navigator" QuickAccessItem="True" IsNewNode="True" />
-          <Item Id="@2a02c5db-fe7e-4d04-a12b-2808a02f0d9a" Caption="Каталог" ImageName="BO_Product_Group" ViewId="Product_CategorizedView" Index="1" IsNewNode="True" />
-          <Item Id="@2b638508-44af-4e36-95e4-95cad41b9689" Caption="Прайс-листы" ImageName="BO_Price" ViewId="PriceList_ListView" Index="2" IsNewNode="True" />
+          <Item Id="Orders" ImageName="BO_Order" Caption="Заказы" Index="0" ViewId="Order_ListView_Navigator" QuickAccessItem="True" IsNewNode="True" />
+          <Item Id="Catalog" Caption="Каталог" ImageName="BO_Product_Group" ViewId="Product_CategorizedView" Index="1" IsNewNode="True" />
+          <Item Id="PriceLists" Caption="Прайс-листы" ImageName="BO_Price" ViewId="PriceList_ListView" Index="2" IsNewNode="True" />
           <Item Id="MyDetails" Caption="Мои настройки" Removed="True" />
           <Item Id="PermissionPolicyRole_ListView" Caption="Роли" Removed="True" />
           <Item Id="PermissionPolicyUser_ListView" Caption="Пользователи" Removed="True" />
         </Items>
       </Item>
-      <Item Id="@433514ac-a5f5-4934-8e13-14d16639f0d3" Caption="Безопасность" ImageName="Security_Key" Index="1" IsNewNode="True">
+      <Item Id="Security" Caption="Безопасность" ImageName="Security_Key" Index="1" IsNewNode="True">
         <Items IsNewNode="True">
           <Item Id="PermissionPolicyUser_ListView" Caption="Пользователи" ViewId="PermissionPolicyUser_ListView" ObjectKey="" Index="0" IsNewNode="True" />
           <Item Id="PermissionPolicyRole_ListView" Caption="Роли" ViewId="PermissionPolicyRole_ListView" ObjectKey="" Index="1" IsNewNode="True" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using Cube.Model;
 using DevExpress.ExpressApp;
 using DevExpress.Data.Filtering;
 using DevExpress.Persistent.Base;
@@ -67,14 +68,33 @@ namespace Cube.Module.DatabaseUpdate
             {
                 defaultRole = ObjectSpace.CreateObject<Role>();
                 defaultRole.Name = "Операторы";
+                defaultRole.CanEditModel = false;
+                defaultRole.IsAdministrative = false;
+                defaultRole.PermissionPolicy = SecurityPermissionPolicy.DenyAllByDefault;
 
                 defaultRole.AddObjectPermission<User>(SecurityOperations.Read, "[Oid] = CurrentUserId()", SecurityPermissionState.Allow);
-                defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Default/Items/MyDetails", SecurityPermissionState.Allow);
+                defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Security/Items/MyDetails", SecurityPermissionState.Allow);
                 defaultRole.AddMemberPermission<User>(SecurityOperations.Write, "ChangePasswordOnFirstLogon", "[Oid] = CurrentUserId()", SecurityPermissionState.Allow);
                 defaultRole.AddMemberPermission<User>(SecurityOperations.Write, "StoredPassword", "[Oid] = CurrentUserId()", SecurityPermissionState.Allow);
+
                 defaultRole.AddTypePermissionsRecursively<Role>(SecurityOperations.Read, SecurityPermissionState.Deny);
-                defaultRole.AddTypePermissionsRecursively<ModelDifference>(SecurityOperations.ReadWriteAccess, SecurityPermissionState.Allow);
-                defaultRole.AddTypePermissionsRecursively<ModelDifferenceAspect>(SecurityOperations.ReadWriteAccess, SecurityPermissionState.Allow);
+                defaultRole.AddTypePermissionsRecursively<ModelDifference>(SecurityOperations.ReadOnlyAccess, SecurityPermissionState.Allow);
+                defaultRole.AddTypePermissionsRecursively<ModelDifferenceAspect>(SecurityOperations.ReadOnlyAccess, SecurityPermissionState.Allow);
+
+                defaultRole.AddTypePermissionsRecursively<Order>(SecurityOperations.CRUDAccess, SecurityPermissionState.Allow);
+                defaultRole.AddTypePermissionsRecursively<OrderRow>(SecurityOperations.CRUDAccess, SecurityPermissionState.Allow);
+                defaultRole.AddTypePermissionsRecursively<ProductGroup>(SecurityOperations.ReadOnlyAccess, SecurityPermissionState.Allow);
+                defaultRole.AddTypePermissionsRecursively<Product>(SecurityOperations.ReadOnlyAccess, SecurityPermissionState.Allow);
+                defaultRole.AddTypePermissionsRecursively<PriceList>(SecurityOperations.ReadOnlyAccess, SecurityPermissionState.Allow);
+                defaultRole.AddTypePermissionsRecursively<Price>(SecurityOperations.ReadOnlyAccess, SecurityPermissionState.Allow);
+
+
+                defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Default/Items/Orders", SecurityPermissionState.Allow);
+                defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Default/Items/Catalog", SecurityPermissionState.Allow);
+                defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Default/Items/PriceLists", SecurityPermissionState.Deny);
+                defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Reports", SecurityPermissionState.Deny);
+                defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Security/Items/PermissionPolicyUser_ListView", SecurityPermissionState.Deny);
+                defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Security/Items/PermissionPolicyRole_ListView", SecurityPermissionState.Deny);
             }
             return defaultRole;
         }
