@@ -21,7 +21,7 @@ namespace Cube.Win
 
         public void CheckCorruption()
         {
-            using (var key = Registry.CurrentUser.OpenSubKey(_registryPath))
+            using (var key = Registry.LocalMachine.OpenSubKey(_registryPath))
             {
                 if (key == null)
                 {
@@ -46,22 +46,6 @@ namespace Cube.Win
                 {
                     throw new Exception("Подмена ключа");
                 }
-            }
-        }
-
-        public void Write()
-        {
-            using (var key = Registry.CurrentUser.OpenSubKey(_registryPath, true) 
-                             ?? Registry.CurrentUser.CreateSubKey(_registryPath))
-            {
-                if (key == null)
-                {
-                    throw new Exception("Не найдена ветка реестра.");
-                }
-
-                var encryptedData = ProtectedData.Protect(_expectedData, _entropy, DataProtectionScope.LocalMachine);
-
-                key.SetValue(RegistryKeyName, Convert.ToBase64String(encryptedData), RegistryValueKind.String);
             }
         }
     }

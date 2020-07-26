@@ -5,6 +5,7 @@ using Cube.Model.Contexts;
 using Cube.Model.Enums;
 using Cube.Model.Interfaces;
 using DevExpress.ExpressApp.DC;
+using DevExpress.Persistent.Base;
 using SQLite.CodeFirst;
 
 namespace Cube.Model
@@ -70,6 +71,16 @@ namespace Cube.Model
         public string Size => Product.GetSize();
 
         /// <summary>
+        /// Продукт
+        /// </summary>
+        [XafDisplayName("Продукт"),
+        VisibleInListView(true), 
+        VisibleInDetailView(false),
+        VisibleInLookupListView(false)]
+        [NotMapped]
+        public string ProductName => Product?.Name;
+
+        /// <summary>
         /// Фасад
         /// </summary>
         [XafDisplayName("Фасад")]
@@ -86,6 +97,10 @@ namespace Cube.Model
         /// <summary>
         /// Продукт, на который установлена цена.
         /// </summary>
+        [XafDisplayName("Продукт"),
+         VisibleInListView(false), 
+         VisibleInDetailView(true),
+         VisibleInLookupListView(true)]
         public virtual Product Product { get; set; }
 
         #endregion
