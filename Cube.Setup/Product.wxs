@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include .\Common\Variables.wxi ?>
+  <?include Variables.wxi ?>
+  
+  <Product Id="$(var.product.code)"
+           Name="$(var.full.product.name)"
+           Language="1049"
+           Version="$(var.product.version)"
+           Manufacturer="$(var.product.manufacturer)"
+           UpgradeCode="$(var.upgrade.code)">
+
+    <Package InstallerVersion="300" Compressed="yes" Description="$(var.product.name) $(var.product.version) setup package"
+            Platform="x64"
+            InstallScope="perMachine"/>
+
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+
+    <!-- Launch conditions -->
+    <Condition Message="!(loc.condition.administrator.message)">Privileged</Condition>
+
+    <CustomAction Id="CA_Err32BitMsiOn64BitOS" Error='!(loc.condition.run32BitMsiOn64BitOS.message)'/>
+    <CustomAction Id="CA_OS_DETECTED" Error='!(loc.condition.os.message)'/>
+    <CustomAction Id="CA_REPAIR_NON_ADMIN" Error='!(loc.condition.repair.denied)'/>
+
+    <Property Id="INSTALLLOCATION">
+      <RegistrySearch Id="RegistrySearch" Type="raw" Root="HKLM"
+                      Key="SOFTWARE\$(var.fs.product.manufacturer)\$(var.fs.product.name)" Name="InstallLocation" />
+    </Property>
+
+    <!-- Properties -->
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
+    <Property Id="REBOOT" Value="Suppress" />
+    <Property Id="ARMINSTALLMODE" Value="1" />
+
+    <!-- Adding Add/Remove Program (ARP) support-->
+    <?include ARPProperties.wxi ?>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="$(var.program.menu.folder)">
+          <Component Id="RemoveApplicationProgramsFolder" Guid="{6B4AFF98-1392-4664-A922-161B258C302A}"  >
+            <RemoveFolder Id="RemoveApplicationProgramsFolder" On="uninstall"/>
+            <RegistryValue Root="HKCU" Key="$(var.shortcuts.registry.key)" Name="installedApplicationProgramsFolder" Type="integer" Value="1" KeyPath="yes"/>
+          </Component>
+        </Directory>
+        <Component Id="RemoveVendorProgramsFolder" Guid="{81642AB8-55B0-4A70-9232-A2DE3AB8D05D}">
+          <RemoveFolder Id="VendorProgramsFolder" On="uninstall"/>
+          <RegistryValue Root="HKCU" Key="$(var.shortcuts.registry.key)" Name="installedVendorFolder" Type="integer" Value="1" KeyPath="yes"/>
+        </Component>
+      </Directory>
+
+      <Directory Id="$(var.PlatformProgramFilesFolder)">
+        <Directory Id="DirVendor" Name="$(var.fs.product.manufacturer)">
+          <Directory Id="DirProductName" Name="$(var.fs.product.name)">
+            <Directory Id="INSTALLLOCATION">
+              <!-- Workaround to prevent display "Will be installed to run from network" 
+						  and "Entire feature will be installed to run from network" for root node.
+					  	See http://blogs.technet.com/alexshev/archive/2008/08/23/from-msi-to-wix-part-4-features-and-components.aspx for more details.-->
+              <Component Id="Empty" Guid="">
+                <CreateFolder />
+              </Component>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <!-- Features definition -->
+    <Feature Id="CubeComponents"
+             Absent="disallow"
+             Title="$(var.product.name)"
+             Level="1"
+             ConfigurableDirectory="INSTALLLOCATION"
+             TypicalDefault="install"
+             Display="expand"
+             Description="$(var.product.name)"
+             InstallDefault="local"
+             AllowAdvertise="no">
+      <ComponentGroupRef Id="OrdersEditorComponents"/>
+      <ComponentRef Id="CubeShortcut" />
+      <ComponentRef Id="CubeShortcutDesktop"/>
+      <ComponentRef Id="Empty"/>
+      <ComponentRef Id="RemoveVendorProgramsFolder" Primary="yes"/>
+      <ComponentRef Id="RemoveApplicationProgramsFolder" Primary="yes"/>
+      <Component Id="InstallFolderRegistry" Directory="INSTALLLOCATION" >
+        <RegistryValue
+          Root="HKLM"
+          Key="$(var.shortcuts.registry.key)"
+          Name="InstallLocation"
+          Value="[INSTALLLOCATION]"
+          Type="string"
+          KeyPath ="yes" />
+      </Component>
+
+      <!--<Feature Id="MainFeatureComponents"
+               Absent="disallow"
+               Title="Cоздание заказов"
+               Level="0"
+               InstallDefault="followParent"
+               Display="expand"
+               Description="Программа создания заказов"
+               TypicalDefault="install"
+               AllowAdvertise='no'>
+        <ComponentGroupRef Id="OrdersEditorComponents"/>
+        <ComponentRef Id="CubeShortcut" />
+        <ComponentRef Id="CubeShortcutDesktop"/>
+        <Condition Level="1">1</Condition>
+      </Feature>-->
+
+    </Feature>
+
+    <!-- Build custom UI sequence using WixUI Mondo as base. 
+		In this sequence SetupTypeDlg from Mondo WixUI is replaced with CustomSetupTypeDlg where 'Minimal' text on the first button is used instead of 'Typical'.-->
+    <UI Id="WixUI_CustomMondo">
+      <TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
+      <TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
+      <TextStyle Id="WixUI_Font_Title" FaceName="Tahoma" Size="9" Bold="yes" />
+
+      <Property Id="WixUI_Mode" Value="Mondo" />
+
+      <DialogRef Id="CustomErrorDlg" />
+      <DialogRef Id="CustomFatalError" />
+      <DialogRef Id="FilesInUse" />
+      <DialogRef Id="CustomPrepareDlg" />
+      <DialogRef Id="CustomProgressDlg" />
+      <DialogRef Id="CustomResumeDlg" />
+      <DialogRef Id="CustomUserExit" />
+      <!--<DialogRef Id="DbFileBrowseDialog"/>
+      <DialogRef Id="InstallModeDialog"/>
+      <DialogRef Id="ConfigurationNameDialog"/>-->
+
+      <!-- Если выбрана Обычная установка перескакиваем на диалог выбора файла старой бд --><!--
+      <Publish Dialog="CustomSetupTypeDlg" Control="TypicalButton" Event="NewDialog" Value="InstallModeDialog">1</Publish>
+
+      --><!--Если выбрали установку с нуля то сразу можно на установку--><!--
+      <Publish Dialog="InstallModeDialog" Control="Next" Event="NewDialog" Value="CustomVerifyReadyDlg">ARMINSTALLMODE = 1</Publish>
+      --><!--Если выбрали обновление то задание именик конфы--><!--
+      <Publish Dialog="InstallModeDialog" Control="Next" Event="NewDialog" Value="ConfigurationNameDialog">ARMINSTALLMODE = 2</Publish>
+      <Publish Dialog="InstallModeDialog" Control="Back" Event="NewDialog" Value="CustomSetupTypeDlg">1</Publish>
+
+      <Publish Dialog="ConfigurationNameDialog" Control="Next" Event="NewDialog" Value="DbFileBrowseDialog">1</Publish>
+      <Publish Dialog="ConfigurationNameDialog" Control="Back" Event="NewDialog" Value="InstallModeDialog">1</Publish>
+
+      <Publish Dialog="DbFileBrowseDialog" Control="Next" Event="NewDialog" Value="CustomVerifyReadyDlg">1</Publish>
+      <Publish Dialog="DbFileBrowseDialog" Control="Back" Event="NewDialog" Value="ConfigurationNameDialog">1</Publish>-->
+
+      <!-- 
+      CustomCustomizeDlg - Диалог с деревом фич при кастомном типе инсталляции 
+      CustomSetupTypeDlg - Диалог выбора типа инсталляции 
+      CustomVerifyReadyDlg - Последний диалог перед установкой (с кнопкой Установить)
+      -->
+      <!--<Publish Dialog="CustomCustomizeDlg" Control="Back" Event="NewDialog" Value="CustomMaintenanceTypeDlg" Order="1">WixUI_InstallMode = "Change"</Publish>
+
+      <Publish Dialog="CustomSetupTypeDlg" Control="Next" Event="NewDialog" Value="DBFileBrowseDialog">1</Publish>
+      <Publish Dialog="DBFileBrowseDialog" Control="Next" Event="NewDialog" Value="CustomVerifyReadyDlg">1</Publish>
+      <Publish Dialog="DBFileBrowseDialog" Control="Back" Event="NewDialog" Value="CustomSetupTypeDlg">1</Publish>
+
+      <Publish Dialog="CustomVerifyReadyDlg" Control="Back" Event="NewDialog" Value="CustomCustomizeDlg" Order="1">WixUI_InstallMode = "InstallCustom"</Publish>
+      <Publish Dialog="CustomVerifyReadyDlg" Control="Back" Event="NewDialog" Value="CustomSetupTypeDlg" Order="2">WixUI_InstallMode = "InstallTypical" OR WixUI_InstallMode = "InstallComplete"</Publish>
+      <Publish Dialog="CustomVerifyReadyDlg" Control="Back" Event="NewDialog" Value="CustomCustomizeDlg" Order="3">WixUI_InstallMode = "Change"</Publish>
+      <Publish Dialog="CustomVerifyReadyDlg" Control="Back" Event="NewDialog" Value="CustomMaintenanceTypeDlg" Order="4">WixUI_InstallMode = "Repair" OR WixUI_InstallMode = "Remove"</Publish>
+
+
+      <Publish Dialog="CustomMaintenanceTypeDlg" Control="RemoveButton" Event="NewDialog" Value="CustomVerifyReadyDlg">1</Publish>-->
+
+      <!--<ProgressText Action="ConvertDb"></ProgressText>-->
+    </UI>
+
+    <InstallExecuteSequence>
+      <InstallExecute After="MsiPublishAssemblies" />
+
+      <!--<Custom Action="SetConvertDbValues" After="InstallInitialize"><![CDATA[NOT (Installed)]]></Custom>
+      <Custom Action="ConvertDb" Before="InstallFinalize"><![CDATA[NOT (Installed)]]></Custom>-->
+
+    </InstallExecuteSequence>
+
+  </Product>
+</Wix>

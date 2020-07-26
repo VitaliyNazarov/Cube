@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include Variables.wxi ?>
+
+  <Fragment>
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="CubeShortcut" Guid="{AC765B43-01C3-4958-9C31-CD6076B28659}">
+        <Shortcut Id="CubeShortcut"
+                  Directory="ApplicationProgramsFolder"
+                  Name="$(var.product.name)"
+                  Show="normal"
+                  WorkingDirectory="INSTALLLOCATION"
+                  Target="[#Cube.Win.exe]" />
+        <RegistryValue Root="HKCU"
+                       Key="$(var.shortcuts.registry.key)"
+                       Name="installedCubeOrdersEditor"
+                       Type="integer"
+                       Value="1"
+                       KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="TARGETDIR">
+      <Directory Id="DesktopFolder">
+        <Component Id="CubeShortcutDesktop" Guid="{34896335-442F-4EE6-9888-533B6C472565}">
+          <Shortcut Id="CubeShortcutShortcut"
+                    Directory="ApplicationProgramsFolder"
+                    Name="$(var.product.name)"
+                    Show="normal"
+                    WorkingDirectory="INSTALLLOCATION"
+                    Target="[#Cube.Win.exe]" />
+          <RemoveFolder Id="DesktopFolder" On="uninstall"/>
+          <RegistryValue Root="HKCU"
+                         Key="$(var.shortcuts.registry.key)"
+                         Name="installedCubeOrdersEditor"
+                         Type="integer"
+                         Value="1"
+                         KeyPath="yes"/>
+        </Component>
+      </Directory>
+    </DirectoryRef>
+  </Fragment>
+</Wix>

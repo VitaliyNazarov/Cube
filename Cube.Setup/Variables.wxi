@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <?include .\Common\VendorCommon.wxi ?>
+
+  <!--version-->
+  <?define product.version = "1.1.0" ?>
+
+  <?if $(var.Platform) = x64 ?>
+  <?define product.code = "B498B76F-7093-4481-81B5-7FC4B2F72C18"?>
+  <?define upgrade.code = "19AC6865-9068-46E9-908B-89A34C8E372B"?>
+  <?else ?>
+  <?define product.code = "7F9A09C1-AE67-44E6-A435-6122575B9DFE"?>
+  <?define upgrade.code = "C2A91436-326F-425F-A4E4-9C93D9409ECB"?>
+  <?endif ?>
+
+  <!--product name-->
+  <?define product.name = "Создание заказов" ?>
+  <?define fs.product.name = "OrdersEditor" ?>
+  <!--product name (for ARP)-->
+  <?define full.product.name = "$(var.product.manufacturer) $(var.product.name) $(var.product.version)" ?>
+
+  <!--  shortcuts registry key  -->
+  <?define shortcuts.registry.key = Software\Cube ?>
+
+  <?define program.menu.folder = "Cube" ?>
+
+</Include>

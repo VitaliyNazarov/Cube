@@ -101,6 +101,24 @@ namespace Cube.Model
         public DateTime PlanningDate { get; set; }
 
         /// <summary>
+        /// Изделие
+        /// </summary>
+        [XafDisplayName("Изделие")]
+        public string ProductName { get; set; }
+
+        /// <summary>
+        /// Комментарии
+        /// </summary>
+        [XafDisplayName("Комментарии")]
+        public string Comments { get; set; }
+
+        /// <summary>
+        /// Дизайнер
+        /// </summary>
+        [XafDisplayName("Дизайнер")]
+        public string Designer { get; set; }
+
+        /// <summary>
         /// Состояние заказа.
         /// </summary>
         public OrderState State { get; set; }

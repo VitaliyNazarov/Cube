@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <Fragment>
+    <?include .\Common\Variables.wxi ?>
+    <?include .\Variables.wxi ?>
+
+    <ComponentGroup Id="OrdersEditorComponents">
+      <ComponentRef Id='Cube.Module.dll'/>
+      <ComponentRef Id='Cube.Module.Win.dll'/>
+      <ComponentRef Id='Cube.sqlite'/>
+      <ComponentRef Id='Cube.Win.exe'/>
+      <ComponentRef Id='Cube.Win.exe.config'/>
+      <ComponentRef Id='DevExpress.Charts.v19.2.Core.dll'/>
+      <ComponentRef Id='DevExpress.CodeParser.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.Data.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.DataAccess.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.DataAccess.v19.2.UI.dll'/>
+      <ComponentRef Id='DevExpress.Diagram.v19.2.Core.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.ConditionalAppearance.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.EF.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.FileAttachment.Win.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Notifications.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Notifications.Win.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Objects.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Office.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Office.Win.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.ReportsV2.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.ReportsV2.Win.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Security.EF.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Security.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.TreeListEditors.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.TreeListEditors.Win.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Validation.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Validation.Win.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.ViewVariantsModule.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Win.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Xpo.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.Images.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.Office.v19.2.Core.dll'/>
+      <ComponentRef Id='DevExpress.Pdf.v19.2.Core.dll'/>
+      <ComponentRef Id='DevExpress.Persistent.Base.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.Persistent.BaseImpl.EF.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.Persistent.BaseImpl.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.PivotGrid.v19.2.Core.dll'/>
+      <ComponentRef Id='DevExpress.Printing.v19.2.Core.dll'/>
+      <ComponentRef Id='DevExpress.RichEdit.v19.2.Core.dll'/>
+      <ComponentRef Id='DevExpress.RichEdit.v19.2.Export.dll'/>
+      <ComponentRef Id='DevExpress.Sparkline.v19.2.Core.dll'/>
+      <ComponentRef Id='DevExpress.Spreadsheet.v19.2.Core.dll'/>
+      <ComponentRef Id='DevExpress.Utils.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.Utils.v19.2.UI.dll'/>
+      <ComponentRef Id='DevExpress.Xpo.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.XtraBars.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.XtraCharts.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.XtraCharts.v19.2.Extensions.dll'/>
+      <ComponentRef Id='DevExpress.XtraCharts.v19.2.Wizard.dll'/>
+      <ComponentRef Id='DevExpress.XtraDiagram.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.XtraEditors.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.XtraGauges.v19.2.Core.dll'/>
+      <ComponentRef Id='DevExpress.XtraGrid.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.XtraLayout.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.XtraNavBar.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.XtraPivotGrid.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.XtraPrinting.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.XtraReports.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.XtraReports.v19.2.Extensions.dll'/>
+      <ComponentRef Id='DevExpress.XtraRichEdit.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.XtraScheduler.v19.2.Core.dll'/>
+      <ComponentRef Id='DevExpress.XtraSpreadsheet.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.XtraTreeList.v19.2.dll'/>
+      <ComponentRef Id='DevExpress.XtraVerticalGrid.v19.2.dll'/>
+      <ComponentRef Id='EntityFramework.dll'/>
+      <ComponentRef Id='EntityFramework.SqlServer.dll'/>
+      <ComponentRef Id='LogonParameters'/>
+      <ComponentRef Id='Model.xafml'/>
+      <ComponentRef Id='ModelAssembly.dll'/>
+      <ComponentRef Id='ModulesVersionInfo'/>
+      <ComponentRef Id='SQLite.CodeFirst.dll'/>
+      <ComponentRef Id='System.Data.SQLite.dll'/>
+      <ComponentRef Id='System.Data.SQLite.dll.config'/>
+      <ComponentRef Id='System.Data.SQLite.EF6.dll'/>
+      <ComponentRef Id='System.Data.SQLite.Linq.dll'/>
+      <ComponentRef Id='DevExpress.Data.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.DataAccess.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.DataAccess.v19.2.UI.resources.dll'/>
+      <ComponentRef Id='DevExpress.Diagram.v19.2.Core.resources.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.FileAttachment.Win.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Notifications.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Objects.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Office.Win.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.ReportsV2.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.ReportsV2.Win.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Security.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Validation.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Validation.Win.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.ViewVariantsModule.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.ExpressApp.Win.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.Office.v19.2.Core.resources.dll'/>
+      <ComponentRef Id='DevExpress.Pdf.v19.2.Core.resources.dll'/>
+      <ComponentRef Id='DevExpress.PivotGrid.v19.2.Core.resources.dll'/>
+      <ComponentRef Id='DevExpress.Printing.v19.2.Core.resources.dll'/>
+      <ComponentRef Id='DevExpress.RichEdit.v19.2.Core.resources.dll'/>
+      <ComponentRef Id='DevExpress.Sparkline.v19.2.Core.resources.dll'/>
+      <ComponentRef Id='DevExpress.Spreadsheet.v19.2.Core.resources.dll'/>
+      <ComponentRef Id='DevExpress.Utils.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.Utils.v19.2.UI.resources.dll'/>
+      <ComponentRef Id='DevExpress.Xpo.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraBars.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraCharts.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraCharts.v19.2.Wizard.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraEditors.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraGauges.v19.2.Core.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraGrid.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraLayout.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraNavBar.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraPivotGrid.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraPrinting.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraReports.v19.2.Extensions.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraReports.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraRichEdit.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraScheduler.v19.2.Core.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraSpreadsheet.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraTreeList.v19.2.resources.dll'/>
+      <ComponentRef Id='DevExpress.XtraVerticalGrid.v19.2.resources.dll'/>
+      <ComponentRef Id='SQLite.Interop.dll_x64'/>
+      <ComponentRef Id='SQLite.Interop.dll_x86'/>
+    </ComponentGroup>
+
+    <DirectoryRef Id="INSTALLLOCATION" >
+      <Component Id='Cube.Module.dll' Guid='{F8ACB504-1BDA-4C74-9571-A99AC3433C39}'>
+        <File Id='Cube.Module.dll' Source='$(var.bin.path)Cube.Module.dll' />
+      </Component>
+      <Component Id='Cube.Module.Win.dll' Guid='{B5E02863-C5E9-4BAD-A549-DD324CE2C234}'>
+        <File Id='Cube.Module.Win.dll' Source='$(var.bin.path)Cube.Module.Win.dll' />
+      </Component>
+      <Component Id='Cube.sqlite' Guid='{C30F32EB-8339-4F06-B9F7-229BE244FFB6}'>
+        <File Id='Cube.sqlite' Source='$(var.bin.path)Cube.sqlite' />
+      </Component>
+      <Component Id='Cube.Win.exe' Guid='{EAD10367-6FB6-4747-AD1A-1FBA2F4C9B3D}'>
+        <File Id='Cube.Win.exe' Source='$(var.bin.path)Cube.Win.exe' />
+      </Component>
+      <Component Id='Cube.Win.exe.config' Guid='{1A37E4DF-6EAB-46F2-9352-5AF992D28269}'>
+        <File Id='Cube.Win.exe.config' Source='$(var.bin.path)Cube.Win.exe.config' />
+      </Component>
+      <Component Id='DevExpress.Charts.v19.2.Core.dll' Guid='{21685D36-1F07-4FD8-B3DF-1B17D778438B}'>
+        <File Id='DevExpress.Charts.v19.2.Core.dll' Source='$(var.bin.path)DevExpress.Charts.v19.2.Core.dll' />
+      </Component>
+      <Component Id='DevExpress.CodeParser.v19.2.dll' Guid='{5A708952-A7D0-4FB1-AA77-2C9CDEA4FBA8}'>
+        <File Id='DevExpress.CodeParser.v19.2.dll' Source='$(var.bin.path)DevExpress.CodeParser.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.Data.v19.2.dll' Guid='{6BD2C67F-D059-481B-B8C0-77C7FCF095FC}'>
+        <File Id='DevExpress.Data.v19.2.dll' Source='$(var.bin.path)DevExpress.Data.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.DataAccess.v19.2.dll' Guid='{ED11A750-DFC7-4E08-89A2-6CC588E02CBD}'>
+        <File Id='DevExpress.DataAccess.v19.2.dll' Source='$(var.bin.path)DevExpress.DataAccess.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.DataAccess.v19.2.UI.dll' Guid='{381BC593-B02D-41B8-B278-4B36B6A0B37A}'>
+        <File Id='DevExpress.DataAccess.v19.2.UI.dll' Source='$(var.bin.path)DevExpress.DataAccess.v19.2.UI.dll' />
+      </Component>
+      <Component Id='DevExpress.Diagram.v19.2.Core.dll' Guid='{6C64BCAF-9DA0-4961-9E98-D196C3547136}'>
+        <File Id='DevExpress.Diagram.v19.2.Core.dll' Source='$(var.bin.path)DevExpress.Diagram.v19.2.Core.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.ConditionalAppearance.v19.2.dll' Guid='{E312D83A-39BF-4F02-878B-ABED6AA6CFF6}'>
+        <File Id='DevExpress.ExpressApp.ConditionalAppearance.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.ConditionalAppearance.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.EF.v19.2.dll' Guid='{FBD4F4AB-0B8F-446C-8863-E685A1F3DB3D}'>
+        <File Id='DevExpress.ExpressApp.EF.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.EF.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.FileAttachment.Win.v19.2.dll' Guid='{51BAA987-4FEB-401C-8EE1-860E02E560A5}'>
+        <File Id='DevExpress.ExpressApp.FileAttachment.Win.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.FileAttachment.Win.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.Notifications.v19.2.dll' Guid='{84D142A5-D4E8-42E5-AF7A-46821C1AFC54}'>
+        <File Id='DevExpress.ExpressApp.Notifications.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.Notifications.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.Notifications.Win.v19.2.dll' Guid='{515CBBBF-EA64-448D-83BA-88FA049824D4}'>
+        <File Id='DevExpress.ExpressApp.Notifications.Win.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.Notifications.Win.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.Objects.v19.2.dll' Guid='{1E919C50-CEC9-43E8-8D93-B660700F72A7}'>
+        <File Id='DevExpress.ExpressApp.Objects.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.Objects.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.Office.v19.2.dll' Guid='{3E368726-4653-4F56-AC28-F46EC03D17CB}'>
+        <File Id='DevExpress.ExpressApp.Office.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.Office.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.Office.Win.v19.2.dll' Guid='{53AF9D0A-38E5-49BD-84FC-50B83789ECAC}'>
+        <File Id='DevExpress.ExpressApp.Office.Win.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.Office.Win.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.ReportsV2.v19.2.dll' Guid='{F1F9B266-5D33-4702-9F4E-DEE3FDD20148}'>
+        <File Id='DevExpress.ExpressApp.ReportsV2.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.ReportsV2.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.ReportsV2.Win.v19.2.dll' Guid='{FFDA580A-8BD1-4A84-9445-184997D32812}'>
+        <File Id='DevExpress.ExpressApp.ReportsV2.Win.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.ReportsV2.Win.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.Security.EF.v19.2.dll' Guid='{115BC817-6227-4899-AC7D-5E2F0DF01AE7}'>
+        <File Id='DevExpress.ExpressApp.Security.EF.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.Security.EF.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.Security.v19.2.dll' Guid='{FC50ECEB-0A86-43F1-9E92-7F389E06F966}'>
+        <File Id='DevExpress.ExpressApp.Security.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.Security.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.TreeListEditors.v19.2.dll' Guid='{EACA67C8-E5DE-47B2-B6E9-050C332ABB9B}'>
+        <File Id='DevExpress.ExpressApp.TreeListEditors.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.TreeListEditors.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.TreeListEditors.Win.v19.2.dll' Guid='{0793B148-CE87-4E7C-9727-E6B6AC409859}'>
+        <File Id='DevExpress.ExpressApp.TreeListEditors.Win.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.TreeListEditors.Win.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.v19.2.dll' Guid='{C29CA3DD-6680-4842-B07C-C33A923C43AD}'>
+        <File Id='DevExpress.ExpressApp.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.Validation.v19.2.dll' Guid='{B8A559D3-942F-421E-9F4D-20CA7E10EB0A}'>
+        <File Id='DevExpress.ExpressApp.Validation.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.Validation.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.Validation.Win.v19.2.dll' Guid='{30293E45-00D6-4D48-BB75-8F3D2E09AF51}'>
+        <File Id='DevExpress.ExpressApp.Validation.Win.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.Validation.Win.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.ViewVariantsModule.v19.2.dll' Guid='{76856AB5-B0D0-4447-A0A5-A4010BC038C7}'>
+        <File Id='DevExpress.ExpressApp.ViewVariantsModule.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.ViewVariantsModule.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.Win.v19.2.dll' Guid='{6DFEF4A5-E2AD-49A4-9129-5D15B0A792A1}'>
+        <File Id='DevExpress.ExpressApp.Win.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.Win.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.ExpressApp.Xpo.v19.2.dll' Guid='{9323E955-7DEE-4B68-AD92-6690C6D90ECF}'>
+        <File Id='DevExpress.ExpressApp.Xpo.v19.2.dll' Source='$(var.bin.path)DevExpress.ExpressApp.Xpo.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.Images.v19.2.dll' Guid='{674805AF-3690-4A13-8537-DC47C37207F0}'>
+        <File Id='DevExpress.Images.v19.2.dll' Source='$(var.bin.path)DevExpress.Images.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.Office.v19.2.Core.dll' Guid='{24A0AEB7-E8BF-42B6-B1BD-851B8D21C64F}'>
+        <File Id='DevExpress.Office.v19.2.Core.dll' Source='$(var.bin.path)DevExpress.Office.v19.2.Core.dll' />
+      </Component>
+      <Component Id='DevExpress.Pdf.v19.2.Core.dll' Guid='{36B8B092-BF24-4CD6-B3AA-F0D5148B38BE}'>
+        <File Id='DevExpress.Pdf.v19.2.Core.dll' Source='$(var.bin.path)DevExpress.Pdf.v19.2.Core.dll' />
+      </Component>
+      <Component Id='DevExpress.Persistent.Base.v19.2.dll' Guid='{71A3E9AC-ED61-4F3D-8578-519C713D85EF}'>
+        <File Id='DevExpress.Persistent.Base.v19.2.dll' Source='$(var.bin.path)DevExpress.Persistent.Base.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.Persistent.BaseImpl.EF.v19.2.dll' Guid='{B3D48CAA-194E-40FC-B008-C6D4635D1010}'>
+        <File Id='DevExpress.Persistent.BaseImpl.EF.v19.2.dll' Source='$(var.bin.path)DevExpress.Persistent.BaseImpl.EF.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.Persistent.BaseImpl.v19.2.dll' Guid='{E55567F7-6FEC-4FC3-BEE2-75F1A6031A64}'>
+        <File Id='DevExpress.Persistent.BaseImpl.v19.2.dll' Source='$(var.bin.path)DevExpress.Persistent.BaseImpl.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.PivotGrid.v19.2.Core.dll' Guid='{4AF1D34A-42B8-466D-9BD0-8AA6AB243EB3}'>
+        <File Id='DevExpress.PivotGrid.v19.2.Core.dll' Source='$(var.bin.path)DevExpress.PivotGrid.v19.2.Core.dll' />
+      </Component>
+      <Component Id='DevExpress.Printing.v19.2.Core.dll' Guid='{146A0C35-080D-42F0-B25B-15FCF7FB55BE}'>
+        <File Id='DevExpress.Printing.v19.2.Core.dll' Source='$(var.bin.path)DevExpress.Printing.v19.2.Core.dll' />
+      </Component>
+      <Component Id='DevExpress.RichEdit.v19.2.Core.dll' Guid='{E9D2EC7B-97F0-4160-B194-B62BD383EF5A}'>
+        <File Id='DevExpress.RichEdit.v19.2.Core.dll' Source='$(var.bin.path)DevExpress.RichEdit.v19.2.Core.dll' />
+      </Component>
+      <Component Id='DevExpress.RichEdit.v19.2.Export.dll' Guid='{04EFE63B-483D-4523-A309-D3F996127BF6}'>
+        <File Id='DevExpress.RichEdit.v19.2.Export.dll' Source='$(var.bin.path)DevExpress.RichEdit.v19.2.Export.dll' />
+      </Component>
+      <Component Id='DevExpress.Sparkline.v19.2.Core.dll' Guid='{2987B99B-775B-4DE2-B7AA-34548501BAE2}'>
+        <File Id='DevExpress.Sparkline.v19.2.Core.dll' Source='$(var.bin.path)DevExpress.Sparkline.v19.2.Core.dll' />
+      </Component>
+      <Component Id='DevExpress.Spreadsheet.v19.2.Core.dll' Guid='{5872A5C3-20AC-4461-86D6-73D4273F4412}'>
+        <File Id='DevExpress.Spreadsheet.v19.2.Core.dll' Source='$(var.bin.path)DevExpress.Spreadsheet.v19.2.Core.dll' />
+      </Component>
+      <Component Id='DevExpress.Utils.v19.2.dll' Guid='{8F42C246-C003-43EA-AC94-12ECE4D5D832}'>
+        <File Id='DevExpress.Utils.v19.2.dll' Source='$(var.bin.path)DevExpress.Utils.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.Utils.v19.2.UI.dll' Guid='{A8319F8B-565B-4E2D-B5AE-7872C44783D2}'>
+        <File Id='DevExpress.Utils.v19.2.UI.dll' Source='$(var.bin.path)DevExpress.Utils.v19.2.UI.dll' />
+      </Component>
+      <Component Id='DevExpress.Xpo.v19.2.dll' Guid='{D383E20F-5C8A-4E90-8EA9-965F0192F73C}'>
+        <File Id='DevExpress.Xpo.v19.2.dll' Source='$(var.bin.path)DevExpress.Xpo.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraBars.v19.2.dll' Guid='{38FA9FC2-DCB5-4509-BBA2-95F8B26BB83E}'>
+        <File Id='DevExpress.XtraBars.v19.2.dll' Source='$(var.bin.path)DevExpress.XtraBars.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraCharts.v19.2.dll' Guid='{2626D281-1E3B-4DC0-98C1-D598FE4AAF2F}'>
+        <File Id='DevExpress.XtraCharts.v19.2.dll' Source='$(var.bin.path)DevExpress.XtraCharts.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraCharts.v19.2.Extensions.dll' Guid='{953D6FB5-55A4-4452-BCF2-F5CA999489A8}'>
+        <File Id='DevExpress.XtraCharts.v19.2.Extensions.dll' Source='$(var.bin.path)DevExpress.XtraCharts.v19.2.Extensions.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraCharts.v19.2.Wizard.dll' Guid='{2DE0F98A-1169-4CEF-B156-5D98A524D91E}'>
+        <File Id='DevExpress.XtraCharts.v19.2.Wizard.dll' Source='$(var.bin.path)DevExpress.XtraCharts.v19.2.Wizard.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraDiagram.v19.2.dll' Guid='{B4AA5A21-5B25-45E8-B0FD-CA6644AE3E47}'>
+        <File Id='DevExpress.XtraDiagram.v19.2.dll' Source='$(var.bin.path)DevExpress.XtraDiagram.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraEditors.v19.2.dll' Guid='{7B5B13A2-4F0D-4376-BC03-6F836636F9BF}'>
+        <File Id='DevExpress.XtraEditors.v19.2.dll' Source='$(var.bin.path)DevExpress.XtraEditors.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraGauges.v19.2.Core.dll' Guid='{38580324-B4F4-4C65-9BEB-0D932E6B1947}'>
+        <File Id='DevExpress.XtraGauges.v19.2.Core.dll' Source='$(var.bin.path)DevExpress.XtraGauges.v19.2.Core.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraGrid.v19.2.dll' Guid='{75318A87-61F3-4686-975B-8C591AFBDA42}'>
+        <File Id='DevExpress.XtraGrid.v19.2.dll' Source='$(var.bin.path)DevExpress.XtraGrid.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraLayout.v19.2.dll' Guid='{35FB7BBC-4909-4CE1-80FB-2350AAB121D5}'>
+        <File Id='DevExpress.XtraLayout.v19.2.dll' Source='$(var.bin.path)DevExpress.XtraLayout.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraNavBar.v19.2.dll' Guid='{C72EDB8F-FF16-4117-8C46-A3B099406702}'>
+        <File Id='DevExpress.XtraNavBar.v19.2.dll' Source='$(var.bin.path)DevExpress.XtraNavBar.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraPivotGrid.v19.2.dll' Guid='{2E3D1C62-E1AA-46C8-A6B2-3860F4F08E56}'>
+        <File Id='DevExpress.XtraPivotGrid.v19.2.dll' Source='$(var.bin.path)DevExpress.XtraPivotGrid.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraPrinting.v19.2.dll' Guid='{256AB3EA-0001-4144-89D1-030C7317A316}'>
+        <File Id='DevExpress.XtraPrinting.v19.2.dll' Source='$(var.bin.path)DevExpress.XtraPrinting.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraReports.v19.2.dll' Guid='{BE49B0CD-2CA5-423F-AA8B-E9C96155285B}'>
+        <File Id='DevExpress.XtraReports.v19.2.dll' Source='$(var.bin.path)DevExpress.XtraReports.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraReports.v19.2.Extensions.dll' Guid='{02F2F180-D6CE-417B-A498-A7AE062C73A2}'>
+        <File Id='DevExpress.XtraReports.v19.2.Extensions.dll' Source='$(var.bin.path)DevExpress.XtraReports.v19.2.Extensions.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraRichEdit.v19.2.dll' Guid='{47524DC2-9D16-4CA3-8D6E-8DBB50EE81CC}'>
+        <File Id='DevExpress.XtraRichEdit.v19.2.dll' Source='$(var.bin.path)DevExpress.XtraRichEdit.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraScheduler.v19.2.Core.dll' Guid='{CD14B94E-7DF6-4F96-A298-1DD59D166ABE}'>
+        <File Id='DevExpress.XtraScheduler.v19.2.Core.dll' Source='$(var.bin.path)DevExpress.XtraScheduler.v19.2.Core.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraSpreadsheet.v19.2.dll' Guid='{A9E1671B-3B5D-4A64-B1A1-0DFFF2FAEE39}'>
+        <File Id='DevExpress.XtraSpreadsheet.v19.2.dll' Source='$(var.bin.path)DevExpress.XtraSpreadsheet.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraTreeList.v19.2.dll' Guid='{E8798790-D18D-406C-B0D0-A60D177334D8}'>
+        <File Id='DevExpress.XtraTreeList.v19.2.dll' Source='$(var.bin.path)DevExpress.XtraTreeList.v19.2.dll' />
+      </Component>
+      <Component Id='DevExpress.XtraVerticalGrid.v19.2.dll' Guid='{EDF6393E-78AE-49FC-A190-FF6F37BBEFDD}'>
+        <File Id='DevExpress.XtraVerticalGrid.v19.2.dll' Source='$(var.bin.path)DevExpress.XtraVerticalGrid.v19.2.dll' />
+      </Component>
+      <Component Id='EntityFramework.dll' Guid='{C3C6758C-944E-4F84-8A20-D6755F24130B}'>
+        <File Id='EntityFramework.dll' Source='$(var.bin.path)EntityFramework.dll' />
+      </Component>
+      <Component Id='EntityFramework.SqlServer.dll' Guid='{941DBD5F-67CA-4D9F-B6EF-507476F1C2C5}'>
+        <File Id='EntityFramework.SqlServer.dll' Source='$(var.bin.path)EntityFramework.SqlServer.dll' />
+      </Component>
+      <Component Id='LogonParameters' Guid='{2002F35A-9481-4B51-86A9-6BACB7A89203}'>
+        <File Id='LogonParameters' Source='$(var.bin.path)LogonParameters' />
+      </Component>
+      <Component Id='Model.xafml' Guid='{9F89C96B-B162-4E71-9D1B-D0F662A5A7F5}'>
+        <File Id='Model.xafml' Source='$(var.bin.path)Model.xafml' />
+      </Component>
+      <Component Id='ModelAssembly.dll' Guid='{FE94CEEF-2122-44EB-AFC8-F2573FDEF420}'>
+        <File Id='ModelAssembly.dll' Source='$(var.bin.path)ModelAssembly.dll' />
+      </Component>
+      <Component Id='ModulesVersionInfo' Guid='{66FEC39F-FEC8-414C-B825-D6A7D34458CD}'>
+        <File Id='ModulesVersionInfo' Source='$(var.bin.path)ModulesVersionInfo' />
+      </Component>
+      <Component Id='SQLite.CodeFirst.dll' Guid='{07751C48-FF5A-4C79-9D9B-1A04E6402514}'>
+        <File Id='SQLite.CodeFirst.dll' Source='$(var.bin.path)SQLite.CodeFirst.dll' />
+      </Component>
+      <Component Id='System.Data.SQLite.dll' Guid='{EBE37F01-CC95-4585-ADAF-85D43C7E3113}'>
+        <File Id='System.Data.SQLite.dll' Source='$(var.bin.path)System.Data.SQLite.dll' />
+      </Component>
+      <Component Id='System.Data.SQLite.dll.config' Guid='{8476047B-FFA2-414B-AD33-B230C093A82F}'>
+        <File Id='System.Data.SQLite.dll.config' Source='$(var.bin.path)System.Data.SQLite.dll.config' />
+      </Component>
+      <Component Id='System.Data.SQLite.EF6.dll' Guid='{301E4D70-6D56-4C02-ADD8-E19B91F3CD72}'>
+        <File Id='System.Data.SQLite.EF6.dll' Source='$(var.bin.path)System.Data.SQLite.EF6.dll' />
+      </Component>
+      <Component Id='System.Data.SQLite.Linq.dll' Guid='{0FEFF88B-B110-4269-BD76-0AD9C8042CAD}'>
+        <File Id='System.Data.SQLite.Linq.dll' Source='$(var.bin.path)System.Data.SQLite.Linq.dll' />
+      </Component>
+      <Directory Id='ru' Name='ru'>
+        <Component Id='DevExpress.Data.v19.2.resources.dll' Guid='{80FC4DC6-76AE-4453-B359-9F0EEF912F7F}'>
+          <File Id='DevExpress.Data.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.Data.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.DataAccess.v19.2.resources.dll' Guid='{76DA30E2-8B4E-466E-914A-C0EAD41F577E}'>
+          <File Id='DevExpress.DataAccess.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.DataAccess.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.DataAccess.v19.2.UI.resources.dll' Guid='{01CD3301-1442-4D7E-899E-141588FAC534}'>
+          <File Id='DevExpress.DataAccess.v19.2.UI.resources.dll' Source='$(var.bin.path)ru\DevExpress.DataAccess.v19.2.UI.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.Diagram.v19.2.Core.resources.dll' Guid='{7B1A55F3-ED40-4C74-A079-8933AD3E8840}'>
+          <File Id='DevExpress.Diagram.v19.2.Core.resources.dll' Source='$(var.bin.path)ru\DevExpress.Diagram.v19.2.Core.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.ExpressApp.FileAttachment.Win.v19.2.resources.dll' Guid='{71CF6C7A-8B72-4367-97D7-5DD5AF86BE46}'>
+          <File Id='DevExpress.ExpressApp.FileAttachment.Win.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.ExpressApp.FileAttachment.Win.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.ExpressApp.Notifications.v19.2.resources.dll' Guid='{2BFBFC9F-18D0-4650-BC1C-53F4FF708DAD}'>
+          <File Id='DevExpress.ExpressApp.Notifications.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.ExpressApp.Notifications.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.ExpressApp.Objects.v19.2.resources.dll' Guid='{C28DCE1D-3DAA-4735-BBD2-83B980B9211D}'>
+          <File Id='DevExpress.ExpressApp.Objects.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.ExpressApp.Objects.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.ExpressApp.Office.Win.v19.2.resources.dll' Guid='{00F375F2-0848-4103-B0A4-410EE8B87C05}'>
+          <File Id='DevExpress.ExpressApp.Office.Win.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.ExpressApp.Office.Win.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.ExpressApp.ReportsV2.v19.2.resources.dll' Guid='{D046533A-80BF-44AD-B2C2-3DE1ACCCA31A}'>
+          <File Id='DevExpress.ExpressApp.ReportsV2.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.ExpressApp.ReportsV2.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.ExpressApp.ReportsV2.Win.v19.2.resources.dll' Guid='{C1BF2B5A-6958-44FC-AAF7-83B0163592DB}'>
+          <File Id='DevExpress.ExpressApp.ReportsV2.Win.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.ExpressApp.ReportsV2.Win.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.ExpressApp.Security.v19.2.resources.dll' Guid='{A9041465-148D-4B54-BE02-F456332C9DA7}'>
+          <File Id='DevExpress.ExpressApp.Security.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.ExpressApp.Security.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.ExpressApp.v19.2.resources.dll' Guid='{51035D1B-DABF-4610-8B22-3C7062202DAF}'>
+          <File Id='DevExpress.ExpressApp.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.ExpressApp.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.ExpressApp.Validation.v19.2.resources.dll' Guid='{BCD45A01-62A7-4D90-8548-36443C1C0DE2}'>
+          <File Id='DevExpress.ExpressApp.Validation.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.ExpressApp.Validation.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.ExpressApp.Validation.Win.v19.2.resources.dll' Guid='{5CBFE6B7-42D8-4BCA-AD78-6ED6925F3A74}'>
+          <File Id='DevExpress.ExpressApp.Validation.Win.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.ExpressApp.Validation.Win.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.ExpressApp.ViewVariantsModule.v19.2.resources.dll' Guid='{7AEC3FF8-4F53-4B72-B38C-1BAE5DF10843}'>
+          <File Id='DevExpress.ExpressApp.ViewVariantsModule.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.ExpressApp.ViewVariantsModule.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.ExpressApp.Win.v19.2.resources.dll' Guid='{A2B18164-33AA-4456-BC9A-DF64C5AC264C}'>
+          <File Id='DevExpress.ExpressApp.Win.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.ExpressApp.Win.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.Office.v19.2.Core.resources.dll' Guid='{B78E997D-5423-4F84-BD1E-904E0100D0AA}'>
+          <File Id='DevExpress.Office.v19.2.Core.resources.dll' Source='$(var.bin.path)ru\DevExpress.Office.v19.2.Core.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.Pdf.v19.2.Core.resources.dll' Guid='{0D000605-1949-436F-83B0-0B9B5B8BBC23}'>
+          <File Id='DevExpress.Pdf.v19.2.Core.resources.dll' Source='$(var.bin.path)ru\DevExpress.Pdf.v19.2.Core.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.PivotGrid.v19.2.Core.resources.dll' Guid='{E86E9813-4E2E-4201-B2B5-B419BFFBEA7F}'>
+          <File Id='DevExpress.PivotGrid.v19.2.Core.resources.dll' Source='$(var.bin.path)ru\DevExpress.PivotGrid.v19.2.Core.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.Printing.v19.2.Core.resources.dll' Guid='{06A92D9F-C2DB-4559-B998-AE61FFC3D295}'>
+          <File Id='DevExpress.Printing.v19.2.Core.resources.dll' Source='$(var.bin.path)ru\DevExpress.Printing.v19.2.Core.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.RichEdit.v19.2.Core.resources.dll' Guid='{62F6409D-E672-4928-9EB8-5EC79939AE6C}'>
+          <File Id='DevExpress.RichEdit.v19.2.Core.resources.dll' Source='$(var.bin.path)ru\DevExpress.RichEdit.v19.2.Core.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.Sparkline.v19.2.Core.resources.dll' Guid='{5CF464D7-0640-4D4F-B331-DB1387855BC3}'>
+          <File Id='DevExpress.Sparkline.v19.2.Core.resources.dll' Source='$(var.bin.path)ru\DevExpress.Sparkline.v19.2.Core.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.Spreadsheet.v19.2.Core.resources.dll' Guid='{4DF98BC0-8B87-434A-B2F3-80A42023F606}'>
+          <File Id='DevExpress.Spreadsheet.v19.2.Core.resources.dll' Source='$(var.bin.path)ru\DevExpress.Spreadsheet.v19.2.Core.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.Utils.v19.2.resources.dll' Guid='{D469CBB5-FE79-4EF4-8F50-41F6D7CBE49A}'>
+          <File Id='DevExpress.Utils.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.Utils.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.Utils.v19.2.UI.resources.dll' Guid='{C4594D56-043F-4F73-A447-6FD1E90BEE41}'>
+          <File Id='DevExpress.Utils.v19.2.UI.resources.dll' Source='$(var.bin.path)ru\DevExpress.Utils.v19.2.UI.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.Xpo.v19.2.resources.dll' Guid='{0F5FF3D7-5140-412B-86D8-476A1DB54726}'>
+          <File Id='DevExpress.Xpo.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.Xpo.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraBars.v19.2.resources.dll' Guid='{6B9C5546-F5E7-47F0-9B25-1D9B3D4009E3}'>
+          <File Id='DevExpress.XtraBars.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraBars.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraCharts.v19.2.resources.dll' Guid='{97E8F685-37A5-48B1-B807-103610A4391A}'>
+          <File Id='DevExpress.XtraCharts.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraCharts.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraCharts.v19.2.Wizard.resources.dll' Guid='{92ACB72C-46D9-4675-BE3D-229F9A9642C9}'>
+          <File Id='DevExpress.XtraCharts.v19.2.Wizard.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraCharts.v19.2.Wizard.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraEditors.v19.2.resources.dll' Guid='{31B8FC16-311F-45C4-AE36-EC20DF3D3911}'>
+          <File Id='DevExpress.XtraEditors.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraEditors.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraGauges.v19.2.Core.resources.dll' Guid='{0D4A388D-E731-4D45-B61D-35E71F058BE9}'>
+          <File Id='DevExpress.XtraGauges.v19.2.Core.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraGauges.v19.2.Core.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraGrid.v19.2.resources.dll' Guid='{F3690D5A-15DA-4C36-A3BB-F00A7851A253}'>
+          <File Id='DevExpress.XtraGrid.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraGrid.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraLayout.v19.2.resources.dll' Guid='{60805117-B40E-46E3-9E47-12FF6FC848D3}'>
+          <File Id='DevExpress.XtraLayout.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraLayout.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraNavBar.v19.2.resources.dll' Guid='{8449FEEA-041A-4AC2-ACE1-BB66FBB467CB}'>
+          <File Id='DevExpress.XtraNavBar.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraNavBar.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraPivotGrid.v19.2.resources.dll' Guid='{89B3834B-92FB-4285-8D65-68A6D3036C51}'>
+          <File Id='DevExpress.XtraPivotGrid.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraPivotGrid.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraPrinting.v19.2.resources.dll' Guid='{E0FC04C0-F563-43E9-85C2-A36CE17A5A55}'>
+          <File Id='DevExpress.XtraPrinting.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraPrinting.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraReports.v19.2.Extensions.resources.dll' Guid='{F8EFABFA-84FC-4015-ADA7-E4F46BCD14EB}'>
+          <File Id='DevExpress.XtraReports.v19.2.Extensions.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraReports.v19.2.Extensions.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraReports.v19.2.resources.dll' Guid='{22F69DB2-A949-48F2-96B9-478D29010B88}'>
+          <File Id='DevExpress.XtraReports.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraReports.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraRichEdit.v19.2.resources.dll' Guid='{75BF2322-7959-42AB-BD27-307BD1DF1EBC}'>
+          <File Id='DevExpress.XtraRichEdit.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraRichEdit.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraScheduler.v19.2.Core.resources.dll' Guid='{47A5EFEE-0236-48B6-91FE-770020E37A85}'>
+          <File Id='DevExpress.XtraScheduler.v19.2.Core.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraScheduler.v19.2.Core.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraSpreadsheet.v19.2.resources.dll' Guid='{BD44CBC8-53E1-4D88-8B7B-59B0D60A1023}'>
+          <File Id='DevExpress.XtraSpreadsheet.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraSpreadsheet.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraTreeList.v19.2.resources.dll' Guid='{317E9D0F-4017-4498-A811-7099CA783B7C}'>
+          <File Id='DevExpress.XtraTreeList.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraTreeList.v19.2.resources.dll' />
+        </Component>
+        <Component Id='DevExpress.XtraVerticalGrid.v19.2.resources.dll' Guid='{D8DE2951-61AF-44F6-BD69-ECCF51ED5DC0}'>
+          <File Id='DevExpress.XtraVerticalGrid.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.XtraVerticalGrid.v19.2.resources.dll' />
+        </Component>
+      </Directory>
+      <Directory Id='Sqlite_x64' Name='x64'>
+        <Component Id='SQLite.Interop.dll_x64' Guid='{05A084D0-CB56-435C-B007-CF46D88678E8}'>
+          <File Id='SQLite.Interop.dll_x64' Source='$(var.bin.path)x64\SQLite.Interop.dll' />
+        </Component>
+      </Directory>
+      <Directory Id='Sqlite_x86' Name='x86'>
+        <Component Id='SQLite.Interop.dll_x86' Guid='{7F23F99B-383B-44A0-B5E8-48113D74E17A}'>
+          <File Id='SQLite.Interop.dll_x86' Source='$(var.bin.path)x86\SQLite.Interop.dll' />
+        </Component>
+      </Directory>
+
+    </DirectoryRef>
+  </Fragment>
+
+</Wix>

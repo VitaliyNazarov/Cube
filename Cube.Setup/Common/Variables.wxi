@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+
+  <?if $(var.Platform) = x64 ?>
+  <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
+  <?define PlatformCommonFilesFolder = "CommonFiles64Folder" ?>
+  <?define InstallUtil.path = "$(env.WINDIR)\Microsoft.NET\Framework64\v4.0.30319\InstallUtilLib.dll" ?>
+  <?else ?>
+  <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
+  <?define PlatformCommonFilesFolder = "CommonFilesFolder" ?>
+  <?define InstallUtil.path = "$(env.WINDIR)\Microsoft.NET\Framework\v4.0.30319\InstallUtilLib.dll" ?>
+  <?endif ?>
+
+  <!--path to source files-->
+  <?define source.path = ..\..\SOURCE\ ?>
+  <?define files.path = ..\Output\ ?>
+
+  <!-- path to assemblies -->
+  <?define bin.path = $(var.files.path)$(var.Configuration)\ ?>
+  <?define bin.platform.path = $(var.files.path)$(var.Configuration)\ ?>
+
+</Include>

@@ -61,12 +61,12 @@ namespace Cube.Win.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
         /// </summary>
-        internal static System.Drawing.Bitmap Logo {
+        internal static DevExpress.Utils.Svg.SvgImage Logo {
             get {
                 object obj = ResourceManager.GetObject("Logo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
             }
         }
     }

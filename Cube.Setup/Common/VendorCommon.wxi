@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <!--manufacturer-->
+  <?define product.manufacturer = "МФ Куб" ?>
+  <?define fs.product.manufacturer = "Cube" ?>
+  <?define fs.product.name = "OrdersEditor" ?>
+
+  <?define VENDOR_WEB_ADDR= "http://www.kubmf.ru/"?>
+  <?define VENDOR_TELEPHONE_NUM= "8 (499) 350-37-40, 8 (8412) 260-966"?>
+
+  <!--  Admin core program menu folder name  -->
+  <?define program.menu.folder = "МФ Куб" ?>
+</Include>

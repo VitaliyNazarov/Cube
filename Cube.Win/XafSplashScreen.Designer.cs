@@ -31,16 +31,16 @@
             this.progressBarControl = new DevExpress.XtraEditors.MarqueeProgressBarControl();
             this.labelCopyright = new DevExpress.XtraEditors.LabelControl();
             this.labelStatus = new DevExpress.XtraEditors.LabelControl();
-            this.peImage = new DevExpress.XtraEditors.PictureEdit();
             this.pcApplicationName = new DevExpress.XtraEditors.PanelControl();
             this.labelSubtitle = new DevExpress.XtraEditors.LabelControl();
             this.labelApplicationName = new DevExpress.XtraEditors.LabelControl();
-            this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
+            this.svgImageBox1 = new DevExpress.XtraEditors.SvgImageBox();
+            this.peImage = new DevExpress.XtraEditors.PictureEdit();
             ((System.ComponentModel.ISupportInitialize)(this.progressBarControl.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.peImage.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcApplicationName)).BeginInit();
             this.pcApplicationName.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.svgImageBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.peImage.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // progressBarControl
@@ -75,20 +75,6 @@
             this.labelStatus.Size = new System.Drawing.Size(54, 17);
             this.labelStatus.TabIndex = 7;
             this.labelStatus.Text = "Starting...";
-            // 
-            // peImage
-            // 
-            this.peImage.EditValue = ((object)(resources.GetObject("peImage.EditValue")));
-            this.peImage.Location = new System.Drawing.Point(12, 12);
-            this.peImage.Name = "peImage";
-            this.peImage.Properties.AllowFocused = false;
-            this.peImage.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.peImage.Properties.Appearance.Options.UseBackColor = true;
-            this.peImage.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.peImage.Properties.ShowMenu = false;
-            this.peImage.Size = new System.Drawing.Size(426, 180);
-            this.peImage.TabIndex = 9;
-            this.peImage.Visible = false;
             // 
             // pcApplicationName
             // 
@@ -129,16 +115,30 @@
             this.labelApplicationName.TabIndex = 0;
             this.labelApplicationName.Text = "МФ КУБ";
             // 
-            // pictureEdit1
+            // svgImageBox1
             // 
-            this.pictureEdit1.EditValue = global::Cube.Win.Properties.Resources.Logo;
-            this.pictureEdit1.Location = new System.Drawing.Point(413, 308);
-            this.pictureEdit1.Name = "pictureEdit1";
-            this.pictureEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-            this.pictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
-            this.pictureEdit1.Size = new System.Drawing.Size(65, 43);
-            this.pictureEdit1.TabIndex = 11;
+            this.svgImageBox1.BackColor = System.Drawing.Color.Transparent;
+            this.svgImageBox1.Location = new System.Drawing.Point(417, 293);
+            this.svgImageBox1.Name = "svgImageBox1";
+            this.svgImageBox1.Size = new System.Drawing.Size(66, 60);
+            this.svgImageBox1.SizeMode = DevExpress.XtraEditors.SvgImageSizeMode.Squeeze;
+            this.svgImageBox1.SvgImage = global::Cube.Win.Properties.Resources.Logo;
+            this.svgImageBox1.TabIndex = 2;
+            this.svgImageBox1.Text = "svgImageBox1";
+            // 
+            // peImage
+            // 
+            this.peImage.EditValue = ((object)(resources.GetObject("peImage.EditValue")));
+            this.peImage.Location = new System.Drawing.Point(12, 12);
+            this.peImage.Name = "peImage";
+            this.peImage.Properties.AllowFocused = false;
+            this.peImage.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.peImage.Properties.Appearance.Options.UseBackColor = true;
+            this.peImage.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.peImage.Properties.ShowMenu = false;
+            this.peImage.Size = new System.Drawing.Size(426, 180);
+            this.peImage.TabIndex = 9;
+            this.peImage.Visible = false;
             // 
             // XafSplashScreen
             // 
@@ -146,7 +146,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(496, 370);
-            this.Controls.Add(this.pictureEdit1);
+            this.Controls.Add(this.svgImageBox1);
             this.Controls.Add(this.pcApplicationName);
             this.Controls.Add(this.peImage);
             this.Controls.Add(this.labelStatus);
@@ -156,11 +156,11 @@
             this.Padding = new System.Windows.Forms.Padding(1);
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.progressBarControl.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.peImage.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcApplicationName)).EndInit();
             this.pcApplicationName.ResumeLayout(false);
             this.pcApplicationName.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.svgImageBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.peImage.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,6 +175,6 @@
         private DevExpress.XtraEditors.PanelControl pcApplicationName;
         private DevExpress.XtraEditors.LabelControl labelSubtitle;
         private DevExpress.XtraEditors.LabelControl labelApplicationName;
-        private DevExpress.XtraEditors.PictureEdit pictureEdit1;
+        private DevExpress.XtraEditors.SvgImageBox svgImageBox1;
     }
 }

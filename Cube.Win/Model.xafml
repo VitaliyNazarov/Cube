@@ -115,7 +115,7 @@
       </OwnMembers>
     </Class>
   </BOModel>
-  <NavigationItems NavigationStyle="NavBar" ShowImages="True" DefaultChildItemsDisplayStyle="LargeIcons" StartupNavigationItem="@2a02c5db-fe7e-4d04-a12b-2808a02f0d9a">
+  <NavigationItems NavigationStyle="NavBar" ShowImages="True" DefaultChildItemsDisplayStyle="LargeIcons" StartupNavigationItem="@a86bd763-750c-4eb4-9894-2dfed3f4383a">
     <Items>
       <Item Id="Default" Caption="Основное" ImageName="BO_Sale" Index="0">
         <Items>
@@ -134,12 +134,12 @@
           <Item Id="MyDetails" ObjectKey="@CurrentUserID" ViewId="PermissionPolicyUser_DetailView" Caption="Мои настройки" ImageName="BO_MyDetails" IsNewNode="True" />
         </Items>
       </Item>
-      <Item Id="Reports" Caption="Отчеты" ImageName="Business_Report" Index="2" />
+      <Item Id="Reports" Caption="Отчеты" ImageName="Business_Report" Index="2" Visible="False" />
     </Items>
   </NavigationItems>
-  <Options UIType="TabbedMDI" FormStyle="Ribbon" ShowTabImage="True" EnableHtmlFormatting="True">
+  <Options UIType="TabbedMDI" FormStyle="Ribbon" ShowTabImage="True" EnableHtmlFormatting="True" RestoreTabbedMdiLayout="True">
     <LayoutManagerOptions EnableLayoutGroupImages="True" />
-    <PrintingSettings Landscape="True" />
+    <PrintingSettings Landscape="True" PaperKind="A4" />
   </Options>
   <SchemaModules>
     <SchemaModule Name="SystemModule" Version="19.2.3.0" IsNewNode="True" />
@@ -163,25 +163,23 @@
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100" Direction="Vertical">
           <LayoutGroup Id="SimpleEditors" RelativeSize="100" Index="0" Direction="Vertical">
-            <LayoutGroup Id="Auto2fe49303-b53d-40b6-9395-0189e7f09f31" ShowCaption="False" Caption="Auto2fe49303-b53d-40b6-9395-0189e7f09f31(3)" Direction="Horizontal" Index="0" RelativeSize="13.095238095238095" IsNewNode="True">
-              <LayoutGroup Id="Item3" ShowCaption="False" CaptionLocation="Top" Index="0" RelativeSize="33.221476510067113" IsNewNode="True">
-                <LayoutItem Id="Number" ViewItem="Number" Index="0" RelativeSize="29.09090909090909" IsNewNode="True" />
-                <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="1" RelativeSize="21.818181818181817" IsNewNode="True" />
-                <LayoutItem Id="PlanningDate" ViewItem="PlanningDate" Index="2" RelativeSize="21.818181818181817" IsNewNode="True" />
-                <LayoutItem Id="State" ViewItem="State" Index="3" RelativeSize="27.272727272727273" IsNewNode="True" />
+            <LayoutGroup Id="Auto2fe49303-b53d-40b6-9395-0189e7f09f31" ShowCaption="False" Caption="Auto2fe49303-b53d-40b6-9395-0189e7f09f31(3)" Direction="Horizontal" Index="0" RelativeSize="15.952380952380953" IsNewNode="True">
+              <LayoutGroup Id="Item3" ShowCaption="False" CaptionLocation="Top" Index="0" RelativeSize="59.246954595791806" IsNewNode="True">
+                <LayoutItem Id="Number" ViewItem="Number" Index="0" RelativeSize="23.880597014925375" IsNewNode="True" />
+                <LayoutItem Id="ProductName" ViewItem="ProductName" Index="1" RelativeSize="17.910447761194028" IsNewNode="True" />
+                <LayoutItem Id="CustomerName" ViewItem="CustomerName" Index="2" RelativeSize="17.910447761194028" IsNewNode="True" />
+                <LayoutItem Id="Designer" ViewItem="Designer" Index="3" RelativeSize="17.910447761194028" IsNewNode="True" />
+                <LayoutItem Id="PlanningDate" ViewItem="PlanningDate" Index="4" RelativeSize="22.388059701492537" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutGroup Id="Item2" ShowCaption="False" CaptionLocation="Top" Index="1" RelativeSize="33.053691275167786" IsNewNode="True">
-                <LayoutItem Id="PriceList" ViewItem="PriceList" Index="0" RelativeSize="29.09090909090909" IsNewNode="True" />
-                <LayoutItem Id="Sum" ViewItem="Sum" Index="1" RelativeSize="21.818181818181817" IsNewNode="True" />
-                <LayoutItem Id="OrderType" ViewItem="OrderType" Index="2" RelativeSize="49.090909090909093" IsNewNode="True" />
-              </LayoutGroup>
-              <LayoutGroup Id="Item4" ShowCaption="False" CaptionLocation="Top" Index="2" RelativeSize="33.7248322147651" IsNewNode="True">
-                <LayoutItem Id="CreatedDate" ViewItem="CreatedDate" Index="0" RelativeSize="29.09090909090909" IsNewNode="True" />
-                <LayoutItem Id="ChangedDate" ViewItem="ChangedDate" Index="1" RelativeSize="21.818181818181817" IsNewNode="True" />
-                <LayoutItem Id="Creator" ViewItem="Creator" Index="2" RelativeSize="21.818181818181817" IsNewNode="True" />
-                <LayoutItem Id="Modifier" ViewItem="Modifier" Index="3" RelativeSize="27.272727272727273" IsNewNode="True" />
+              <LayoutGroup Id="Item2" ShowCaption="False" CaptionLocation="Top" Index="1" RelativeSize="40.753045404208194" IsNewNode="True">
+                <LayoutItem Id="PriceList" ViewItem="PriceList" Index="0" RelativeSize="23.880597014925375" IsNewNode="True" />
+                <LayoutItem Id="OrderType" ViewItem="OrderType" Index="1" RelativeSize="17.910447761194028" IsNewNode="True" />
+                <LayoutItem Id="State" ViewItem="State" Index="2" RelativeSize="17.910447761194028" IsNewNode="True" />
+                <LayoutItem Id="Sum" ViewItem="Sum" Index="3" RelativeSize="17.910447761194028" IsNewNode="True" />
+                <LayoutItem Id="CreatedDate" ViewItem="CreatedDate" Index="4" RelativeSize="22.388059701492537" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
+            <LayoutItem Id="Comments" ViewItem="Comments" Index="1" RelativeSize="2.8571428571428572" IsNewNode="True" />
             <LayoutGroup Id="Order" RelativeSize="16.30952380952381" Caption="Основное" Index="1" Removed="True">
               <LayoutGroup Id="Order_col1" RelativeSize="32.094288304623753">
                 <LayoutItem Id="Number" RelativeSize="28.571428571428573" Index="0" />
@@ -202,10 +200,10 @@
                 <LayoutItem Id="Sum" RelativeSize="17.391304347826086" Removed="True" />
               </LayoutGroup>
             </LayoutGroup>
-            <LayoutGroup Id="Rows_Group" ShowCaption="True" Caption="Состав заказа" TextAlignMode="AlignWithChildren" Direction="Horizontal" Index="1" RelativeSize="86.9047619047619" IsNewNode="True">
-              <LayoutItem Id="Image" ShowCaption="False" ViewItem="Image" Index="0" RelativeSize="43.760683760683762" IsNewNode="True" />
-              <SplitterItem Id="SplitterItem1" Index="1" RelativeSize="1.0256410256410256" IsNewNode="True" />
-              <LayoutItem Id="Rows" ViewItem="Rows" Index="2" RelativeSize="55.213675213675216" IsNewNode="True" />
+            <LayoutGroup Id="Rows_Group" ShowCaption="True" Caption="Состав заказа" TextAlignMode="AlignWithChildren" Direction="Horizontal" Index="2" RelativeSize="81.19047619047619" IsNewNode="True">
+              <LayoutItem Id="Image" ShowCaption="False" ViewItem="Image" Index="0" RelativeSize="43.813847900113508" IsNewNode="True" />
+              <SplitterItem Id="SplitterItem1" Index="1" RelativeSize="1.362088535754824" IsNewNode="True" />
+              <LayoutItem Id="Rows" ViewItem="Rows" Index="2" RelativeSize="54.82406356413167" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
           <LayoutGroup Id="Rows_Group" Removed="True" />

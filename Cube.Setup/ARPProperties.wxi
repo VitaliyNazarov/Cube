@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <Property Id="ARPCONTACT" Value="Technical support" />
+  <Property Id="ARPPRODUCTICON" Value="arp.ico" />
+  <Property Id="ARPHELPLINK" Value="$(var.VENDOR_WEB_ADDR)" />
+  <Property Id="ARPURLINFOABOUT" Value="$(var.VENDOR_WEB_ADDR)" />
+  <Property Id="ARPURLUPDATEINFO" Value="$(var.VENDOR_WEB_ADDR)" />
+  <Property Id="ARPHELPTELEPHONE" Value="$(var.VENDOR_TELEPHONE_NUM)" />
+
+  <Property Id="ARPNOREPAIR" Value="1" />
+  <Icon Id="arp.ico" SourceFile="Images\arp.ico" />
+
+  <!-- Set up ARPINSTALLLOCATION property -->
+  <CustomAction Id="SetARPINSTALLLOCATION" Property="ARPINSTALLLOCATION" Value="[INSTALLLOCATION]" />
+
+  <!-- Sequences -->
+  <InstallExecuteSequence>
+    <Custom Action="SetARPINSTALLLOCATION" After="InstallValidate"></Custom>
+  </InstallExecuteSequence>
+</Include>

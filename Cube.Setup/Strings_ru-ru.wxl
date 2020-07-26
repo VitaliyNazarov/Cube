@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="ru-ru" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+
+  <!-- launch conditions -->
+  <String Id="condition.run32BitMsiOn64BitOS.message">32-х разрядная версия этого продукта не может быть установлена на 64-х битную версию Microsoft Windows.</String>
+  <String Id="condition.os.message">Поддерживаются только следующие платформы: Windows Server 2008 R2, Windows Server 2012  и выше.</String>
+  <String Id="condition.net.message">Приложение требует установки .NET Framework 4.5. Пожалуйста, установите .NET Framework и запустите программу установки снова.</String>
+  <String Id="condition.net462.message">Приложение требует установки .NET Framework 4.6.2. Пожалуйста, установите .NET Framework и запустите программу установки снова.</String>
+  <String Id="condition.repair.denied">Для исправления [ProductName] удалите продукт и начните установку снова.</String>
+  <String Id="condition.administrator.message">Вы должны иметь права администратора для установки данного продукта.</String>
+
+</WixLocalization>
