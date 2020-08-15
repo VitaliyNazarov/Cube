@@ -36,7 +36,7 @@
         <Member Name="Order" Caption="Заказ" />
         <Member Name="Position" Caption="№" />
         <Member Name="Price" Caption="Цена" />
-        <Member Name="Product" Caption="Продукт" />
+        <Member Name="Product" Caption="Продукт" LookupEditorMode="AllItems" />
         <Member Name="Quantity" Caption="Количество" />
         <Member Name="SourcePrice" Caption="Прайс-лист" />
         <Member Name="Sum" Caption="Сумма" />

@@ -60,13 +60,18 @@ namespace Cube.Model
         [Browsable(false)]
         public bool Deleted { get; set; }
 
+        /// <summary>
+        /// Ключ группы для экспорта\импорта.
+        /// </summary>
+        [Browsable(false)]
+        public string Key { get; set; }
+
         #endregion
 
         /// <summary>
         /// Название группы.
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Необходмо название группы.")]
-        // [MaxLength(256, ErrorMessage = "Название группы не должно превышать 256 символов.")]
         public string Name { get; set; }
 
         /// <summary>

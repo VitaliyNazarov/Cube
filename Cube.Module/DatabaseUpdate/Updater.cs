@@ -90,7 +90,7 @@ namespace Cube.Module.DatabaseUpdate
 
 
                 defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Default/Items/Orders", SecurityPermissionState.Allow);
-                defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Default/Items/Catalog", SecurityPermissionState.Allow);
+                defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Default/Items/Catalog", SecurityPermissionState.Deny);
                 defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Default/Items/PriceLists", SecurityPermissionState.Deny);
                 defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Reports", SecurityPermissionState.Deny);
                 defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Security/Items/PermissionPolicyUser_ListView", SecurityPermissionState.Deny);

@@ -52,7 +52,7 @@ namespace Cube.Module.Win.Controllers
                 .ToList();
 
             var orderView = dataSource.First();
-            var report = new CusomerOrderCardReport
+            var report = new OrderCardReport
             {
                 DataSource = dataSource
             };
@@ -79,7 +79,7 @@ namespace Cube.Module.Win.Controllers
                 .ToList();
 
             var orderView = dataSource.First();
-            var report = new ProdcutionSpecification
+            var report = new CustomerSpecificationReport
             {
                 DataSource = dataSource
             };

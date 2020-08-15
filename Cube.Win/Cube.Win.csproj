@@ -13,22 +13,6 @@
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <FileAlignment>512</FileAlignment>
     <UseVSHostingProcess>False</UseVSHostingProcess>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\!!!Work\!!!Cube\Publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,16 +40,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>4A841E3B996371867EB7DC0AA1ADE0D83D948591</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>Cube.Win_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v19.2">
@@ -342,15 +317,7 @@
     <Content Include="ExpressApp.ico" />
     <Content Include="logo.ico" />
     <Content Include="Resources\Logo.png" />
-    <None Include="Cube.Win_TemporaryKey.pfx" />
-    <None Include="UnusableNodes1.xml">
-      <DependentUpon>Model.xafml</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="UnusableNodes.xml">
-      <DependentUpon>Model.xafml</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="app.manifest" />
     <None Include="ReadMe.txt" />
     <None Include="Images\ReadMe.txt" />
     <None Include="App.config" />

@@ -10,6 +10,7 @@ namespace Cube.Module.Win.Reports
         {
             return new OrderReportView
             {
+                Identity = order.ExternalId.ToString(),
                 CreatedDate = order.CreatedDate,
                 CustomerName = order.CustomerName,
                 OrderNumber = order.Number,

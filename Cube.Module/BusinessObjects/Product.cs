@@ -133,6 +133,11 @@ namespace Cube.Model
          XafDisplayName("Изображение")]
         public byte[] Image { get; set; }
 
+        /// <summary>
+        /// Ключ продукта для экспорта\импорта.
+        /// </summary>
+        [Browsable(false)]
+        public string Key { get; set; }
 
         #endregion
 

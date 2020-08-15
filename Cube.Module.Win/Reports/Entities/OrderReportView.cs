@@ -10,6 +10,11 @@ namespace Cube.Module.Win.Reports.Entities
     public class OrderReportView
     {
         /// <summary>
+        /// Идентификатор заказа для отчета
+        /// </summary>
+        public string Identity { get; set; }
+
+        /// <summary>
         /// Номер заказа
         /// </summary>
         [Display(Name = "№ заказа")]

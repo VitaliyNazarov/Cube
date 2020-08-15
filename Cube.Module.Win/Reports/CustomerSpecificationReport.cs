@@ -6,9 +6,9 @@ using DevExpress.XtraReports.UI;
 
 namespace Cube.Module.Win.Reports
 {
-    public partial class ProdcutionSpecification : DevExpress.XtraReports.UI.XtraReport
+    public partial class CustomerSpecificationReport : DevExpress.XtraReports.UI.XtraReport
     {
-        public ProdcutionSpecification()
+        public CustomerSpecificationReport()
         {
             InitializeComponent();
         }

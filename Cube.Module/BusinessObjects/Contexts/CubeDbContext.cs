@@ -11,7 +11,7 @@ namespace Cube.Model.Contexts
     [DbConfigurationType(typeof(CubeSQLiteConfiguration))]
     public class CubeDbContext : DbContext
     {
-        private bool _dropAndCreate;
+        private readonly bool _dropAndCreate = false;
 
         public CubeDbContext(string connectionString)
             : base(CreateConnection(), true)
