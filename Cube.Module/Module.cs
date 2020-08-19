@@ -39,7 +39,6 @@ namespace Cube.Module
             EnumProcessingHelper.RegisterEnum(typeof(OrderState));
             EnumProcessingHelper.RegisterEnum(typeof(OrderType));
             EnumProcessingHelper.RegisterEnum(typeof(ProductUnit));
-            EnumProcessingHelper.RegisterEnum(typeof(FacadeType));
         }
 
         public override IEnumerable<ModuleUpdater> GetModuleUpdaters(IObjectSpace objectSpace, Version versionFromDB)

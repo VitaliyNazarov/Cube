@@ -46,6 +46,8 @@ namespace Cube.Model.Contexts
 
         public virtual DbSet<PriceList> PriceLists { get; set; }
 
+        public virtual DbSet<PriceGroup> PriceGroups { get; set; }
+
         public virtual DbSet<Price> Prices { get; set; }
 
         public virtual DbSet<Order> Orders { get; set; }

@@ -101,7 +101,7 @@
             this.labelSubtitle.Name = "labelSubtitle";
             this.labelSubtitle.Size = new System.Drawing.Size(198, 17);
             this.labelSubtitle.TabIndex = 1;
-            this.labelSubtitle.Text = "Cоздание заказов. Версия 1.1.1.1";
+            this.labelSubtitle.Text = "Cоздание заказов. Версия 1.2";
             // 
             // labelApplicationName
             // 

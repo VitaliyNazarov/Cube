@@ -127,6 +127,7 @@
       <ComponentRef Id='DevExpress.XtraVerticalGrid.v19.2.resources.dll'/>
       <ComponentRef Id='SQLite.Interop.dll_x64'/>
       <ComponentRef Id='SQLite.Interop.dll_x86'/>
+      <ComponentRef Id='NPOI'/>
     </ComponentGroup>
 
     <DirectoryRef Id="INSTALLLOCATION" >
@@ -358,6 +359,15 @@
       <Component Id='System.Data.SQLite.Linq.dll' Guid='{0FEFF88B-B110-4269-BD76-0AD9C8042CAD}'>
         <File Id='System.Data.SQLite.Linq.dll' Source='$(var.bin.path)System.Data.SQLite.Linq.dll' />
       </Component>
+
+      <Component Id='NPOI' Guid='{A884C8FB-47F0-4401-9CE5-C451D329DA7B}'>
+        <File Id='NPOI.dll' Source='$(var.bin.path)NPOI.dll' />
+        <File Id='NPOI.OOXML.dll' Source='$(var.bin.path)NPOI.OOXML.dll' />
+        <File Id='NPOI.OpenXml4Net.dll' Source='$(var.bin.path)NPOI.OpenXml4Net.dll' />
+        <File Id='NPOI.OpenXmlFormats.dll' Source='$(var.bin.path)NPOI.OpenXmlFormats.dll' />
+        <File Id='ICSharpCode.SharpZipLib.dll' Source='$(var.bin.path)ICSharpCode.SharpZipLib.dll' />
+      </Component>
+
       <Directory Id='ru' Name='ru'>
         <Component Id='DevExpress.Data.v19.2.resources.dll' Guid='{80FC4DC6-76AE-4453-B359-9F0EEF912F7F}'>
           <File Id='DevExpress.Data.v19.2.resources.dll' Source='$(var.bin.path)ru\DevExpress.Data.v19.2.resources.dll' />

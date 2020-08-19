@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using Cube.Model.Contexts;
 using Cube.Model.Enums;
 using Cube.Model.Interfaces;
@@ -82,13 +81,6 @@ namespace Cube.Model
         public string Size { get; set; }
 
         /// <summary>
-        /// Фасад для кухни
-        /// </summary>
-        [XafDisplayName("Фасад")]
-        [Appearance("Kitchen_Facade", Visibility = ViewItemVisibility.Hide, Criteria = "!IsKitchen", Context = "Any")]
-        public FacadeType Facade { get; set; }
-
-        /// <summary>
         /// Признак того что продукт для кухни
         /// </summary>
         [Browsable(false)]
@@ -110,8 +102,15 @@ namespace Cube.Model
         [RuleRequiredField("OrderRow_Product_Required",
             DefaultContexts.Save,
             SkipNullOrEmptyValues = false,
-            CustomMessageTemplate = "Необходмо выбрать продукт.")]
+            CustomMessageTemplate = "Необходимо выбрать продукт.")]
         public virtual Product Product { get; set; }
+
+        /// <summary>
+        /// Группа цен.
+        /// </summary>
+        [XafDisplayName("Группа цен")]
+        [Appearance("Kitchen_SourcePriceGroup", Visibility = ViewItemVisibility.Hide, Criteria = "!IsKitchen", Context = "Any")]
+        public virtual PriceGroup SourcePriceGroup { get; set; }
 
         /// <summary>
         /// Заказ.
@@ -136,16 +135,21 @@ namespace Cube.Model
         {
             if (Product != null && Order != null)
             {
+                if (!IsKitchen)
+                {
+                    SourcePriceGroup = _objectSpace.FindObject<PriceGroup>(new BinaryOperator("IsDefault", true));
+                }
+
                 SourcePrice = _objectSpace.FindObject<Price>(CriteriaOperator.And(
                     new BinaryOperator("Product.Id", Product.Id),
-                    new BinaryOperator("PriceList.Id", Order.PriceList.Id)));
+                    new BinaryOperator("PriceList.Id", Order.PriceList.Id),
+                    new BinaryOperator("PriceGroup.Id", SourcePriceGroup.Id)));
 
                 if (SourcePrice == null)
                 {
                     throw new Exception("Не найдена цена.");
                 }
 
-                Facade = Product.Facade;
                 Size = Product.GetSize();
                 Unit = Product.Unit;
                 Price = SourcePrice?.Value ?? 0;

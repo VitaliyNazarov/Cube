@@ -5,7 +5,6 @@ using Cube.Model.Contexts;
 using Cube.Model.Enums;
 using Cube.Model.Interfaces;
 using DevExpress.ExpressApp.DC;
-using DevExpress.ExpressApp.EF.Utils;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.Base.General;
 using DevExpress.Persistent.Validation;
@@ -23,7 +22,6 @@ namespace Cube.Model
         /// </summary>
         public Product()
         {
-            Facade = FacadeType.Undefined;
         }
 
         #region Base properties
@@ -62,16 +60,11 @@ namespace Cube.Model
 
         #endregion
 
-        //[Unique]
         [System.ComponentModel.DataAnnotations.Schema.Index("UX_Product_Article", IsUnique = false)]
-        //[RuleUniqueValue("Product_Article_Unique",
-        //    DefaultContexts.Save, 
-        //    CustomMessageTemplate = "Указанный артикул продукта уже существует.", 
-        //    ResultType = ValidationResultType.Error)]
         [RuleRequiredField("Product_Article_Required",
             DefaultContexts.Save,
             SkipNullOrEmptyValues = false,
-            CustomMessageTemplate = "Необходмо задать артикул.")]
+            CustomMessageTemplate = "Необходимо задать артикул.")]
         public string Article { get; set; }
 
         /// <summary>
@@ -80,7 +73,7 @@ namespace Cube.Model
         [RuleRequiredField("Product_Name_Required",
             DefaultContexts.Save,
             SkipNullOrEmptyValues = false,
-            CustomMessageTemplate = "Необходмо указать название продукта.")]
+            CustomMessageTemplate = "Необходимо указать название продукта.")]
         public string Name { get; set; }
 
         /// <summary>
@@ -107,11 +100,6 @@ namespace Cube.Model
         /// Единицы измерения.
         /// </summary>
         public ProductUnit Unit { get; set; }
-
-        /// <summary>
-        /// Фасад
-        /// </summary>
-        public FacadeType Facade { get; set; }
 
         #region References
 

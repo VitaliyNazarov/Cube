@@ -282,6 +282,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms">
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
@@ -317,6 +318,10 @@
     <Content Include="ExpressApp.ico" />
     <Content Include="logo.ico" />
     <Content Include="Resources\Logo.png" />
+    <None Include="UnusableNodes2.xml">
+      <DependentUpon>Model.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="app.manifest" />
     <None Include="ReadMe.txt" />
     <None Include="Images\ReadMe.txt" />

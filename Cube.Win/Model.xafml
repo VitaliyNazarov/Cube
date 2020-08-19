@@ -246,7 +246,6 @@
         <ColumnInfo Id="Image" Index="0" Width="0" ImageSizeMode="Zoom" ImageEditorCustomHeight="100" ImageEditorFixedHeight="0" />
         <ColumnInfo Id="Product" Index="1" Width="212" />
         <ColumnInfo Id="Size" Index="2" />
-        <ColumnInfo Id="Facade" Index="3" />
         <ColumnInfo Id="Unit" Index="4" Width="86" />
         <ColumnInfo Id="Quantity" Index="5" Width="90" />
         <ColumnInfo Id="Price" Index="6" Width="77" />
@@ -257,7 +256,36 @@
       <Items IsNewNode="True">
         <PropertyEditor Id="CreatedDate" PropertyName="CreatedDate" IsNewNode="True" />
         <PropertyEditor Id="ExternalId" PropertyName="ExternalId" IsNewNode="True" />
-        <PropertyEditor Id="Facade" PropertyName="Facade" IsNewNode="True" />
+        <PropertyEditor Id="Id" PropertyName="Id" IsNewNode="True" />
+        <PropertyEditor Id="ObjectSpace" PropertyName="ObjectSpace" IsNewNode="True" />
+        <PropertyEditor Id="Order" PropertyName="Order" IsNewNode="True" />
+        <PropertyEditor Id="Position" PropertyName="Position" IsNewNode="True" />
+        <PropertyEditor Id="Price" PropertyName="Price" IsNewNode="True" />
+        <PropertyEditor Id="Product" PropertyName="Product" IsNewNode="True" />
+        <PropertyEditor Id="Quantity" PropertyName="Quantity" IsNewNode="True" />
+        <PropertyEditor Id="SourcePrice" PropertyName="SourcePrice" IsNewNode="True" />
+        <PropertyEditor Id="SourcePriceGroup" PropertyName="SourcePriceGroup" IsNewNode="True" />
+        <PropertyEditor Id="Sum" PropertyName="Sum" IsNewNode="True" />
+        <PropertyEditor Id="Unit" PropertyName="Unit" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+            <LayoutGroup Id="OrderRow" Index="0" Direction="Vertical" ShowCaption="True" Caption="Строка заказа" RelativeSize="100" IsNewNode="True">
+              <LayoutGroup Id="OrderRow_col1" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+                <LayoutItem Id="Product" ViewItem="Product" Index="0" RelativeSize="4.005006257822278" IsNewNode="True" />
+                <LayoutItem Id="SourcePriceGroup" ViewItem="SourcePriceGroup" Index="1" RelativeSize="3.0037546933667083" IsNewNode="True" />
+                <LayoutItem Id="Quantity" ViewItem="Quantity" ShowCaption="" Index="2" RelativeSize="92.991239048811011" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="OrderRow_CreateNew_Copy" ClassName="Cube.Model.OrderRow" DefaultFocusedItem="Product" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="CreatedDate" PropertyName="CreatedDate" IsNewNode="True" />
+        <PropertyEditor Id="ExternalId" PropertyName="ExternalId" IsNewNode="True" />
         <PropertyEditor Id="Id" PropertyName="Id" IsNewNode="True" />
         <PropertyEditor Id="ObjectSpace" PropertyName="ObjectSpace" IsNewNode="True" />
         <PropertyEditor Id="Order" PropertyName="Order" IsNewNode="True" />
@@ -272,11 +300,10 @@
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
           <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
-            <LayoutGroup Id="OrderRow" Index="0" Direction="Vertical" ShowCaption="True" Caption="Строка заказа" RelativeSize="100" IsNewNode="True">
+            <LayoutGroup Id="OrderRow" Index="0" ShowCaption="True" Caption="Строка заказа" RelativeSize="100" IsNewNode="True">
               <LayoutGroup Id="OrderRow_col1" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
                 <LayoutItem Id="Product" ViewItem="Product" Index="0" RelativeSize="4.005006257822278" IsNewNode="True" />
-                <LayoutItem Id="Facade" ViewItem="Facade" Index="1" RelativeSize="3.0037546933667083" IsNewNode="True" />
-                <LayoutItem Id="Quantity" ViewItem="Quantity" ShowCaption="" Index="2" RelativeSize="92.991239048811011" IsNewNode="True" />
+                <LayoutItem Id="Quantity" ViewItem="Quantity" ShowCaption="" Index="1" RelativeSize="95.994993742177726" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
           </LayoutGroup>
@@ -307,8 +334,12 @@
       <Columns>
         <ColumnInfo Id="CreatedDate" Index="-1" Width="82" />
         <ColumnInfo Id="PriceList" Index="-1" />
-        <ColumnInfo Id="Product" Index="0" Width="260" />
+        <ColumnInfo Id="Size" Index="-1" />
+        <ColumnInfo Id="Product" Index="0" Width="260" Removed="True" />
+        <ColumnInfo Id="ProductName" SortIndex="-1" GroupIndex="0" />
         <ColumnInfo Id="Value" Index="1" Width="88" Caption="Цена за единицу" />
+        <ColumnInfo Id="GroupName" Index="2" Width="111" />
+        <ColumnInfo Id="PriceGroup" Removed="True" />
       </Columns>
     </ListView>
     <ListView Id="Product_CategorizedView" ClassName="Cube.Model.Product" ImageName="BO_Product" AutoExpandAllGroups="True" IsGroupPanelVisible="True" IsFooterVisible="True" IsNewNode="True">
@@ -316,7 +347,6 @@
         <ColumnInfo Id="CreatedDate" PropertyName="CreatedDate" Index="-1" Width="70" Caption="Дата создания" IsNewNode="True" />
         <ColumnInfo Id="ExternalId" PropertyName="ExternalId" Index="-1" Width="70" IsNewNode="True" />
         <ColumnInfo Id="Id" PropertyName="Id" Index="-1" Width="70" IsNewNode="True" />
-        <ColumnInfo Id="Facade" PropertyName="Facade" Caption="Фасад" Index="0" IsNewNode="True" />
         <ColumnInfo Id="Name" PropertyName="Name" Index="1" Width="81" SortIndex="0" SortOrder="Ascending" AllowEdit="False" Caption="Название" IsNewNode="True" />
         <ColumnInfo Id="Width" PropertyName="Width" Index="2" Width="50" Caption="Ширина" IsNewNode="True" />
         <ColumnInfo Id="Height" PropertyName="Height" Index="3" Width="50" Caption="Высота" IsNewNode="True" />
@@ -326,7 +356,6 @@
     </ListView>
     <DetailView Id="Product_DetailView">
       <Items>
-        <PropertyEditor Id="Facade" Caption="Фасад" />
         <PropertyEditor Id="Image" Caption="Image(16)" />
       </Items>
       <Layout>
@@ -370,16 +399,6 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="Product_ListView">
-      <Columns>
-        <ColumnInfo Id="Facade" Caption="Фасад" />
-      </Columns>
-    </ListView>
-    <ListView Id="Product_LookupListView">
-      <Columns>
-        <ColumnInfo Id="Facade" PropertyName="Facade" Caption="Фасад" IsNewNode="True" />
-      </Columns>
-    </ListView>
     <ListView Id="ProductGroup_Children_ListView">
       <Columns>
         <ColumnInfo Id="CreatedDate" Index="-1" />

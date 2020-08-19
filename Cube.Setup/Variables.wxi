@@ -3,7 +3,7 @@
   <?include .\Common\VendorCommon.wxi ?>
 
   <!--version-->
-  <?define product.version = "1.1.0" ?>
+  <?define product.version = "1.2.0" ?>
 
   <?if $(var.Platform) = x64 ?>
   <?define product.code = "B498B76F-7093-4481-81B5-7FC4B2F72C18"?>

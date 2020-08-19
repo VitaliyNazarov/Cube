@@ -170,6 +170,7 @@
     <Compile Include="BusinessObjects\Interfaces\IImageHolder.cs" />
     <Compile Include="BusinessObjects\Interfaces\ISoftDeletable.cs" />
     <Compile Include="BusinessObjects\Price.cs" />
+    <Compile Include="BusinessObjects\PriceGroup.cs" />
     <Compile Include="BusinessObjects\PriceList.cs" />
     <Compile Include="BusinessObjects\Product.cs" />
     <Compile Include="BusinessObjects\ProductGroup.cs" />

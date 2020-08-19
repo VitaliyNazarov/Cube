@@ -2,45 +2,73 @@
 
 namespace Cube.Model.Enums
 {
+    ///// <summary>
+    ///// Типы фасадов
+    ///// </summary>
+    //public enum FacadeType
+    //{
+    //    [XafDisplayName("-")]
+    //    Undefined,
+
+    //    [XafDisplayName("ЛДСП")]
+    //    Ldsp,
+
+    //    [XafDisplayName("ЛДСП AL")]
+    //    LdspAl,
+
+    //    [XafDisplayName("ПВХ")]
+    //    Pvh,
+
+    //    [XafDisplayName("ПВХ пат")]
+    //    PvhPat,
+
+    //    [XafDisplayName("ПЛАСТ пост")]
+    //    PlastPost,
+
+    //    [XafDisplayName("ПЛАСТ преф")]
+    //    PlastPref,
+
+    //    [XafDisplayName("Полотно AGT AL")]
+    //    PolotnoAgtAl,
+
+    //    [XafDisplayName("Эмаль")]
+    //    Emal,
+
+    //    [XafDisplayName("Массив Лак")]
+    //    MassivLak,
+
+    //    [XafDisplayName("Массив Эмаль")]
+    //    MassivEmal,
+
+    //    [XafDisplayName("Без фасада")]
+    //    NoFacade
+    //}
+
     /// <summary>
-    /// Типы фасадов
+    /// Предопределенные варианты продукта.
+    /// Используются для разделения цены для одного
+    /// продукта и разных вариантов.
     /// </summary>
-    public enum FacadeType
+    public class PredefinedProductVariantType
     {
-        [XafDisplayName("-")]
-        Undefined,
+        public const string Default = "-";
 
-        [XafDisplayName("ЛДСП")]
-        Ldsp,
+        public const string Ldsp = "ЛДСП";
 
-        [XafDisplayName("ЛДСП AL")]
-        LdspAl,
+        public const string LdspAl = "ЛДСП AL";
 
-        [XafDisplayName("ПВХ")]
-        Pvh,
+        public const string Pvh = "ПВХ";
 
-        [XafDisplayName("ПВХ пат")]
-        PvhPat,
+        public const string PvhPat = "ПВХ пат";
 
-        [XafDisplayName("ПЛАСТ пост")]
-        PlastPost,
+        public const string PlastPost = "ПЛАСТ пост";
 
-        [XafDisplayName("ПЛАСТ преф")]
-        PlastPref,
+        public const string PlastPref = "ПЛАСТ преф";
 
-        [XafDisplayName("Полотно AGT AL")]
-        PolotnoAgtAl,
+        public const string PolotnoAgtAl = "Полотно AGT AL";
 
-        [XafDisplayName("Эмаль")]
-        Emal,
+        public const string Emal = "Эмаль";
 
-        [XafDisplayName("Массив Лак")]
-        MassivLak,
-
-        [XafDisplayName("Массив Эмаль")]
-        MassivEmal,
-
-        [XafDisplayName("Без фасада")]
-        NoFacade
+        public const string MassivLak = "Массив Эмаль";
     }
 }

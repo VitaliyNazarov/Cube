@@ -2,10 +2,10 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using Cube.Model.Contexts;
-using Cube.Model.Enums;
 using Cube.Model.Interfaces;
 using DevExpress.ExpressApp.DC;
 using DevExpress.Persistent.Base;
+using DevExpress.Persistent.Validation;
 using SQLite.CodeFirst;
 
 namespace Cube.Model
@@ -68,24 +68,27 @@ namespace Cube.Model
         /// </summary>
         [XafDisplayName("Размер")]
         [NotMapped]
-        public string Size => Product.GetSize();
+        public string Size => Product?.GetSize();
 
         /// <summary>
         /// Продукт
         /// </summary>
         [XafDisplayName("Продукт"),
-        VisibleInListView(true), 
-        VisibleInDetailView(false),
-        VisibleInLookupListView(false)]
-        [NotMapped]
+         NotMapped,
+         VisibleInListView(true),
+         VisibleInDetailView(false),
+         VisibleInLookupListView(true)]
         public string ProductName => Product?.Name;
 
         /// <summary>
-        /// Фасад
+        /// Группа цен
         /// </summary>
-        [XafDisplayName("Фасад")]
-        [NotMapped]
-        public FacadeType Facade => Product.Facade;
+        [XafDisplayName("Группа цен"),
+         NotMapped,
+         VisibleInListView(true),
+         VisibleInDetailView(false),
+         VisibleInLookupListView(true)]
+        public string GroupName => PriceGroup?.Name;
 
         #region References
 
@@ -95,12 +98,29 @@ namespace Cube.Model
         public virtual PriceList PriceList { get; set; }
 
         /// <summary>
+        /// Группа, которой принадлежит цена.
+        /// </summary>
+        [RuleRequiredField("Price_PriceGroup_Required",
+            DefaultContexts.Save,
+            SkipNullOrEmptyValues = false,
+            CustomMessageTemplate = "Необходимо задать группу цен.")]
+        [XafDisplayName("Группа цен"),
+         VisibleInListView(true),
+         VisibleInDetailView(true),
+         VisibleInLookupListView(false)]
+        public virtual PriceGroup PriceGroup { get; set; }
+
+        /// <summary>
         /// Продукт, на который установлена цена.
         /// </summary>
+        [RuleRequiredField("Price_Product_Required",
+            DefaultContexts.Save,
+            SkipNullOrEmptyValues = false,
+            CustomMessageTemplate = "Необходимо задать продукт.")]
         [XafDisplayName("Продукт"),
-         VisibleInListView(false), 
+         VisibleInListView(false),
          VisibleInDetailView(true),
-         VisibleInLookupListView(true)]
+         VisibleInLookupListView(false)]
         public virtual Product Product { get; set; }
 
         #endregion

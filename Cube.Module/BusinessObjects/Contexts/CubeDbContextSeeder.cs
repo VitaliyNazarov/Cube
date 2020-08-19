@@ -8,7 +8,7 @@ namespace Cube.Model.Contexts
         public static void Seed(CubeDbContext context)
         {
             context.PriceLists.Add(new PriceList {Name = "Основной прайс-лист"});
-
+            context.PriceGroups.Add(new PriceGroup {Name = "Основаня", IsDefault = true});
             context.SaveChanges();
         }
     }

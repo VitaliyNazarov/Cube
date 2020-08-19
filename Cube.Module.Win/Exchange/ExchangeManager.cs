@@ -16,11 +16,15 @@ namespace Cube.Module.Win.Exchange
          */
         private readonly CubeDbContext _context;
         private readonly PriceList _defaultPriceList;
+        private readonly Dictionary<string, PriceGroup> _priceGroups;
+        private readonly PriceGroup _defaultPriceGroup;
 
         public ExchangeManager()
         {
             _context = new CubeDbContext(null, false);
             _defaultPriceList = _context.PriceLists.FirstOrDefault();
+            _priceGroups = _context.PriceGroups.ToDictionary(x => x.Name);
+            _defaultPriceGroup = _context.PriceGroups.FirstOrDefault(x => x.IsDefault);
         }
 
         #region Export
@@ -98,23 +102,106 @@ namespace Cube.Module.Win.Exchange
         {
             using (var file = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
-                var wb = new XSSFWorkbook(file);
+                var wb = new XSSFWorkbook(file){ MissingCellPolicy = MissingCellPolicy.CREATE_NULL_AS_BLANK };
                 for (int i = 0; i < wb.NumberOfSheets; i++)
                 {
                     var sheet = wb.GetSheetAt(i);
-                    var nodes = LoadNodes(sheet);
-                    SaveNodes(nodes);
+                    var container = LoadNodes(sheet);
+                    ValidateNodes(container);
+                    SaveNodes(container);
                 }
             }
         }
 
-        private void SaveNodes(List<Node> nodes)
+        /// <summary>
+        /// Валидация на корректность сохранения
+        /// </summary>
+        private void ValidateNodes(NodeContainer container)
         {
-            var rootGroup = CreateGroup(nodes[0], null);
-
-            foreach (var subRoot in nodes.Skip(1).Where(x => x.ParentKey == null))
+            var nodes = container.Nodes;
+            var products = nodes.Where(x => x.IsProduct).ToArray();
+            var failNameProducts = products.Where(x => string.IsNullOrWhiteSpace(x.Name)).ToArray();
+            if (failNameProducts.Any())
             {
-                CreateEntity(subRoot, CreateGroup(subRoot, rootGroup), nodes);
+                throw new ExchangeManagerException(
+                    "Обнаружены продукты без названия.",
+                    failNameProducts.Select(x => x.SheetName).Distinct().ToArray(),
+                    failNameProducts.Select(x => x.RowNumber).Distinct().ToArray());
+            }
+
+            var failArticleProducts = products.Where(x => string.IsNullOrWhiteSpace(x.Article)).ToArray();
+            if (failArticleProducts.Any())
+            {
+                throw new ExchangeManagerException(
+                    "Обнаружены продукты без артикула.",
+                    failArticleProducts.Select(x => x.SheetName).Distinct().ToArray(),
+                    failArticleProducts.Select(x => x.RowNumber).Distinct().ToArray());
+            }
+
+            var failPricesProducts = products.Where(x => x.Prices == null || !x.Prices.Any()).ToArray();
+            if (failPricesProducts.Any())
+            {
+                throw new ExchangeManagerException(
+                    "Обнаружены продукты без цены.",
+                    failPricesProducts.Select(x => x.SheetName).Distinct().ToArray(),
+                    failPricesProducts.Select(x => x.RowNumber).Distinct().ToArray());
+            }
+
+            var groups = nodes.Where(x => !x.IsProduct && !x.IsRoot).ToArray();
+            var failNameGroups = groups.Where(x => string.IsNullOrWhiteSpace(x.Name)).ToArray();
+            if (failNameGroups.Any())
+            {
+                throw new ExchangeManagerException(
+                    "Обнаружены группы без названия.",
+                    failNameGroups.Select(x => x.SheetName).Distinct().ToArray(),
+                    failNameGroups.Select(x => x.RowNumber).Distinct().ToArray());
+            }
+
+            var failKeysGroups = groups.Where(x => string.IsNullOrWhiteSpace(x.Key)).ToArray();
+            if (failKeysGroups.Any())
+            {
+                throw new ExchangeManagerException(
+                    "Обнаружены группы без указания типа.",
+                    failKeysGroups.Select(x => x.SheetName).Distinct().ToArray(),
+                    failKeysGroups.Select(x => x.RowNumber).Distinct().ToArray());
+            }
+
+        }
+
+        /// <summary>
+        /// Сохранение
+        /// </summary>
+        private void SaveNodes(NodeContainer container)
+        {
+            // Создать группы цен
+            CreatePriceGroup(container);
+
+            var rootGroup = CreateGroup(container.Nodes[0], null);
+
+            foreach (var subRoot in container.Nodes.Skip(1).Where(x => x.ParentKey.Length == 1))
+            {
+                CreateEntity(subRoot, CreateGroup(subRoot, rootGroup), container.Nodes);
+            }
+
+            _context.SaveChanges();
+        }
+
+        private void CreatePriceGroup(NodeContainer container)
+        {
+            if (container.DefaultPriceGroupOnly)
+                return;
+
+            foreach (var groupPrice in container.GroupPrices)
+            {
+                if (_priceGroups.ContainsKey(groupPrice.Value))
+                    continue;
+
+                var createdGroup = _context.PriceGroups.Add(new PriceGroup
+                {
+                    Name = groupPrice.Value
+                });
+
+                _priceGroups.Add(createdGroup.Name, createdGroup);
             }
 
             _context.SaveChanges();
@@ -125,7 +212,7 @@ namespace Cube.Module.Win.Exchange
             if (parent.IsProduct)
                 return;
 
-            var children = source.Where(x => x.ParentKey == parent.Key);
+            var children = source.Where(x => x.ParentKey == parent.Key).ToList();
             foreach (var child in children)
             {
                 if (child.IsProduct)
@@ -139,81 +226,132 @@ namespace Cube.Module.Win.Exchange
 
         private ProductGroup CreateGroup(Node node, ProductGroup parent)
         {
-            return _context.ProductGroups.Add(new ProductGroup
+            // Существующая группа
+            var gr = _context.ProductGroups.FirstOrDefault(x => x.Key == node.Key);
+
+            if (gr == null)
             {
-                Name = node.Name,
-                Parent = parent,
-                Key = node.Key
-            });
+                gr = _context.ProductGroups.Add(new ProductGroup
+                {
+                    Name = node.Name,
+                    Parent = parent,
+                    Key = node.Key
+                });
+            }
+            else
+            {
+                gr.Name = node.Name;
+            }
+
+            return gr;
         }
 
         private void CreateProduct(Node node, ProductGroup parent)
         {
-            var product = _context.Products.Add(new Product
+            var newProduct = false;
+            var product = _context.Products.FirstOrDefault(x => x.Article == node.Article);
+            
+            if (product == null)
             {
-                Name = node.Name,
-                Width = node.Width,
-                Height = node.Height,
-                Length = node.Length,
-                Article = node.Article,
-                Category = parent,
-                Key = node.Key
-            });
-
-            if (node.Prices.Any())
-            {
-                _context.Prices.Add(new Price
-                {
-                    PriceList = _defaultPriceList,
-                    Product = product,
-                    Value = node.Prices[0]
-                });
+                newProduct = true;
+                product = new Product();
             }
+
+            product.Name = node.Name;
+            product.Width = node.Width;
+            product.Height = node.Height;
+            product.Length = node.Length;
+            product.Article = node.Article;
+            product.Category = parent;
+            product.Key = node.Key;
+
+            if (newProduct)
+            {
+                product = _context.Products.Add(product);
+                _context.SaveChanges();
+            }
+            
+            foreach (var item in node.Prices)
+            {
+                var priceGroup = node.DefaultPriceGroupOnly ? _defaultPriceGroup : _priceGroups[item.Key];
+
+                var price = _context.Prices.FirstOrDefault(x =>
+                    x.PriceList.Id == _defaultPriceList.Id && 
+                    x.PriceGroup.Id == priceGroup.Id && 
+                    x.Product.Id == product.Id);
+
+                if (price == null)
+                {
+                    _context.Prices.Add(new Price
+                    {
+                        Product = product,
+                        PriceGroup = priceGroup,
+                        Value = item.Value,
+                        CreatedDate = DateTime.Now,
+                        PriceList = _defaultPriceList
+                    });
+                }
+                else
+                {
+                    price.Value = item.Value;
+                }
+            }
+
+            _context.SaveChanges();
         }
 
-        private List<Node> LoadNodes(ISheet sheet)
+        private NodeContainer LoadNodes(ISheet sheet)
         {
-            var nodes = new List<Node>(sheet.LastRowNum + 1);
+            var container = new NodeContainer();
+            container.Nodes = new List<Node>(sheet.LastRowNum + 1);
+
+            var headers = sheet.GetRow(0);
+            for (int k = 7; k < headers.LastCellNum; k++)
+            {
+                container.GroupPrices.Add(k, GetStringValue(GetCell(headers, k)));
+            }
+
             var name = sheet.SheetName;
             var rootNode = new Node
             {
                 Name = name,
                 IsRoot = true,
-                Key = "root"
+                Key = $"root{sheet.SheetName}",
+                SheetName = name
             };
-            nodes.Add(rootNode);
+            container.Nodes.Add(rootNode);
             for (int j = 1; j <= sheet.LastRowNum; j++)
             {
-                var row = sheet.GetRow(j);
-                var node = new Node();
-                node.Key = GetValue(row.Cells[0]);
-                node.Article = GetValue(row.Cells[1]);
-                node.Name = GetValue(row.Cells[2]);
-                node.Height = (int)row.Cells[3].NumericCellValue;
-                node.Length = (int)row.Cells[4].NumericCellValue;
-                node.Width = (int)row.Cells[5].NumericCellValue;
-                for (int k = 7; k < row.LastCellNum; k++)
+                try
                 {
-                    var cellType = row.Cells[k].CellType;
-                    var price = 0.0;
-                    switch (cellType)
+                    var row = sheet.GetRow(j);
+                    var node = new Node();
+                    node.SheetName = name;
+                    node.RowNumber = j;
+                    node.Key = GetStringValue(GetCell(row, 0));
+                    node.Article = GetStringValue(GetCell(row, 1));
+                    node.Name = GetStringValue(GetCell(row, 2));
+                    node.Height = GetIntValue(GetCell(row, 3), 0);
+                    node.Length = GetIntValue(GetCell(row, 4), 0);
+                    node.Width = GetIntValue(GetCell(row, 5), 0);
+                    for (int k = 7; k < row.LastCellNum; k++)
                     {
-                        case CellType.Blank:
-                            break;
-                        case CellType.Numeric:
-                            price = row.Cells[k].NumericCellValue;
-                            break;
-                        case CellType.String:
-                            var str = row.Cells[k].StringCellValue;
-                            price = string.IsNullOrWhiteSpace(str) ? 0.0 : double.Parse(str);
-                            break;
+                        var price = GetDoubleValue(GetCell(row, k));
+                        if (!price.HasValue || price.Value == 0.0)
+                            continue;
+
+                        node.Prices.Add(container.GroupPrices[k], price.Value);
                     }
-                    node.Prices.Add(price);
+                    container.Nodes.Add(node);
                 }
-                nodes.Add(node);
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }
 
-            return nodes;
+            return container;
         }
 
         #endregion
@@ -227,32 +365,97 @@ namespace Cube.Module.Win.Exchange
 
         #endregion
 
-        private string GetValue(ICell cell)
+        private ICell GetCell(IRow row, int index)
         {
+            return row.GetCell(index, MissingCellPolicy.RETURN_NULL_AND_BLANK);
+        }
+
+        private string GetStringValue(ICell cell)
+        {
+            if (cell == null)
+                return null;
+
             if (cell.CellType == CellType.Numeric)
             {
                 return cell.NumericCellValue.ToString();
-                //Console.WriteLine("Row[{0},{1}] = {2}", i, j, cell.NumericCellValue);     
             }
             if (cell.CellType == CellType.String)
             {
                 return cell.StringCellValue;
-                //Console.WriteLine("Row[{0},{1}] = {2}", i, j, cell.StringCellValue);     
             }
 
             return null;
+        }
+
+        private double? GetDoubleValue(ICell cell)
+        {
+            if (cell == null)
+                return null;
+
+            if (cell.CellType == CellType.Numeric)
+            {
+                return cell.NumericCellValue;
+            }
+            if (cell.CellType == CellType.String)
+            {
+                var str = cell.StringCellValue;
+                if (string.IsNullOrWhiteSpace(str))
+                    return null;
+
+                return double.TryParse(str, out var val) ? (double?)val : null;
+            }
+
+            return null;
+        }
+
+        private int GetIntValue(ICell cell, int defaultValue)
+        {
+            if (cell == null)
+                return defaultValue;
+
+            if (cell.CellType == CellType.Numeric)
+            {
+                return (int)cell.NumericCellValue;
+            }
+            if (cell.CellType == CellType.String)
+            {
+                var str = cell.StringCellValue;
+                if (string.IsNullOrWhiteSpace(str))
+                    return defaultValue;
+
+                return int.TryParse(str, out var val) ? val : defaultValue;
+            }
+
+            return defaultValue;
+        }
+
+        private class NodeContainer
+        {
+            public NodeContainer()
+            {
+                Nodes = new List<Node>();
+                GroupPrices = new Dictionary<int, string>();
+            }
+
+            public List<Node> Nodes { get; set; }
+
+            public Dictionary<int, string> GroupPrices { get; set; }
+
+            public bool DefaultPriceGroupOnly => GroupPrices.Count == 1;
         }
 
         private class Node
         {
             public Node()
             {
-                Prices = new List<double>();
+                Prices = new Dictionary<string, double>();
             }
 
-            public bool IsRoot { get; set; }
+            public string SheetName { get; set; }
 
-            public string Group => Key.Substring(0, 1);
+            public int RowNumber { get; set; }
+
+            public bool IsRoot { get; set; }
 
             public string Key { get; set; }
 
@@ -260,11 +463,9 @@ namespace Cube.Module.Win.Exchange
 
             public string Name { get; set; }
 
-            public int Level => Key.Where(char.IsDigit).Count();
-
             public bool IsProduct => Key.EndsWith("P");
 
-            public string ParentKey => Level == 1 ? null : Key.Substring(0, Key.Length - 1);
+            public string ParentKey => Key.Substring(0, Key.Length - 1);
 
             public int Height { get; set; }
 
@@ -272,7 +473,23 @@ namespace Cube.Module.Win.Exchange
 
             public int Length { get; set; }
 
-            public List<double> Prices { get; set; }
+            public Dictionary<string, double> Prices { get; set; }
+
+            public bool DefaultPriceGroupOnly => Prices.Count == 1;
         }
+    }
+
+    public class ExchangeManagerException : Exception
+    {
+        public ExchangeManagerException(string message, string[] sheetNames, int[] rowNumbers)
+            : base(message)
+        {
+            SheetNames = sheetNames;
+            RowNumbers = rowNumbers;
+        }
+
+        public string[] SheetNames { get; }
+
+        public int[] RowNumbers { get; }
     }
 }

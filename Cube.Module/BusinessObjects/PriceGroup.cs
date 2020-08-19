@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using Cube.Model.Contexts;
@@ -11,18 +10,17 @@ using SQLite.CodeFirst;
 namespace Cube.Model
 {
     /// <summary>
-    /// Прайс-лист.
+    /// Группа цен. Для разделения цен на продукт
+    /// по группам, например, по фасаду.
     /// </summary>
-    [XafDefaultProperty("Name")]
-    [XafDisplayName("Прайс-лист")]
-    public class PriceList : IBaseEntity, ISoftDeletable, IArchivable
+    [XafDefaultProperty(nameof(PriceGroup.Name))]
+    public class PriceGroup : IBaseEntity, ISoftDeletable
     {
         /// <summary>
         /// ctor
         /// </summary>
-        public PriceList()
+        public PriceGroup()
         {
-            Prices = new List<Price>();
         }
 
         #region Base properties
@@ -62,36 +60,23 @@ namespace Cube.Model
         #endregion
 
         /// <summary>
-        /// Название прайса.
+        /// Название группы.
         /// </summary>
-        [RuleUniqueValue("PriceList_Name_Unique",
+        [XafDisplayName("Название")]
+        [RuleUniqueValue("PriceGroup_Name_Unique",
             DefaultContexts.Save, 
-            CustomMessageTemplate = "Указанное название прайс-листа уже существует.", 
+            CustomMessageTemplate = "Указанное название группы цен уже существует.", 
             ResultType = ValidationResultType.Error)]
-        [RuleRequiredField("PriceList_Name_Required",
+        [RuleRequiredField("PriceGroup_Name_Required",
             DefaultContexts.Save,
             SkipNullOrEmptyValues = false,
-            CustomMessageTemplate = "Необходимо задать имя прайс-листа.")]
+            CustomMessageTemplate = "Необходимо задать имя группы цен.")]
         public string Name { get; set; }
 
-        #region References
-
         /// <summary>
-        /// Цены продуктов по прайсу.
+        /// Группа цен по-умолчанию.
         /// </summary>
-        [Aggregated]
-        public virtual IList<Price> Prices { get; set; }
-
-        #endregion
-
-        #region Implementation of IArchivable
-
-        /// <summary>
-        /// Прайс в архиве.
-        /// </summary>
-        [Browsable(false)]
-        public bool IsArchive { get; set; }
-
-        #endregion
+        [XafDisplayName("Группа по-умолчанию")]
+        public bool IsDefault { get; set; }
     }
 }

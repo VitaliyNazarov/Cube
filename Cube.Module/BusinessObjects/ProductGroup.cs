@@ -71,7 +71,7 @@ namespace Cube.Model
         /// <summary>
         /// Название группы.
         /// </summary>
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Необходмо название группы.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Необходимо название группы.")]
         public string Name { get; set; }
 
         /// <summary>
